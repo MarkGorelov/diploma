@@ -3479,19 +3479,19 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-info {
     color: #fff;
-    background-color: #5bc0de;
+    background-color: #43c767;
     border-color: #46b8da
 }
 
 .btn-info.focus, .btn-info:focus {
     color: #fff;
-    background-color: #5cb85c;
+    background-color: #43c767;
     border-color: #4cae4c
 }
 
 .btn-info.active, .btn-info:active, .btn-info:hover, .open > .dropdown-toggle.btn-info {
     color: #fff;
-    background-color: #5cb85c;
+    background-color: #43c767;
     border-color: #4cae4c
 }
 
@@ -3506,12 +3506,12 @@ a.btn.disabled, fieldset[disabled] a.btn {
 }
 
 .btn-info.disabled.focus, .btn-info.disabled:focus, .btn-info.disabled:hover, .btn-info[disabled].focus, .btn-info[disabled]:focus, .btn-info[disabled]:hover, fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:hover {
-    background-color: #5cb85c;
+    background-color: #43c767;
     border-color: #4cae4c
 }
 
-.btn-info .badge {
-    color: #5cb85c;
+. .badge {
+    color: #43c767;
     background-color: #fff
 }
 
@@ -12136,18 +12136,17 @@ select.bs-select-hidden, select.selectpicker {
 }
 
 .btn-primary {
-    background-color: #29aafe;
-    border-color: #29aafe !important
+    background-color: #4cae4c;
+    border-color: #4cae4c !important
 }
 
 .btn-primary:active, .btn-primary:active:focus, .btn-primary:focus, .btn-primary:hover {
     color: #fff;
-    background-color: #38b0fe
-}
+    background-color: #43c767}
 
 .btn-success {
-    background-color: #7ec855;
-    border-color: #7ec855 !important
+    background-color: #43c767;
+    border-color: #43c767 !important
 }
 
 .btn-success:active, .btn-success:active:focus, .btn-success:focus, .btn-success:hover {
@@ -12156,13 +12155,13 @@ select.bs-select-hidden, select.selectpicker {
 }
 
 .btn-info {
-    background-color: #5bb7ed;
-    border-color: #5bb7ed !important
+    background-color: #4cae4c;
+    border-color: #4cae4c !important
 }
 
 .btn-info:active, .btn-info:active:focus, .btn-info:focus, .btn-info:hover {
     color: #fff;
-    background-color: #69bdef
+    background-color: #43c767;
 }
 
 .btn-warning {
@@ -12406,7 +12405,7 @@ select.bs-select-hidden, select.selectpicker {
 
 #scroll-up, .btn-navbar:hover {
     color: #fff;
-    background-color: #29aafe
+    background-color: #4cae4c;
 }
 
 #scroll-up {
@@ -13287,7 +13286,7 @@ dl.icon-holder dd {
     margin-bottom: 3.5%;
     text-align: center;
     border: 1px solid #eee;
-    color: #7e8890;
+    color: #4cae4c;
     background-color: #fff;
     transition: .3s ease-in-out
 }
@@ -13298,8 +13297,8 @@ dl.icon-holder dd {
 
 .category-grid a:hover {
     color: #fff;
-    background-color: #29aafe;
-    border-color: #29aafe;
+    background-color: #43c767;
+    border-color: #4cae4c;
     box-shadow: 0 5px 65px 0 rgba(0, 0, 0, .15)
 }
 
