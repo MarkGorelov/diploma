@@ -12916,7 +12916,7 @@ form .text-muted {
 .pagination > li > a, .pagination > li > span {
     padding: 9px 15px;
     font-size: 15px;
-    color: #7e8890;
+    color: #43c767;
     background-color: #fff;
     border: none;
     margin: 0;
@@ -12925,11 +12925,11 @@ form .text-muted {
 
 .pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
     color: #fff;
-    background-color: #29aafe
+    background-color: #43c767
 }
 
 .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover {
-    background-color: #29aafe
+    background-color: #43c767
 }
 
 .pagination.no-shadow {
@@ -13170,7 +13170,7 @@ blockquote footer {
 }
 
 img {
-    max-width: 100%
+    max-width: 100%;
 }
 
 iframe {
@@ -15513,7 +15513,8 @@ section.no-overlay:before {
     padding: 60px;
     box-shadow: 0 3px 50px 0 rgba(0, 0, 0, .1);
     text-align: center;
-    border-radius: 5px
+    border-radius: 5px;
+    padding-top: 30%;
 }
 
 .login-block h1, .login-block h6 {

@@ -8,5 +8,23 @@
 
 class CompanyController
 {
+    public function actionIndex()
+    {
+        $latestCompanies = array();
+        $latestCompanies = Company::getLatestCompany(3);
 
+        require_once(ROOT . '/views/company/index.php');
+        return true;
+    }
+
+    public function actionView($companyId)
+    {
+        $company = Company::getCompanyById($companyId);
+
+        $jobsCompany = array();
+        $jobsCompany = Vacancy::getVacanciesListByCompany($companyId);
+
+        require_once (ROOT . '/views/company/view.php');
+        return true;
+    }
 }

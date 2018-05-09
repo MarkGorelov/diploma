@@ -1,5 +1,36 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
+    <!-- Site header -->
+    <header class="site-header size-lg text-center" style="background-image: url(/template/img/bg-banner1.jpg)">
+        <div class="container">
+            <div class="col-xs-12">
+                <br><br>
+                <h2>
+                    Мы предлагаем
+                    <mark>1 259</mark>
+                    вакансий прямо сейчас!
+                </h2>
+                <h5 class="font-alt">Найди работу своей мечты.</h5>
+                <br><br><br>
+                <form class="header-job-search">
+                    <div class="input-keyword">
+                        <input type="text" class="form-control" placeholder="Название должности или компании">
+                    </div>
+
+                    <div class="input-location">
+                        <input type="text" class="form-control" placeholder="Страну, город">
+                    </div>
+
+                    <div class="btn-search">
+                        <button class="btn btn-primary" type="submit">Найти работу</button>
+                        <a href="">Расширенный поиск работы</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+    <!-- END Site header -->
+
     <!-- Main container -->
     <main>
 
@@ -11,101 +42,29 @@
                 </header>
 
                 <div class="row item-blocks-connected">
-
+                    <?php foreach ($latestVacancies as $vacancy): ?>
                     <!-- Job item -->
                     <div class="col-xs-12">
-                        <a class="item-block" href="/">
+                        <a class="item-block" href="/vacancy/<?php echo $vacancy['id']; ?>">
                             <header>
                                 <img src="/template/img/logo-google.jpg" alt="">
                                 <div class="hgroup">
-                                    <h4>Руководитель-стажёр</h4>
-                                    <h5>Леруа Мерлен. Гипермаркеты</h5>
+                                    <h4><?php echo $vacancy['job_title']; ?></h4>
+                                    <h5><?php echo $vacancy['company_name']; ?></h5>
                                 </div>
                                 <div class="header-meta">
-                                    <span class="location">Россия, Москва</span>
-                                    <span class="label label-success">НА ПОСТОЯННОЙ ОСНОВЕ</span>
+                                    <span class="location"><?php echo $vacancy['location']; ?></span>
+                                    <span class="label label-success"><?php echo $vacancy['type_of_employment']; ?></span>
                                 </div>
                             </header>
                         </a>
                     </div>
                     <!-- END Job item -->
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/">
-                            <header>
-                                <img src="/template/img/logo-linkedin.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Продавец-консультант</h4>
-                                    <h5>HOFF</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Россия, Казань</span>
-                                    <span class="label label-warning">Неполная занятость</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/">
-                            <header>
-                                <img src="/template/img/logo-envato.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Помощник системного администратора</h4>
-                                    <h5>IBF Motors</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Россия, Ростов-на-дону</span>
-                                    <span class="label label-info">На дому</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/">
-                            <header>
-                                <img src="/template/img/logo-facebook.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Секретарь на ресепшен / Офис-менеджер</h4>
-                                    <h5>ООО Арсенал</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Россия, Санкт-Петербург</span>
-                                    <span class="label label-danger">Интернатура</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/">
-                            <header>
-                                <img src="/template/img/logo-microsoft.jpg" alt="">
-                                <div class="hgroup">
-                                    <h4>Инженер-проектировщик</h4>
-                                    <h5>ООО Инновационные Строительные Технологии</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Россия, Пермь</span>
-                                    <span class="label label-success">Дистанционно</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
+                    <?php endforeach; ?>
                 </div>
 
                 <br><br>
-                <p class="text-center"><a class="btn btn-info" href="/">Просмотреть всё</a></p>
+                <p class="text-center"><a class="btn btn-info" href="/vacancies/">Просмотреть всё</a></p>
             </div>
         </section>
         <!-- END Recent jobs -->

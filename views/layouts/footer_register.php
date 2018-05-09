@@ -1,7 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 07.05.2018
- * Time: 17:21
- */
+<!-- Scripts -->
+<script src="/template//js/app.min.js"></script>
+<script src="/template//js/custom.js"></script>
+
+</body>
+</html>

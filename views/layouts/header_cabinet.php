@@ -1,7 +1,101 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 07.05.2018
- * Time: 18:52
- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Post a job position or create your online resume by TheJobs!">
+    <meta name="keywords" content="">
+
+    <title>DreamWork</title>
+
+    <!-- Styles -->
+    <link href="/template/css/app.min.css" rel="stylesheet">
+    <link href="/template/css/custom.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Oswald:100,300,400,500,600,800%7COpen+Sans:300,400,500,600,700,800%7CMontserrat:400,700'
+          rel='stylesheet' type='text/css'>
+
+</head>
+
+<body class="nav-on-header">
+
+<!--Navigation -->
+<nav class="navbar">
+    <div class="container">
+
+        <!-- logo -->
+        <div class="pull-left">
+            <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
+
+            <div class="logo-wrapper">
+                <a class="logo" href="/"><img src="/template/img/logo.png" alt="logo"></a>
+                <a class="logo-alt" href="/"><img src="/template/img/logo-alt.png" alt="logo-alt"></a>
+            </div>
+        </div>
+        <!-- END logo -->
+
+        <!-- user -->
+        <div class="pull-right">
+            <div class="dropdown user-account">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                    <img src="/template/img/user_avatar.png" alt="avatar">
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <?php if (User::isGuest()): ?>
+                        <li><a href="/user/login/">Войти</a></li>
+                        <li><a href="/user/register/">Регистрация</a></li>
+                    <?php else: ?>
+                        <li><a href="/user/cabinet/">Аккаунт</a></li>
+                        <li><a href="/user/logout/">Выход</a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </div>
+        <!-- END user -->
+
+        <!-- nav-menu -->
+        <ul class="nav-menu">
+            <li>
+                <a href="index.html">Главная</a>
+            </li>
+            <li>
+                <a href="#">Ищу работу</a>
+                <ul>
+                    <li><a href="job-list-1.html">Найти работу</a></li>
+                    <li><a href="job-detail.html">Создать резюме</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Ищу сотрудников</a>
+                <ul>
+                    <li><a href="resume-list.html">Найти резюме</a></li>
+                    <li><a href="resume-detail.html">Создать вакансию</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Помощь</a>
+                <ul>
+                    <li><a href="page-about.html">О нас</a></li>
+                    <li><a href="page-contact.html">Контакты</a></li>
+                    <li><a href="page-faq.html">FAQ</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- END nav-menu -->
+
+    </div>
+</nav>
+<!-- END navigation -->
+
+<!-- Site header -->
+<header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner2.png)">
+    <div class="container no-shadow">
+        <h1 class="text-center">Здраствуйте, <?php echo $user['name'];?>!</h1>
+        <p class="lead text-center">Здесь вы можете пойти нахуй</p>
+    </div>
+</header>
+<!-- END Site header -->
