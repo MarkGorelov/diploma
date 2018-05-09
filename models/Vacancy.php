@@ -2,11 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: Mark
- * Date: 06.05.2018
- * Time: 12:45
+ * Date: 09.05.2018
+ * Time: 17:10
  */
 
-class Resumes
+class Vacancy
 {
 
 }
