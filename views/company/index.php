@@ -64,7 +64,7 @@
                     <div class="col-xs-12">
                         <a class="item-block" href="/company/<?php echo $company['id']; ?>">
                             <header>
-                                <img src="/template/img/logo-google.jpg" alt="">
+                                <img src="<?php echo Company::getImage($company['id']); ?>" alt="">
                                 <div class="hgroup">
                                     <h4><?php echo $company['company_name']; ?></h4>
                                     <h5><?php echo $company['headline']; ?></h5>

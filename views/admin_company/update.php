@@ -24,36 +24,36 @@
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <p>Название компании</p>
-                        <input type="text" name="name" placeholder="" value="<?php echo $company['company_name']; ?>">
+                        <input type="text" name="company_name" placeholder="" value="<?php echo $company['company_name']; ?>">
 
                         <p>Вид деятельности</p>
-                        <input type="text" name="code" placeholder="" value="<?php echo $company['headline']; ?>">
+                        <input type="text" name="headline" placeholder="" value="<?php echo $company['headline']; ?>">
 
                         <p>Краткое описание</p>
-                        <input type="text" name="price" placeholder=""
+                        <input type="text" name="short_description" placeholder=""
                                value="<?php echo $company['short_description']; ?>">
 
                         <p>Местоположение</p>
-                        <input type="text" name="name" placeholder="" value="<?php echo $company['location']; ?>">
+                        <input type="text" name="location" placeholder="" value="<?php echo $company['location']; ?>">
 
                         <p>Дата основания</p>
-                        <input type="text" name="code" placeholder="" value="<?php echo $company['founded']; ?>">
+                        <input type="text" name="founded" placeholder="" value="<?php echo $company['founded']; ?>">
 
                         <p>Штат</p>
-                        <input type="text" name="price" placeholder="" value="<?php echo $company['employees']; ?>">
+                        <input type="text" name="employees" placeholder="" value="<?php echo $company['employees']; ?>">
 
                         <p>Сайт компании</p>
-                        <input type="text" name="name" placeholder=""
+                        <input type="text" name="website_address" placeholder=""
                                value="<?php echo $company['website_address']; ?>">
 
                         <p>Номер телефона</p>
-                        <input type="text" name="code" placeholder="" value="<?php echo $company['phone_number']; ?>">
+                        <input type="text" name="phone_number" placeholder="" value="<?php echo $company['phone_number']; ?>">
 
                         <p>Email</p>
-                        <input type="text" name="price" placeholder="" value="<?php echo $company['email_address']; ?>">
+                        <input type="text" name="email_address" placeholder="" value="<?php echo $company['email_address']; ?>">
 
                         <p>О компании</p>
-                        <input type="text" name="price" placeholder=""
+                        <input type="text" name="company_detail" placeholder=""
                                value="<?php echo $company['company_detail']; ?>">
 
                         <p>Категория</p>
