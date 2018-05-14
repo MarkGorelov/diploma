@@ -171,4 +171,132 @@ class User
             return $result->fetch();
         }
     }
+
+    /**
+     * Возвращает список пользователей
+     * @return array <p>Массив с пользователями</p>
+     */
+    public static function getUsersList()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Получение и возврат результатов
+        $result = $db->query('SELECT id, name, email, role FROM user ORDER BY id ASC');
+        $usersList = array();
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $usersList[$i]['id'] = $row['id'];
+            $usersList[$i]['name'] = $row['name'];
+            $usersList[$i]['email'] = $row['email'];
+            $usersList[$i]['role'] = $row['role'];
+            $i++;
+        }
+        return $usersList;
+    }
+
+    /**
+     * Добавляет нового пользователя
+     * @param array $options <p>Массив с информацией о пользователе</p>
+     * @return integer <p>id добавленной в таблицу записи</p>
+     */
+    public static function createUser($options)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = 'INSERT INTO user '
+            . '(name, email, password)'
+            . 'VALUES '
+            . '(:name, :email, :password)';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':email', $options['email'], PDO::PARAM_STR);
+        $result->bindParam(':password', $options['password'], PDO::PARAM_STR);
+
+        if ($result->execute()) {
+            // Если запрос выполенен успешно, возвращаем id добавленной записи
+            return $db->lastInsertId();
+        }
+        // Иначе возвращаем 0
+        return 0;
+    }
+
+    /**
+     * Редактирует пользователя с заданным id
+     * @param integer $id <p>id пользователя</p>
+     * @param array $options <p>Массив с информацей о пользователе</p>
+     * @return boolean <p>Результат выполнения метода</p>
+     */
+    public static function updateUserById($id, $options)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = "UPDATE user
+            SET 
+                name = :name, 
+                email = :email, 
+                password = :password, 
+                role = :role
+            WHERE id = :id";
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':email', $options['email'], PDO::PARAM_STR);
+        $result->bindParam(':password', $options['password'], PDO::PARAM_STR);
+        $result->bindParam(':role', $options['role'], PDO::PARAM_STR);
+        return $result->execute();
+    }
+
+    /**
+     * Удаляет пользователя с указанным id
+     * @param integer $id <p>id пользователя</p>
+     * @return boolean <p>Результат выполнения метода</p>
+     */
+    public static function deleteUserById($id)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = 'DELETE FROM user WHERE id = :id';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        return $result->execute();
+    }
+
+    /**
+     * Возвращает путь к изображению
+     * @param integer $id
+     * @return string <p>Путь к изображению</p>
+     */
+    public static function getImage($id)
+    {
+        // Название изображения-пустышки
+        $noImg = 'no-img.jpg';
+
+        // Путь к папке с картинками пользователями
+        $path = '/upload/img/user/';
+
+        // Путь к изображению пользователя
+        $pathToUserImg = $path . $id . '.jpg';
+
+        if (file_exists($_SERVER['DOCUMENT_ROOT'].$pathToUserImg)) {
+            // Если изображение для пользователя существует
+            // Возвращаем путь изображения пользователя
+            return $pathToUserImg;
+        }
+
+        // Возвращаем путь изображения-пустышки
+        return $path . $noImg;
+    }
 }

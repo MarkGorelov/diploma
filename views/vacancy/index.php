@@ -61,7 +61,7 @@
                 <?php foreach ($latestVacancies as $vacancy): ?>
                     <!-- Job item -->
                     <div class="col-xs-12">
-                        <a class="item-block" href="/vacancy/<?php echo $vacancy['id']; ?>">
+                        <a class="item-block" href="">
                             <header>
                                 <img src="/template/img/logo-google.jpg" alt="">
                                 <div class="hgroup">

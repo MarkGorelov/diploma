@@ -6,7 +6,7 @@
                 <img class="logo" src="/template/img/logo-google.jpg" alt="">
                 <div class="hgroup">
                     <h1><?php echo $vacancy['job_title']; ?></h1>
-                    <h3><a href="#"><?php echo $vacancy['company_name']; ?></a></h3>
+                    <h3><a href="/"><?php echo $vacancy['company_name']; ?></a></h3>
                 </div>
                 <hr>
                 <p class="lead"><?php echo $vacancy['short_description']; ?></p>

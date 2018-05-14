@@ -21,6 +21,26 @@ return array(
     'cabinet/edit' => 'cabinet/edit', //actionEdit в CabinetController
     'cabinet' => 'cabinet/index', //actionIndex в CabinetController
 
+    // Управление пользователями:
+    'admin/user/create' => 'adminUser/create',
+    'admin/user/update/([0-9]+)' => 'adminUser/update/$1',
+    'admin/user/delete/([0-9]+)' => 'adminUser/delete/$1',
+    'admin/user' => 'adminUser/index',
+
+    // Управление категориями:
+    'admin/category/create' => 'adminCategory/create',
+    'admin/category/update/([0-9]+)' => 'adminCategory/update/$1',
+    'admin/category/delete/([0-9]+)' => 'adminCategory/delete/$1',
+    'admin/category' => 'adminCategory/index',
+
+    // Управление компаниями:
+    'admin/company/create' => 'adminCompany/create',
+    'admin/company/update/([0-9]+)' => 'adminCompany/update/$1',
+    'admin/company/delete/([0-9]+)' => 'adminCompany/delete/$1',
+    'admin/company' => 'adminCompany/index',
+
+    'admin' => 'admin/index',
+
     '' => 'site/index', // actionIndex в SiteController
 
 );
