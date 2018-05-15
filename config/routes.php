@@ -45,6 +45,12 @@ return array(
     'admin/vacancy/delete/([0-9]+)' => 'adminVacancy/delete/$1',
     'admin/vacancy' => 'adminVacancy/index',
 
+    // Управление образованием:
+    'admin/education/create' => 'adminEducation/create',
+    'admin/education/update/([0-9]+)' => 'adminEducation/update/$1',
+    'admin/education/delete/([0-9]+)' => 'adminEducation/delete/$1',
+    'admin/education' => 'adminEducation/index',
+
     'admin' => 'admin/index',
 
     '' => 'site/index', // actionIndex в SiteController

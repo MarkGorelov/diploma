@@ -19,6 +19,9 @@
                 <li><a href="/admin/category">Управление категориями</a></li>
                 <li><a href="/admin/company">Управление компаниями</a></li>
                 <li><a href="/admin/vacancy">Управление вакансиями</a></li>
+                <li><a href="/admin/education">Управление образованием</a></li>
+                <li><a href="/admin/work-experience">Управление опытом работы</a></li>
+                <li><a href="/admin/tag">Управление тегами</a></li>
                 <li><a href="/admin/resume">Управление резюме</a></li>
             </ul>
 
