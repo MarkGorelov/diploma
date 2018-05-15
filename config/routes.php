@@ -51,6 +51,12 @@ return array(
     'admin/education/delete/([0-9]+)' => 'adminEducation/delete/$1',
     'admin/education' => 'adminEducation/index',
 
+    // Управление опыт работы:
+    'admin/work-experience/create' => 'adminWorkExperience/create',
+    'admin/work-experience/update/([0-9]+)' => 'adminWorkExperience/update/$1',
+    'admin/work-experience/delete/([0-9]+)' => 'adminWorkExperience/delete/$1',
+    'admin/work-experience' => 'adminWorkExperience/index',
+
     'admin' => 'admin/index',
 
     '' => 'site/index', // actionIndex в SiteController
