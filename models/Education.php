@@ -23,6 +23,32 @@ class Education
     }
 
     /**
+     * Возвращает массив образований для списка в админпанели <br/>
+     * (при этом в результат попадают и включенные и выключенные компании)
+     * @return array <p>Массив компаний</p>
+     */
+    public static function getEducationListAdmin()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Запрос к БД
+        $result = $db->query('SELECT id, school_name, degree, branch, short_description FROM education ORDER BY id ASC');
+
+        $listOfEducation = array();
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $listOfEducation[$i]['id'] = $row['id'];
+            $listOfEducation[$i]['school_name'] = $row['school_name'];
+            $listOfEducation[$i]['degree'] = $row['degree'];
+            $listOfEducation[$i]['branch'] = $row['branch'];
+            $listOfEducation[$i]['short_description'] = $row['short_description'];
+            $i++;
+        }
+        return $listOfEducation;
+    }
+
+    /**
      * Возвращает список образования
      * @return array <p>Массив с образования</p>
      */

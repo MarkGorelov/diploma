@@ -63,6 +63,12 @@ return array(
     'admin/tag/delete/([0-9]+)' => 'adminTag/delete/$1',
     'admin/tag' => 'adminTag/index',
 
+    // Управление резюме:
+    'admin/resume/create' => 'adminResume/create',
+    'admin/resume/update/([0-9]+)' => 'adminResume/update/$1',
+    'admin/resume/delete/([0-9]+)' => 'adminResume/delete/$1',
+    'admin/resume' => 'adminResume/index',
+
     'admin' => 'admin/index',
 
     '' => 'site/index', // actionIndex в SiteController
