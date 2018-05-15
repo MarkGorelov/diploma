@@ -39,6 +39,12 @@ return array(
     'admin/company/delete/([0-9]+)' => 'adminCompany/delete/$1',
     'admin/company' => 'adminCompany/index',
 
+    // Управление вакансиями:
+    'admin/vacancy/create' => 'adminVacancy/create',
+    'admin/vacancy/update/([0-9]+)' => 'adminVacancy/update/$1',
+    'admin/vacancy/delete/([0-9]+)' => 'adminVacancy/delete/$1',
+    'admin/vacancy' => 'adminVacancy/index',
+
     'admin' => 'admin/index',
 
     '' => 'site/index', // actionIndex в SiteController

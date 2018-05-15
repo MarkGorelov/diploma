@@ -58,6 +58,32 @@ class Company
     }
 
     /**
+     * Возвращает массив компаний для списка в админпанели <br/>
+     * (при этом в результат попадают и включенные и выключенные компании)
+     * @return array <p>Массив компаний</p>
+     */
+    public static function getCompaniesListAdmin()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Запрос к БД
+        $result = $db->query('SELECT id, company_name, website_address, phone_number, email_address FROM company ORDER BY id ASC');
+
+        $companiesList = array();
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $companiesList[$i]['id'] = $row['id'];
+            $companiesList[$i]['company_name'] = $row['company_name'];
+            $companiesList[$i]['website_address'] = $row['website_address'];
+            $companiesList[$i]['phone_number'] = $row['phone_number'];
+            $companiesList[$i]['email_address'] = $row['email_address'];
+            $i++;
+        }
+        return $companiesList;
+    }
+
+    /**
      * Возвращает список компаний
      * @return array <p>Массив с компаниями</p>
      */

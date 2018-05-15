@@ -9,13 +9,13 @@
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                     <li><a href="/admin">Админпанель</a></li>
-                    <li><a href="/admin/company">Управление компаниями</a></li>
-                    <li class="active">Редактировать компанию</li>
+                    <li><a href="/admin/vacancy">Управление вакансиями</a></li>
+                    <li class="active">Редактировать вакансию</li>
                 </ol>
             </div>
 
 
-            <h4>Добавить новую компанию</h4>
+            <h4>Добавить новую вакансию</h4>
 
             <br/>
 
@@ -34,36 +34,39 @@
                         <p>Название компании</p>
                         <input type="text" name="company_name" placeholder="" value="">
 
-                        <p>Вид деятельности</p>
-                        <input type="text" name="headline" placeholder="" value="">
+                        <p>Должность</p>
+                        <input type="text" name="job_title" placeholder="" value="">
 
                         <p>Краткое описание</p>
                         <input type="text" name="short_description" placeholder="" value="">
 
-                        <p>Местоположение</p>
-                        <input type="text" name="location" placeholder="" value="">
-
-                        <p>Дата основания</p>
-                        <input type="text" name="founded" placeholder="" value="">
-
-                        <p>Штат</p>
-                        <input type="text" name="employees" placeholder="" value="">
-
                         <p>Сайт компании</p>
                         <input type="text" name="website_address" placeholder="" value="">
 
-                        <p>Номер телефона</p>
-                        <input type="text" name="phone_number" placeholder="" value="">
+                        <p>Местоположение</p>
+                        <input type="text" name="location" placeholder="" value="">
 
-                        <p>Email</p>
-                        <input type="text" name="email_address" placeholder="" value="">
+                        <p>Тип занятости</p>
+                        <input type="text" name="type_of_employment" placeholder="" value="">
 
-                        <p>О компании</p>
-                        <input type="text" name="company_detail" placeholder="" value="">
+                        <p>Зарпалата</p>
+                        <input type="text" name="salary" placeholder="" value="">
 
-                        <p>Изображение компании</p>
-                        <img src="<?php echo Company::getImage($company['id']); ?>" width="200" alt="" />
-                        <input type="file" name="img" placeholder="" value="<?php echo $company['img']; ?>">
+                        <p>Режим работы</p>
+                        <input type="text" name="working" placeholder="" value="">
+
+                        <p>Опыт работы</p>
+                        <input type="text" name="experince" placeholder="" value="">
+
+                        <p>Пол</p>
+                        <input type="text" name="gender" placeholder="" value="">
+
+                        <p>О работе</p>
+                        <input type="text" name="job_detail" placeholder="" value="">
+
+                        <p>Изображение вакансии</p>
+                        <img src="<?php echo Vacancy::getImage($vacancy['id']); ?>" width="200" alt="" />
+                        <input type="file" name="img" placeholder="" value="<?php echo $vacancy['img']; ?>">
 
                         <p>Категория</p>
                         <select name="category_id">
@@ -71,6 +74,17 @@
                                 <?php foreach ($categoriesList as $category): ?>
                                     <option value="<?php echo $category['id']; ?>">
                                         <?php echo $category['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+
+                        <p>Компания</p>
+                        <select name="company_id">
+                            <?php if (is_array($companiesList)): ?>
+                                <?php foreach ($companiesList as $company): ?>
+                                    <option value="<?php echo $company['id']; ?>">
+                                        <?php echo $company['company_name']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             <?php endif; ?>

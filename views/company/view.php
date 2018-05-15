@@ -77,7 +77,7 @@
                         <div class="col-xs-12">
                             <a class="item-block" href="/vacancy/<?php echo $vacancies['id']; ?>">
                                 <header>
-                                    <img src="/template/img/logo-google.jpg" alt="">
+                                    <img src="<?php echo Vacancy::getImage($vacancies['id']); ?>" alt="">
                                     <div class="hgroup">
                                         <h4><?php echo $vacancies['job_title']; ?></h4>
                                         <h5>

@@ -3,7 +3,7 @@
     <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner1.jpg)">
         <div class="container">
             <div class="header-detail">
-                <img class="logo" src="/template/img/logo-google.jpg" alt="">
+                <img class="logo" src="<?php echo Vacancy::getImage($vacancy['id']); ?>" alt="">
                 <div class="hgroup">
                     <h1><?php echo $vacancy['job_title']; ?></h1>
                     <h3><a href="/"><?php echo $vacancy['company_name']; ?></a></h3>

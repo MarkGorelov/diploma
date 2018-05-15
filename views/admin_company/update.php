@@ -71,7 +71,7 @@
                         <br/><br/>
 
                         <p>Изображение компании</p>
-                        <img src="<?php echo User::getImage($company['id']); ?>" width="200" alt="" />
+                        <img src="<?php echo Company::getImage($company['id']); ?>" width="200" alt="" />
                         <input type="file" name="img" placeholder="" value="<?php echo $company['img']; ?>">
 
                         <br/><br/>
