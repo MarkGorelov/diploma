@@ -1,13 +1,12 @@
 <div class="page-buffer"></div>
 </div>
 
-<footer id="footer" class="page-footer"><!--Footer-->
+<footer class="site-footer">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-sm-6 col-xs-12">
                 <p class="copyright-text">© Gorelov M.P., 2018 </p>
             </div>
-
         </div>
     </div>
 </footer><!--/Footer-->

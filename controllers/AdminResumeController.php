@@ -116,7 +116,7 @@ class AdminResumeController extends AdminBase
         // Получаем список тегов для выпадающего списка
         $tagsList = Tag::getTagListAdmin();
 
-        // Получаем данные о конкретном заказе
+        // Получаем данные о конкретном резюме
         $resume = Resume::getResumeById($id);
 
         // Обработка формы
