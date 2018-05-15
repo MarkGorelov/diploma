@@ -57,6 +57,12 @@ return array(
     'admin/work-experience/delete/([0-9]+)' => 'adminWorkExperience/delete/$1',
     'admin/work-experience' => 'adminWorkExperience/index',
 
+    // Управление тегами:
+    'admin/tag/create' => 'adminTag/create',
+    'admin/tag/update/([0-9]+)' => 'adminTag/update/$1',
+    'admin/tag/delete/([0-9]+)' => 'adminTag/delete/$1',
+    'admin/tag' => 'adminTag/index',
+
     'admin' => 'admin/index',
 
     '' => 'site/index', // actionIndex в SiteController

@@ -49,7 +49,7 @@
                         <li><a href="/user/login/">Войти</a></li>
                         <li><a href="/user/register/">Регистрация</a></li>
                     <?php else: ?>
-                        <li><a href="/user/cabinet/">Аккаунт</a></li>
+                        <li><a href="/cabinet/">Аккаунт</a></li>
                         <li><a href="/user/logout/">Выход</a></li>
                     <?php endif; ?>
                 </ul>

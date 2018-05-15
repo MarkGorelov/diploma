@@ -1,5 +1,13 @@
-<?php include ROOT . '/views/layouts/header_cabinet.php'; ?>
+<?php include ROOT . '/views/layouts/header_main.php'; ?>
 
+    <!-- Site header -->
+    <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner2.png)">
+        <div class="container no-shadow">
+            <h1 class="text-center">Здраствуйте, <?php echo $user['name'];?>!</h1>
+            <p class="lead text-center">Здесь вы можете пойти нахуй</p>
+        </div>
+    </header>
+    <!-- END Site header -->
     <!-- Main container -->
     <main>
 
@@ -19,4 +27,4 @@
     </main>
     <!-- END Main container -->
 
-<?php include ROOT . '/views/layouts/footer_cabinet.php'; ?>
+<?php include ROOT . '/views/layouts/footer_main.php'; ?>
