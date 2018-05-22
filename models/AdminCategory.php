@@ -2,35 +2,37 @@
 /**
  * Created by PhpStorm.
  * User: Mark
- * Date: 07.05.2018
- * Time: 13:58
+ * Date: 22.05.2018
+ * Time: 15:44
  */
 
-class Category
+/**
+ * Класс AdminCategory - модель для работы с категориями
+ */
+class AdminCategory
 {
     /**
-     * Возвращает массив категорий для списка на сайте
+     * Возвращает массив категорий для отображения их на сайте
      * @return array <p>Массив с категориями</p>
      */
-    public static function getCategoryList()
+    public static function getCategoriesList()
     {
+        // Соединение с БД
         $db = Db::getConnection();
 
-        $categoryList = array();
-
-        $result = $db->query('SELECT id, name, img, description FROM category '
+        // Запрос к БД
+        $result = $db->query('SELECT id, name FROM category '
             . 'ORDER BY sort_order ASC');
 
+        // Получение и возврат результатов
+        $categoriesList = array();
         $i = 0;
         while ($row = $result->fetch()) {
-            $categoryList[$i]['id'] = $row['id'];
-            $categoryList[$i]['name'] = $row['name'];
-            $categoryList[$i]['img'] = $row['img'];
-            $categoryList[$i]['description'] = $row['description'];
+            $categoriesList[$i]['id'] = $row['id'];
+            $categoriesList[$i]['name'] = $row['name'];
             $i++;
         }
-
-        return $categoryList;
+        return $categoriesList;
     }
 
     /**
@@ -44,56 +46,54 @@ class Category
         $db = Db::getConnection();
 
         // Запрос к БД
-        $result = $db->query('SELECT id, name, description, sort_order, status FROM category ORDER BY sort_order ASC');
+        $result = $db->query('SELECT id, name, sort_order, status FROM category ORDER BY sort_order ASC');
 
         // Получение и возврат результатов
-        $categoryList = array();
+        $categoriesList = array();
         $i = 0;
         while ($row = $result->fetch()) {
-            $categoryList[$i]['id'] = $row['id'];
-            $categoryList[$i]['name'] = $row['name'];
-            $categoryList[$i]['description'] = $row['description'];
-            $categoryList[$i]['sort_order'] = $row['sort_order'];
-            $categoryList[$i]['status'] = $row['status'];
+            $categoriesList[$i]['id'] = $row['id'];
+            $categoriesList[$i]['name'] = $row['name'];
+            $categoriesList[$i]['sort_order'] = $row['sort_order'];
+            $categoriesList[$i]['status'] = $row['status'];
             $i++;
         }
-        return $categoryList;
+        return $categoriesList;
     }
 
     /**
-     * Добавляет новую категорию
+     * Добавляем новую категорию
      * @param string $name <p>Название</p>
      * @param integer $sortOrder <p>Порядковый номер</p>
      * @param integer $status <p>Статус <i>(включено "1", выключено "0")</i></p>
      * @return boolean <p>Результат добавления записи в таблицу</p>
      */
-    public static function createCategory($name, $description, $sortOrder, $status)
+    public static function createCategory($name, $sortOrder, $status)
     {
         // Соединение с БД
         $db = Db::getConnection();
 
         // Текст запроса к БД
-        $sql = 'INSERT INTO category (name, description, sort_order, status) '
-            . 'VALUES (:name, :description, :sort_order, :status)';
+        $sql = 'INSERT INTO category (name, sort_order, status) '
+            . 'VALUES (:name, :sort_order, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':name', $name, PDO::PARAM_STR);
-        $result->bindParam(':description', $description, PDO::PARAM_STR);
         $result->bindParam(':sort_order', $sortOrder, PDO::PARAM_INT);
         $result->bindParam(':status', $status, PDO::PARAM_INT);
         return $result->execute();
     }
 
     /**
-     * Редактирование категории с заданным id
+     * Редактируем категорию с заданным id
      * @param integer $id <p>id категории</p>
      * @param string $name <p>Название</p>
      * @param integer $sortOrder <p>Порядковый номер</p>
      * @param integer $status <p>Статус <i>(включено "1", выключено "0")</i></p>
      * @return boolean <p>Результат выполнения метода</p>
      */
-    public static function updateCategoryById($id, $name, $description, $sortOrder, $status)
+    public static function updateCategoryById($id, $name, $sortOrder, $status)
     {
         // Соединение с БД
         $db = Db::getConnection();
@@ -102,7 +102,6 @@ class Category
         $sql = "UPDATE category
             SET 
                 name = :name, 
-                description = :description,
                 sort_order = :sort_order, 
                 status = :status
             WHERE id = :id";
@@ -111,14 +110,13 @@ class Category
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':name', $name, PDO::PARAM_STR);
-        $result->bindParam(':description', $description, PDO::PARAM_STR);
         $result->bindParam(':sort_order', $sortOrder, PDO::PARAM_INT);
         $result->bindParam(':status', $status, PDO::PARAM_INT);
         return $result->execute();
     }
 
     /**
-     * Удаляет категорию с заданным id
+     * Удаляем категорию с заданным id
      * @param integer $id
      * @return boolean <p>Результат выполнения метода</p>
      */
@@ -179,31 +177,5 @@ class Category
                 return 'Скрыта';
                 break;
         }
-    }
-
-    /**
-     * Возвращает путь к изображению
-     * @param integer $id
-     * @return string <p>Путь к изображению</p>
-     */
-    public static function getImage($id)
-    {
-        // Название изображения-пустышки
-        $noImg = 'no-img.jpg';
-
-        // Путь к папке с картинками пользователями
-        $path = '/upload/img/category/';
-
-        // Путь к изображению пользователя
-        $pathToUserImg = $path . $id . '.jpg';
-
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg)) {
-            // Если изображение для пользователя существует
-            // Возвращаем путь изображения пользователя
-            return $pathToUserImg;
-        }
-
-        // Возвращаем путь изображения-пустышки
-        return $path . $noImg;
     }
 }

@@ -6,6 +6,10 @@
  * Time: 18:58
  */
 
+/**
+ * Контроллер AdminCategoryController
+ * Страница управления категориями в административной панели
+ */
 class AdminCategoryController extends AdminBase
 {
     /**
@@ -17,7 +21,7 @@ class AdminCategoryController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий
-        $categoriesList = Category::getCategoriesListAdmin();
+        $categoriesList = AdminCategory::getCategoriesListAdmin();
 
         // Подключаем вид
         require_once(ROOT . '/views/admin_category/index.php');
@@ -37,7 +41,6 @@ class AdminCategoryController extends AdminBase
             // Если форма отправлена
             // Получаем данные из формы
             $name = $_POST['name'];
-            $description = $_POST['description'];
             $sortOrder = $_POST['sort_order'];
             $status = $_POST['status'];
 
@@ -52,21 +55,13 @@ class AdminCategoryController extends AdminBase
             if ($errors == false) {
                 // Если ошибок нет
                 // Добавляем новую категорию
-                $id = Category::createCategory($name, $description, $sortOrder, $status);
+                AdminCategory::createCategory($name, $sortOrder, $status);
 
-                // Если запись добавлена
-                if ($id) {
-                    // Проверим, загружалось ли через форму изображение
-                    if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
-                        // Если загружалось, переместим его в нужную папке, дадим новое имя
-                        move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/category/{$id}.jpg");
-                    }
-                };
                 // Перенаправляем пользователя на страницу управлениями категориями
                 header("Location: /admin/category");
             }
         }
-
+        // Подключаем вид
         require_once(ROOT . '/views/admin_category/create.php');
         return true;
     }
@@ -80,32 +75,22 @@ class AdminCategoryController extends AdminBase
         self::checkAdmin();
 
         // Получаем данные о конкретной категории
-        $category = Category::getCategoryById($id);
+        $category = AdminCategory::getCategoryById($id);
 
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Получаем данные из формы
             $name = $_POST['name'];
-            $description = $_POST['description'];
             $sortOrder = $_POST['sort_order'];
             $status = $_POST['status'];
 
             // Сохраняем изменения
-            if (Category::updateCategoryById($id, $name, $description, $sortOrder, $status)) {
-                // Если запись сохранена
-                // Проверим, загружалось ли через форму изображение
-                if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
-
-                    // Если загружалось, переместим его в нужную папке, дадим новое имя
-                    move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/category/{$id}.jpg");
-                }
-            }
+            AdminCategory::updateCategoryById($id, $name, $sortOrder, $status);
 
             // Перенаправляем пользователя на страницу управлениями категориями
             header("Location: /admin/category");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_category/update.php');
         return true;
@@ -123,12 +108,11 @@ class AdminCategoryController extends AdminBase
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Удаляем категорию
-            Category::deleteCategoryById($id);
+            AdminCategory::deleteCategoryById($id);
 
             // Перенаправляем пользователя на страницу управлениями товарами
             header("Location: /admin/category");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_category/delete.php');
         return true;

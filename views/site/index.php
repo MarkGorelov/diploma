@@ -43,23 +43,23 @@
 
                 <div class="row item-blocks-connected">
                     <?php foreach ($latestVacancies as $vacancy): ?>
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="/vacancy/<?php echo $vacancy['id']; ?>">
-                            <header>
-                                <img src="<?php echo Vacancy::getImage($vacancy['id']); ?>" alt="">
-                                <div class="hgroup">
-                                    <h4><?php echo $vacancy['job_title']; ?></h4>
-                                    <h5><?php echo $vacancy['company_name']; ?></h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location"><?php echo $vacancy['location']; ?></span>
-                                    <span class="label label-success"><?php echo $vacancy['type_of_employment']; ?></span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
+                        <!-- Job item -->
+                        <div class="col-xs-12">
+                            <a class="item-block" href="/vacancy/<?php echo $vacancy['id']; ?>">
+                                <header>
+                                    <img src="<?php echo Vacancy::getImage($vacancy['id']); ?>" alt="">
+                                    <div class="hgroup">
+                                        <h4><?php echo $vacancy['job_title']; ?></h4>
+                                        <h5><?php echo $vacancy['company_name']; ?></h5>
+                                    </div>
+                                    <div class="header-meta">
+                                        <span class="location"><?php echo $vacancy['location']; ?></span>
+                                        <span class="label label-success"><?php echo $vacancy['type_of_employment']; ?></span>
+                                    </div>
+                                </header>
+                            </a>
+                        </div>
+                        <!-- END Job item -->
                     <?php endforeach; ?>
                 </div>
 
@@ -68,7 +68,6 @@
             </div>
         </section>
         <!-- END Recent jobs -->
-
 
         <!-- Facts -->
         <section class="bg-img bg-repeat no-overlay section-sm">
@@ -99,62 +98,6 @@
             </div>
         </section>
         <!-- END Facts -->
-
-
-        <!-- How it works -->
-        <section>
-            <div class="container">
-
-                <div class="col-sm-12 col-md-6">
-                    <header class="section-header text-left">
-                        <span>Мобильная версия</span>
-                        <h2>О нас</h2>
-                    </header>
-
-                    <p class="lead">Работа составляет большую часть жизни почти каждого из нас.
-                        Но ничто не вечно: случается, что однажды приходится менять место работы и с головой погружаться
-                        в
-                        поиски вакансий — хочется ведь найти хорошую альтернативу текущей должности.
-                        Однако зачастую при смене работы мы задумываемся не только о смене компании, но и об изменении
-                        профессиональной деятельности. И именно в эти моменты возникает вопрос: «Как теперь найти
-                        хорошую
-                        работу в Москве? А главное, какой должна быть эта работа?»
-                        Чтобы решать такие вопросы легко и быстро, достаточно всего лишь зайти на DreamWork!</p>
-
-                    <br><br>
-                    <a class="btn btn-primary" href="/">Узнать больше</a>
-                </div>
-
-                <div class="col-sm-12 col-md-6 hidden-xs hidden-sm">
-                    <br>
-                    <img class="center-block" src="/" alt="how it works">
-                </div>
-
-            </div>
-        </section>
-        <!-- END How it works -->
-
-        <!-- Categories -->
-        <section class="bg-alt">
-            <div class="container">
-                <header class="section-header">
-                    <span>Категории</span>
-                    <h2>Популярные категории</h2>
-                </header>
-
-                <div class="category-grid">
-                    <?php foreach ($categories as $categoryItem): ?>
-                        <a href="/category/<?php echo $categoryItem['id']; ?>">
-                            <i <?php echo Vacancy::getImage($categoryItem['id']); ?>></i>
-                            <h6><?php echo $categoryItem['name']; ?></h6>
-                            <p><?php echo $categoryItem['description']; ?></p>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-
-            </div>
-        </section>
-        <!-- END Categories -->
 
         <!-- Newsletter -->
         <section class="bg-img text-center" style="background-image: url(/template/img/bg-facts.png)">

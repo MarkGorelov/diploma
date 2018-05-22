@@ -6,6 +6,10 @@
  * Time: 19:20
  */
 
+/**
+ * Контроллер AdminCompanyController
+ * Страница управления компаниями в административной панели
+ */
 class AdminCompanyController extends AdminBase
 {
     /**
@@ -17,7 +21,7 @@ class AdminCompanyController extends AdminBase
         self::checkAdmin();
 
         // Получаем список компаний
-        $companiesList = Company::getCompanyList();
+        $companiesList = AdminCompany::getCompaniesList();
 
         // Подключаем вид
         require_once(ROOT . '/views/admin_company/index.php');
@@ -33,7 +37,7 @@ class AdminCompanyController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = Category::getCategoriesListAdmin();
+        $categoriesList = AdminCategory::getCategoriesListAdmin();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -63,7 +67,7 @@ class AdminCompanyController extends AdminBase
             if ($errors == false) {
                 // Если ошибок нет
                 // Добавляем новую компанию
-                $id = Company::createCompany($options);
+                $id = AdminCompany::createCompany($options);
 
                 // Если запись добавлена
                 if ($id) {
@@ -73,12 +77,10 @@ class AdminCompanyController extends AdminBase
                         move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/company/{$id}.jpg");
                     }
                 };
-
                 // Перенаправляем пользователя на страницу управлениями компаниями
                 header("Location: /admin/company");
             }
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_company/create.php');
         return true;
@@ -93,10 +95,9 @@ class AdminCompanyController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = Category::getCategoriesListAdmin();
-
+        $categoriesList = AdminCategory::getCategoriesListAdmin();
         // Получаем данные о конкретном заказе
-        $company = Company::getCompanyById($id);
+        $company = AdminCompany::getCompanyById($id);
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -116,21 +117,17 @@ class AdminCompanyController extends AdminBase
             $options['status'] = $_POST['status'];
 
             // Сохраняем изменения
-            if (Company::updateCompanyById($id, $options)) {
-
+            if (AdminCompany::updateCompanyById($id, $options)) {
                 // Если запись сохранена
                 // Проверим, загружалось ли через форму изображение
                 if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
-
                     // Если загружалось, переместим его в нужную папке, дадим новое имя
-                    move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/category/{$id}.jpg");
+                    move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/company/{$id}.jpg");
                 }
             }
-
             // Перенаправляем пользователя на страницу управлениями компаниями
             header("Location: /admin/company");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_company/update.php');
         return true;
@@ -148,12 +145,11 @@ class AdminCompanyController extends AdminBase
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Удаляем компанию
-            Company::deleteCompanyById($id);
+            AdminCompany::deleteCompanyById($id);
 
             // Перенаправляем пользователя на страницу управлениями компаниями
             header("Location: /admin/company");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_company/delete.php');
         return true;

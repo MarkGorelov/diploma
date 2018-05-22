@@ -33,7 +33,7 @@ class AdminResumeController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = Category::getCategoriesListAdmin();
+        $categoriesList = AdminCategory::getCategoriesListAdmin();
 
         // Получаем список образований для выпадающего списка
         $listOfEducation = Education::getEducationListAdmin();

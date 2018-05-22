@@ -17,7 +17,7 @@ class ResumeController
         $tagsResume = Tag::getTagListByResume();
 
         $categories = array();
-        $categories = Category::getCategoryList();
+        $categories = AdminCategory::getCategoriesList();
 
         require_once(ROOT . '/views/resume/index.php');
         return true;

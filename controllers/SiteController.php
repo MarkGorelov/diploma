@@ -6,12 +6,15 @@
  * Time: 12:52
  */
 
+/**
+ * Контроллер SiteController
+ */
 class SiteController
 {
     public function actionIndex()
     {
         $categories = array();
-        $categories = Category::getCategoryList();
+        $categories = AdminCategory::getCategoriesList();
 
         $latestVacancies = array();
         $latestVacancies = Vacancy::getLatestVacancy();

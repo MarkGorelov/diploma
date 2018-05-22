@@ -9,7 +9,7 @@
 return array(
 
     'companies' => 'company/index', // actionIndex в CompanyController
-    'company/create' => 'company/create',
+    'company/register' => 'company/create',
     'company/([0-9]+)' => 'company/view/$1', // actionView в CompanyController
 
     'vacancies' => 'vacancy/index', //actionIndex в VacancyController

@@ -19,7 +19,9 @@
 
                     <li>
                         <i class="fa fa-globe"></i>
-                        <a href="#"><?php echo $company['website_address']; ?></a>
+                        <a href="<?php echo $company['website_address']; ?>">
+                            <?php echo $company['website_address']; ?>
+                        </a>
                     </li>
 
                     <li>
