@@ -36,15 +36,6 @@
 
                 <input class="btn btn-primary btn-block" type="submit" name="submit" value="Вход"/>
 
-                <div class="login-footer">
-                    <h6>Войти через</h6>
-                    <ul class="social-icons">
-                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-
             </form>
         </div>
 

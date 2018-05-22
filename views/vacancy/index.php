@@ -21,12 +21,9 @@
 
                 <div class="form-group col-xs-12 col-sm-4">
                     <select class="form-control selectpicker" multiple>
-                        <option selected>Все категории</option>
-                        <option>Разработчик</option>
-                        <option>ДиЗаЙнЕр</option>
-                        <option>Пидор</option>
-                        <option>Шелуха</option>
-                        <option>Другое</option>
+                        <?php foreach ($categories as $categoryItem): ?>
+                            <option><?php echo $categoryItem['name']; ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
@@ -61,7 +58,7 @@
                 <?php foreach ($latestVacancies as $vacancy): ?>
                     <!-- Job item -->
                     <div class="col-xs-12">
-                        <a class="item-block" href="">
+                        <a class="item-block" href="/vacancy/<?php echo $vacancy['id']; ?>">
                             <header>
                                 <img src="<?php echo Vacancy::getImage($vacancy['id']); ?>" alt="">
                                 <div class="hgroup">

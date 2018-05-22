@@ -7,7 +7,7 @@
                 <br><br>
                 <h2>
                     Мы предлагаем
-                    <mark>1 259</mark>
+                    <mark>1 290</mark>
                     вакансий прямо сейчас!
                 </h2>
                 <h5 class="font-alt">Найди работу своей мечты.</h5>
@@ -23,7 +23,7 @@
 
                     <div class="btn-search">
                         <button class="btn btn-primary" type="submit">Найти работу</button>
-                        <a href="">Расширенный поиск работы</a>
+                        <a href="/vacancies/">Расширенный поиск работы</a>
                     </div>
                 </form>
             </div>
@@ -127,7 +127,7 @@
 
                 <div class="col-sm-12 col-md-6 hidden-xs hidden-sm">
                     <br>
-                    <img class="center-block" src="/template/img/how-it-works.png" alt="how it works">
+                    <img class="center-block" src="/" alt="how it works">
                 </div>
 
             </div>
@@ -145,7 +145,7 @@
                 <div class="category-grid">
                     <?php foreach ($categories as $categoryItem): ?>
                         <a href="/category/<?php echo $categoryItem['id']; ?>">
-                            <i class="fa fa-laptop"></i>
+                            <i <?php echo Vacancy::getImage($categoryItem['id']); ?>></i>
                             <h6><?php echo $categoryItem['name']; ?></h6>
                             <p><?php echo $categoryItem['description']; ?></p>
                         </a>

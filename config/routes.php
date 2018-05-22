@@ -9,10 +9,14 @@
 return array(
 
     'companies' => 'company/index', // actionIndex в CompanyController
+    'company/create' => 'company/create',
     'company/([0-9]+)' => 'company/view/$1', // actionView в CompanyController
 
     'vacancies' => 'vacancy/index', //actionIndex в VacancyController
     'vacancy/([0-9]+)' => 'vacancy/view/$1', //actionView в VacancyController
+
+    'resumes' => 'resume/index', //actionIndex в ResumeController
+    'resume/([0-9]+)' => 'resume/view/$1', //actionView в ResumeController
 
     'user/register' => 'user/register', // actionRegister в UserController
     'user/login' => 'user/login', //actionLogin в UserController

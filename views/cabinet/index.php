@@ -4,7 +4,7 @@
     <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner2.png)">
         <div class="container no-shadow">
             <h1 class="text-center">Здраствуйте, <?php echo $user['name'];?>!</h1>
-            <p class="lead text-center">Здесь вы можете пойти нахуй</p>
+            <p class="lead text-center">Вы находитесь в личном кабинете</p>
         </div>
     </header>
     <!-- END Site header -->

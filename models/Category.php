@@ -8,6 +8,10 @@
 
 class Category
 {
+    /**
+     * Возвращает массив категорий для списка на сайте
+     * @return array <p>Массив с категориями</p>
+     */
     public static function getCategoryList()
     {
         $db = Db::getConnection();
@@ -132,8 +136,6 @@ class Category
         return $result->execute();
     }
 
-
-
     /**
      * Возвращает категорию с указанным id
      * @param integer $id <p>id категории</p>
@@ -179,5 +181,29 @@ class Category
         }
     }
 
+    /**
+     * Возвращает путь к изображению
+     * @param integer $id
+     * @return string <p>Путь к изображению</p>
+     */
+    public static function getImage($id)
+    {
+        // Название изображения-пустышки
+        $noImg = 'no-img.jpg';
 
+        // Путь к папке с картинками пользователями
+        $path = '/upload/img/category/';
+
+        // Путь к изображению пользователя
+        $pathToUserImg = $path . $id . '.jpg';
+
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg)) {
+            // Если изображение для пользователя существует
+            // Возвращаем путь изображения пользователя
+            return $pathToUserImg;
+        }
+
+        // Возвращаем путь изображения-пустышки
+        return $path . $noImg;
+    }
 }

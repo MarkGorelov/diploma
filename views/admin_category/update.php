@@ -32,6 +32,10 @@
                         <p>Порядковый номер</p>
                         <input type="text" name="sort_order" placeholder="" value="<?php echo $category['sort_order']; ?>">
 
+                        <p>Изображение компании</p>
+                        <img src="<?php echo Category::getImage($category['id']); ?>" width="200" alt="" />
+                        <input type="file" name="img" placeholder="" value="<?php echo $category['img']; ?>">
+
                         <p>Статус</p>
                         <select name="status">
                             <option value="1" <?php if ($category['status'] == 1) echo ' selected="selected"'; ?>>Отображается</option>

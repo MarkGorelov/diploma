@@ -8,6 +8,42 @@
 
 class Resume
 {
+
+    const SHOW_BY_DEFAULT = 4;
+
+    /*
+     * Returns an array of vacancies
+     */
+    public static function getLatestResume($count = self::SHOW_BY_DEFAULT)
+    {
+        $count = intval($count);
+
+        $db = Db::getConnection();
+
+        $resumesList = array();
+
+        $result = $db->query('SELECT id, img, name, headline, short_description, tag_id, location, salary, gender FROM resume '
+            . 'WHERE status = "1"'
+            . 'ORDER BY id DESC '
+            . 'LIMIT ' . $count);
+
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $resumesList[$i]['id'] = $row['id'];
+            $resumesList[$i]['img'] = $row['img'];
+            $resumesList[$i]['name'] = $row['name'];
+            $resumesList[$i]['headline'] = $row['headline'];
+            $resumesList[$i]['short_description'] = $row['short_description'];
+            $resumesList[$i]['tag_id'] = $row['tag_id'];
+            $resumesList[$i]['location'] = $row['location'];
+            $resumesList[$i]['salary'] = $row['salary'];
+            $resumesList[$i]['gender'] = $row['gender'];
+            $i++;
+        }
+
+        return $resumesList;
+    }
+
     public static function getResumeById($id)
     {
         $id = intval($id);
@@ -185,4 +221,6 @@ class Resume
         // Возвращаем путь изображения-пустышки
         return $path . $noImg;
     }
+
+
 }

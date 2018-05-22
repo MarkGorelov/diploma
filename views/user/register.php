@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="ti-user"></i></span>
-                            <input type="text" class="form-control" name="name" placeholder="Введите логин">
+                            <input type="text" class="form-control" name="name" placeholder="Введите ваше имя">
                         </div>
                     </div>
 
@@ -45,15 +45,6 @@
                     </div>
 
                     <input class="btn btn-primary btn-block" type="submit" name="submit" value="Регистрация"/>
-
-                    <div class="login-footer">
-                        <h6>зарегистрироваться через</h6>
-                        <ul class="social-icons">
-                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
 
                 </form>
             <?php endif; ?>

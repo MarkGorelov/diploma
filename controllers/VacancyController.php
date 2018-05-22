@@ -13,6 +13,9 @@ class VacancyController
         $latestVacancies = array();
         $latestVacancies = Vacancy::getLatestVacancy();
 
+        $categories = array();
+        $categories = Category::getCategoryList();
+
         require_once(ROOT . '/views/vacancy/index.php');
         return true;
     }
@@ -21,7 +24,7 @@ class VacancyController
     {
         $vacancy = Vacancy::getVacancyById($vacancyId);
 
-        require_once (ROOT . '/views/vacancy/view.php');
+        require_once(ROOT . '/views/vacancy/view.php');
         return true;
     }
 }

@@ -17,7 +17,6 @@ class User
      */
     public static function register($name, $email, $password)
     {
-
         $db = Db::getConnection();
 
         $sql = 'INSERT INTO user (name, email, password) '
@@ -118,8 +117,9 @@ class User
      */
     public static function checkPassword($password)
     {
-        if (strlen($password) >= 6)
+        if (strlen($password) >= 6) {
             return true;
+        }
 
         return false;
     }
@@ -290,7 +290,7 @@ class User
         // Путь к изображению пользователя
         $pathToUserImg = $path . $id . '.jpg';
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'].$pathToUserImg)) {
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg)) {
             // Если изображение для пользователя существует
             // Возвращаем путь изображения пользователя
             return $pathToUserImg;

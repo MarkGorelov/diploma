@@ -49,12 +49,19 @@ class AdminCategoryController extends AdminBase
                 $errors[] = 'Заполните поля';
             }
 
-
             if ($errors == false) {
                 // Если ошибок нет
                 // Добавляем новую категорию
-                Category::createCategory($name, $description, $sortOrder, $status);
+                $id = Category::createCategory($name, $description, $sortOrder, $status);
 
+                // Если запись добавлена
+                if ($id) {
+                    // Проверим, загружалось ли через форму изображение
+                    if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
+                        // Если загружалось, переместим его в нужную папке, дадим новое имя
+                        move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/category/{$id}.jpg");
+                    }
+                };
                 // Перенаправляем пользователя на страницу управлениями категориями
                 header("Location: /admin/category");
             }
@@ -85,7 +92,15 @@ class AdminCategoryController extends AdminBase
             $status = $_POST['status'];
 
             // Сохраняем изменения
-            Category::updateCategoryById($id, $name, $description, $sortOrder, $status);
+            if (Category::updateCategoryById($id, $name, $description, $sortOrder, $status)) {
+                // Если запись сохранена
+                // Проверим, загружалось ли через форму изображение
+                if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
+
+                    // Если загружалось, переместим его в нужную папке, дадим новое имя
+                    move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/category/{$id}.jpg");
+                }
+            }
 
             // Перенаправляем пользователя на страницу управлениями категориями
             header("Location: /admin/category");

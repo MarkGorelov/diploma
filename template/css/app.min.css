@@ -12669,8 +12669,8 @@ form .text-muted {
 }
 
 .checkbox input[type=checkbox]:checked + label:before, .checkbox input[type=radio]:checked + label:before {
-    background-color: #29aafe;
-    border-color: #29aafe
+    background-color: #43c767;
+    border-color: #43c767
 }
 
 .checkbox input[type=checkbox]:disabled + label, .checkbox input[type=radio]:disabled + label {
@@ -13063,12 +13063,12 @@ body.bg-alt {
 }
 
 ::selection {
-    background: #4db8fe;
+    background: #43c767;
     color: #fff
 }
 
 ::-moz-selection {
-    background: #4db8fe;
+    background: #43c767;
     color: #fff
 }
 

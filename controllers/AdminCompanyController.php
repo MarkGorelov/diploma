@@ -56,7 +56,7 @@ class AdminCompanyController extends AdminBase
             $errors = false;
 
             // При необходимости можно валидировать значения нужным образом
-            if (!isset($options['name']) || empty($options['name'])) {
+            if (!isset($options['company_name']) || empty($options['company_name'])) {
                 $errors[] = 'Заполните поля';
             }
 
@@ -118,13 +118,12 @@ class AdminCompanyController extends AdminBase
             // Сохраняем изменения
             if (Company::updateCompanyById($id, $options)) {
 
-
                 // Если запись сохранена
                 // Проверим, загружалось ли через форму изображение
                 if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
 
                     // Если загружалось, переместим его в нужную папке, дадим новое имя
-                    move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/company/{$id}.jpg");
+                    move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/category/{$id}.jpg");
                 }
             }
 

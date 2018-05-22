@@ -131,7 +131,7 @@ class Company
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
         $result->bindParam(':location', $options['location'], PDO::PARAM_INT);
         $result->bindParam(':founded', $options['founded'], PDO::PARAM_STR);
-        $result->bindParam(':employees', $options['employees'], PDO::PARAM_INT);
+        $result->bindParam(':employees', $options['employees'], PDO::PARAM_STR);
         $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
         $result->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_INT);
         $result->bindParam(':email_address', $options['email_address'], PDO::PARAM_STR);
@@ -183,7 +183,7 @@ class Company
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
         $result->bindParam(':location', $options['location'], PDO::PARAM_INT);
         $result->bindParam(':founded', $options['founded'], PDO::PARAM_STR);
-        $result->bindParam(':employees', $options['employees'], PDO::PARAM_INT);
+        $result->bindParam(':employees', $options['employees'], PDO::PARAM_STR);
         $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
         $result->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_INT);
         $result->bindParam(':email_address', $options['email_address'], PDO::PARAM_STR);

@@ -8,7 +8,7 @@
 
 class Vacancy
 {
-    const SHOW_BY_DEFAULT = 10;
+    const SHOW_BY_DEFAULT = 4;
 
     /*
      * Returns an array of vacancies
@@ -42,7 +42,6 @@ class Vacancy
 
         return $vacanciesList;
     }
-
 
     /*
      * Return company item by id

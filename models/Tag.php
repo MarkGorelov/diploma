@@ -46,6 +46,25 @@ class Tag
         return $tagsList;
     }
 
+    public static function getTagListByResume()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Запрос к БД
+        $result = $db->query('SELECT id, name, status FROM tag ORDER BY id ASC');
+
+        $tagsList = array();
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $tagsList[$i]['id'] = $row['id'];
+            $tagsList[$i]['name'] = $row['name'];
+            $tagsList[$i]['status'] = $row['status'];
+            $i++;
+        }
+        return $tagsList;
+    }
+
     /**
      * Возвращает список тегов
      * @return array <p>Массив с тегами</p>

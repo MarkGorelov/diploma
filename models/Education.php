@@ -48,6 +48,28 @@ class Education
         return $listOfEducation;
     }
 
+    public static function getEducationListByResume()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Запрос к БД
+        $result = $db->query('SELECT id, school_name, degree, branch, short_description, date_of_education FROM education ORDER BY id ASC');
+
+        $listOfEducation = array();
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $listOfEducation[$i]['id'] = $row['id'];
+            $listOfEducation[$i]['school_name'] = $row['school_name'];
+            $listOfEducation[$i]['degree'] = $row['degree'];
+            $listOfEducation[$i]['branch'] = $row['branch'];
+            $listOfEducation[$i]['short_description'] = $row['short_description'];
+            $listOfEducation[$i]['date_of_education'] = $row['date_of_education'];
+            $i++;
+        }
+        return $listOfEducation;
+    }
+
     /**
      * Возвращает список образования
      * @return array <p>Массив с образования</p>

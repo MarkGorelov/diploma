@@ -48,6 +48,27 @@ class WorkExperience
         return $workExperienceList;
     }
 
+    public static function getWorkExperienceListByResume()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Запрос к БД
+        $result = $db->query('SELECT id, company_name, position, date_of_experience, short_description FROM work_experience ORDER BY id ASC');
+
+        $workExperienceList = array();
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $workExperienceList[$i]['id'] = $row['id'];
+            $workExperienceList[$i]['company_name'] = $row['company_name'];
+            $workExperienceList[$i]['position'] = $row['position'];
+            $workExperienceList[$i]['date_of_experience'] = $row['date_of_experience'];
+            $workExperienceList[$i]['short_description'] = $row['short_description'];
+            $i++;
+        }
+        return $workExperienceList;
+    }
+
     /**
      * Возвращает список опыта работы
      * @return array <p>Массив с опытом работы</p>
