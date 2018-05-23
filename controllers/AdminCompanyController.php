@@ -37,7 +37,7 @@ class AdminCompanyController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = AdminCategory::getCategoriesListAdmin();
+        $categoriesList = AdminCategory::getCategoriesList();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -77,7 +77,7 @@ class AdminCompanyController extends AdminBase
                         move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/company/{$id}.jpg");
                     }
                 };
-                // Перенаправляем пользователя на страницу управлениями компаниями
+                // Перенаправляем администратора на страницу управлениями компаниями
                 header("Location: /admin/company");
             }
         }
@@ -95,7 +95,7 @@ class AdminCompanyController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = AdminCategory::getCategoriesListAdmin();
+        $categoriesList = AdminCategory::getCategoriesList();
         // Получаем данные о конкретном заказе
         $company = AdminCompany::getCompanyById($id);
 
@@ -125,7 +125,7 @@ class AdminCompanyController extends AdminBase
                     move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/company/{$id}.jpg");
                 }
             }
-            // Перенаправляем пользователя на страницу управлениями компаниями
+            // Перенаправляем администратора на страницу управлениями компаниями
             header("Location: /admin/company");
         }
         // Подключаем вид
@@ -147,7 +147,7 @@ class AdminCompanyController extends AdminBase
             // Удаляем компанию
             AdminCompany::deleteCompanyById($id);
 
-            // Перенаправляем пользователя на страницу управлениями компаниями
+            // Перенаправляем администратора на страницу управлениями компаниями
             header("Location: /admin/company");
         }
         // Подключаем вид

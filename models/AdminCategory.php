@@ -7,7 +7,7 @@
  */
 
 /**
- * Класс AdminCategory - модель для работы с категориями
+ * Класс AdminCategory - модель для работы с категориями в административной панели
  */
 class AdminCategory
 {
@@ -62,6 +62,33 @@ class AdminCategory
     }
 
     /**
+     * Возвращает категорию с указанным id
+     * @param integer $id <p>id категории</p>
+     * @return array <p>Массив с информацией о категории</p>
+     */
+    public static function getCategoryById($id)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = 'SELECT * FROM category WHERE id = :id';
+
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+
+        // Указываем, что хотим получить данные в виде массива
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        // Выполняем запрос
+        $result->execute();
+
+        // Возвращаем данные
+        return $result->fetch();
+    }
+
+    /**
      * Редактируем категорию с заданным id
      * @param integer $id <p>id категории</p>
      * @param string $name <p>Название</p>
@@ -108,33 +135,6 @@ class AdminCategory
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
-    }
-
-    /**
-     * Возвращает категорию с указанным id
-     * @param integer $id <p>id категории</p>
-     * @return array <p>Массив с информацией о категории</p>
-     */
-    public static function getCategoryById($id)
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Текст запроса к БД
-        $sql = 'SELECT * FROM category WHERE id = :id';
-
-        // Используется подготовленный запрос
-        $result = $db->prepare($sql);
-        $result->bindParam(':id', $id, PDO::PARAM_INT);
-
-        // Указываем, что хотим получить данные в виде массива
-        $result->setFetchMode(PDO::FETCH_ASSOC);
-
-        // Выполняем запрос
-        $result->execute();
-
-        // Возвращаем данные
-        return $result->fetch();
     }
 
     /**

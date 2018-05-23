@@ -57,7 +57,7 @@ class AdminCategoryController extends AdminBase
                 // Добавляем новую категорию
                 AdminCategory::createCategory($name, $sortOrder, $status);
 
-                // Перенаправляем пользователя на страницу управлениями категориями
+                // Перенаправляем администратора на страницу управлениями категориями
                 header("Location: /admin/category");
             }
         }
@@ -88,7 +88,7 @@ class AdminCategoryController extends AdminBase
             // Сохраняем изменения
             AdminCategory::updateCategoryById($id, $name, $sortOrder, $status);
 
-            // Перенаправляем пользователя на страницу управлениями категориями
+            // Перенаправляем администратора на страницу управлениями категориями
             header("Location: /admin/category");
         }
         // Подключаем вид
@@ -110,7 +110,7 @@ class AdminCategoryController extends AdminBase
             // Удаляем категорию
             AdminCategory::deleteCategoryById($id);
 
-            // Перенаправляем пользователя на страницу управлениями товарами
+            // Перенаправляем администратора на страницу управлениями товарами
             header("Location: /admin/category");
         }
         // Подключаем вид

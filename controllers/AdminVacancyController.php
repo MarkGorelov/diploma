@@ -6,6 +6,10 @@
  * Time: 15:36
  */
 
+/**
+ * Контроллер AdminVacancyController
+ * Страница управления  информацией об вакансиях в административной панели
+ */
 class AdminVacancyController extends AdminBase
 {
     /**
@@ -17,7 +21,7 @@ class AdminVacancyController extends AdminBase
         self::checkAdmin();
 
         // Получаем список вакнсий
-        $vacanciesList = Vacancy::getVacancyList();
+        $vacanciesList = AdminVacancy::getVacanciesList();
 
         // Подключаем вид
         require_once(ROOT . '/views/admin_vacancy/index.php');
@@ -33,9 +37,9 @@ class AdminVacancyController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = Category::getCategoriesListAdmin();
+        $categoriesList = AdminCategory::getCategoriesList();
         // Получаем список компаний для выпадающего списка
-        $companiesList = Company::getCompaniesListAdmin();
+        $companiesList = AdminCompany::getCompaniesList();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -67,7 +71,7 @@ class AdminVacancyController extends AdminBase
             if ($errors == false) {
                 // Если ошибок нет
                 // Добавляем новую вакансию
-                $id = Vacancy::createVacancy($options);
+                $id = AdminVacancy::createVacancy($options);
 
                 // Если запись добавлена
                 if ($id) {
@@ -77,12 +81,10 @@ class AdminVacancyController extends AdminBase
                         move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/vacancy/{$id}.jpg");
                     }
                 };
-
-                // Перенаправляем пользователя на страницу управлениями вакансиями
+                // Перенаправляем администратора на страницу управлениями вакансиями
                 header("Location: /admin/vacancy");
             }
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_vacancy/create.php');
         return true;
@@ -97,12 +99,12 @@ class AdminVacancyController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = Category::getCategoriesListAdmin();
+        $categoriesList = AdminCategory::getCategoriesList();
         // Получаем список компаний для выпадающего списка
-        $companiesList = Company::getCompaniesListAdmin();
+        $companiesList = AdminCompany::getCompaniesList();
 
         // Получаем данные о конкретном заказе
-        $vacancy = Vacancy::getVacancyById($id);
+        $vacancy = AdminVacancy::getVacancyById($id);
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -124,21 +126,17 @@ class AdminVacancyController extends AdminBase
             $options['status'] = $_POST['status'];
 
             // Сохраняем изменения
-            if (Vacancy::updateVacancyById($id, $options)) {
-
+            if (AdminVacancy::updateVacancyById($id, $options)) {
                 // Если запись сохранена
                 // Проверим, загружалось ли через форму изображение
                 if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
-
                     // Если загружалось, переместим его в нужную папке, дадим новое имя
                     move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/vacancy/{$id}.jpg");
                 }
             }
-
-            // Перенаправляем пользователя на страницу управлениями вакансиями
+            // Перенаправляем администратора на страницу управлениями вакансиями
             header("Location: /admin/vacancy");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_vacancy/update.php');
         return true;
@@ -156,12 +154,11 @@ class AdminVacancyController extends AdminBase
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Удаляем вакансию
-            Vacancy::deleteVacancyById($id);
+            AdminVacancy::deleteVacancyById($id);
 
-            // Перенаправляем пользователя на страницу управлениями вакансиями
+            // Перенаправляем администратора на страницу управлениями вакансиями
             header("Location: /admin/vacancy");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_vacancy/delete.php');
         return true;
