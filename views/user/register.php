@@ -8,7 +8,9 @@
 
             <?php if ($result): ?>
                 <h1>Вы зарегистрированы!</h1>
+                <a href="/">Перейти на сайт</a>
             <?php else: ?>
+
                 <?php if (isset($errors) && is_array($errors)): ?>
                     <ul>
                         <?php foreach ($errors as $error): ?>
@@ -43,6 +45,13 @@
                             <input type="password" class="form-control" name="password" placeholder="Введите пароль">
                         </div>
                     </div>
+
+                    <hr class="hr-xs">
+                    <br>
+                    <select class="form-control selectpicker" name="role">
+                        <option value="aspirant" selected="selected">Ищу работу</option>
+                        <option value="employer">Ищу работников</option>
+                    </select>
 
                     <input class="btn btn-primary btn-block" type="submit" name="submit" value="Регистрация"/>
 

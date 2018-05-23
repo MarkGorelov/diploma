@@ -15,17 +15,20 @@ class User
      * @param type $password
      * @return type
      */
-    public static function register($name, $email, $password)
+    public static function register($name, $email, $password, $role)
     {
         $db = Db::getConnection();
 
-        $sql = 'INSERT INTO user (name, email, password) '
-            . 'VALUES (:name, :email, :password)';
+        $sql = 'INSERT INTO user (name, email, password, role) '
+            . 'VALUES (:name, :email, :password, :role)';
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
 
         $result = $db->prepare($sql);
         $result->bindParam(':name', $name, PDO::PARAM_STR);
         $result->bindParam(':email', $email, PDO::PARAM_STR);
-        $result->bindParam(':password', $password, PDO::PARAM_STR);
+        $result->bindParam(':password', $hash, PDO::PARAM_STR);
+        $result->bindParam(':role', $role, PDO::PARAM_STR);
 
         return $result->execute();
     }
@@ -62,9 +65,12 @@ class User
 
         $sql = 'SELECT * FROM user WHERE email = :email AND password = :password';
 
+        $hash = '$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq';
+        $check = password_verify($password, $hash);
+
         $result = $db->prepare($sql);
         $result->bindParam(':email', $email, PDO::PARAM_INT);
-        $result->bindParam(':password', $password, PDO::PARAM_INT);
+        $result->bindParam(':password', $check, PDO::PARAM_INT);
         $result->execute();
 
         $user = $result->fetch();

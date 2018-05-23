@@ -13,12 +13,14 @@ class UserController
         $name = '';
         $email = '';
         $password = '';
+        $role = '';
         $result = false;
 
         if (isset($_POST['submit'])) {
             $name = $_POST['name'];
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $role = $_POST['role'];
 
             $errors = false;
 
@@ -35,7 +37,7 @@ class UserController
                 $errors[] = 'Такой email уже используется';
 
             if ($errors == false)
-                $result = User::register($name, $email, $password);
+                $result = User::register($name, $email, $password, $role);
         }
 
         require_once(ROOT . '/views/user/register.php');
