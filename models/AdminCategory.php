@@ -21,32 +21,8 @@ class AdminCategory
         $db = Db::getConnection();
 
         // Запрос к БД
-        $result = $db->query('SELECT id, name FROM category '
+        $result = $db->query('SELECT id, name, sort_order, status FROM category '
             . 'ORDER BY sort_order ASC');
-
-        // Получение и возврат результатов
-        $categoriesList = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $categoriesList[$i]['id'] = $row['id'];
-            $categoriesList[$i]['name'] = $row['name'];
-            $i++;
-        }
-        return $categoriesList;
-    }
-
-    /**
-     * Возвращает массив категорий для списка в админпанели <br/>
-     * (при этом в результат попадают и включенные и выключенные категории)
-     * @return array <p>Массив категорий</p>
-     */
-    public static function getCategoriesListAdmin()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Запрос к БД
-        $result = $db->query('SELECT id, name, sort_order, status FROM category ORDER BY sort_order ASC');
 
         // Получение и возврат результатов
         $categoriesList = array();

@@ -6,18 +6,22 @@
  * Time: 17:30
  */
 
+/**
+ * Контроллер AdminEducationController
+ * Страница управления  информацией об учебных учреждениях пользователя в административной панели
+ */
 class AdminEducationController extends AdminBase
 {
     /**
-     * Action для страницы "Управление образования"
+     * Action для страницы "Управление  информацией об учебных учреждениях пользователя"
      */
     public function actionIndex()
     {
         // Проверка доступа
         self::checkAdmin();
 
-        // Получаем список вакнсий
-        $listOfEducation = Education::getEducationList();
+        // Получаем список учебных учреждений
+        $listOfEducations = AdminEducation::getListOfEducations();
 
         // Подключаем вид
         require_once(ROOT . '/views/admin_education/index.php');
@@ -25,7 +29,7 @@ class AdminEducationController extends AdminBase
     }
 
     /**
-     * Action для страницы "Добавить образование"
+     * Action для страницы "Добавить новое учебное учреждение"
      */
     public function actionCreate()
     {
@@ -54,7 +58,7 @@ class AdminEducationController extends AdminBase
             if ($errors == false) {
                 // Если ошибок нет
                 // Добавляем новую вакансию
-                $id = Education::createEducation($options);
+                $id = AdminEducation::createEducation($options);
 
                 // Если запись добавлена
                 if ($id) {
@@ -64,27 +68,25 @@ class AdminEducationController extends AdminBase
                         move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/education/{$id}.jpg");
                     }
                 };
-
-                // Перенаправляем пользователя на страницу управлениями образованием
+                // Перенаправляем администартора на страницу управлениями учебным учреждением
                 header("Location: /admin/education");
             }
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_education/create.php');
         return true;
     }
 
     /**
-     * Action для страницы "Редактировать образование"
+     * Action для страницы "Редактировать учебное учреждение"
      */
     public function actionUpdate($id)
     {
         // Проверка доступа
         self::checkAdmin();
 
-        // Получаем данные о конкретном заказе
-        $education = Education::getEducationById($id);
+        // Получаем данные о конкретном учебном учреждение
+        $education = AdminEducation::getEducationById($id);
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -98,28 +100,24 @@ class AdminEducationController extends AdminBase
             $options['status'] = $_POST['status'];
 
             // Сохраняем изменения
-            if (Education::updateEducationById($id, $options)) {
-
+            if (AdminEducation::updateEducationById($id, $options)) {
                 // Если запись сохранена
                 // Проверим, загружалось ли через форму изображение
                 if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
-
                     // Если загружалось, переместим его в нужную папке, дадим новое имя
                     move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/education/{$id}.jpg");
                 }
             }
-
-            // Перенаправляем пользователя на страницу управлениями образованием
+            // Перенаправляем администартора на страницу управлениями учебным учреждением
             header("Location: /admin/education");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_education/update.php');
         return true;
     }
 
     /**
-     * Action для страницы "Удалить образование"
+     * Action для страницы "Удалить учебное учреждение"
      */
     public function actionDelete($id)
     {
@@ -129,13 +127,12 @@ class AdminEducationController extends AdminBase
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена
-            // Удаляем образование
-            Education::deleteEducationById($id);
+            // Удаляем учебное учреждение
+            AdminEducation::deleteEducationById($id);
 
-            // Перенаправляем пользователя на страницу управлениями образованием
+            // Перенаправляем администартора на страницу управлениями учебным учреждением
             header("Location: /admin/education");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_education/delete.php');
         return true;

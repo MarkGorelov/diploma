@@ -6,6 +6,10 @@
  * Time: 19:06
  */
 
+/**
+ * Контроллер AdminTagController
+ * Страница управления тегами в административной панели
+ */
 class AdminTagController extends AdminBase
 {
     /**
@@ -17,7 +21,7 @@ class AdminTagController extends AdminBase
         self::checkAdmin();
 
         // Получаем список тегов
-        $tagsList = Tag::getTagList();
+        $tagsList = AdminTag::getTagsList();
 
         // Подключаем вид
         require_once(ROOT . '/views/admin_tag/index.php');
@@ -49,14 +53,13 @@ class AdminTagController extends AdminBase
 
             if ($errors == false) {
                 // Если ошибок нет
-                // Добавляем новую вакансию
-                $id = Tag::createTag($options);
+                // Добавляем новый тег
+                $id = AdminTag::createTag($options);
 
-                // Перенаправляем пользователя на страницу управлениями тегами
+                // Перенаправляем администратора на страницу управлениями тегами
                 header("Location: /admin/tag");
             }
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_tag/create.php');
         return true;
@@ -70,8 +73,8 @@ class AdminTagController extends AdminBase
         // Проверка доступа
         self::checkAdmin();
 
-        // Получаем данные о конкретном заказе
-        $tag = Tag::getTagById($id);
+        // Получаем данные о конкретном теге
+        $tag = AdminTag::getTagById($id);
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -80,10 +83,12 @@ class AdminTagController extends AdminBase
             $options['name'] = $_POST['name'];
             $options['status'] = $_POST['status'];
 
-            // Перенаправляем пользователя на страницу управлениями тегами
+            // Сохраняем изменения
+            AdminTag::updateTagById($id, $options);
+
+            // Перенаправляем администратора на страницу управлениями тегами
             header("Location: /admin/tag");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_tag/update.php');
         return true;
@@ -100,13 +105,12 @@ class AdminTagController extends AdminBase
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена
-            // Удаляем опыт работы
-            Tag::deleteTagById($id);
+            // Удаляем тег
+            AdminTag::deleteTagById($id);
 
-            // Перенаправляем пользователя на страницу управлениями тегами
+            // Перенаправляем администратора на страницу управлениями тегами
             header("Location: /admin/tag");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_tag/delete.php');
         return true;

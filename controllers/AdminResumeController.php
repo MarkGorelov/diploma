@@ -6,6 +6,10 @@
  * Time: 20:22
  */
 
+/**
+ * Контроллер AdminResumeController
+ * Страница управления резюме в административной панели
+ */
 class AdminResumeController extends AdminBase
 {
     /**
@@ -17,7 +21,7 @@ class AdminResumeController extends AdminBase
         self::checkAdmin();
 
         // Получаем список резюме
-        $resumesList = Resume::getResumeList();
+        $listResumes = AdminResume::getListResumes();
 
         // Подключаем вид
         require_once(ROOT . '/views/admin_resume/index.php');
@@ -33,16 +37,13 @@ class AdminResumeController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = AdminCategory::getCategoriesListAdmin();
-
+        $categoriesList = AdminCategory::getCategoriesList();
         // Получаем список образований для выпадающего списка
-        $listOfEducation = Education::getEducationListAdmin();
-
+        $listOfEducations = AdminEducation::getListOfEducations();
         // Получаем список опыта работы для выпадающего списка
-        $workExperienceList = WorkExperience::getWorkExperienceListAdmin();
-
+        $listOfWorkExperiences = AdminWorkExperience::getListOfWorkExperiences();
         // Получаем список тегов для выпадающего списка
-        $tagsList = Tag::getTagListAdmin();
+        $tagsList = AdminTag::getTagsList();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -74,8 +75,8 @@ class AdminResumeController extends AdminBase
 
             if ($errors == false) {
                 // Если ошибок нет
-                // Добавляем новую вакансию
-                $id = Resume::createResume($options);
+                // Добавляем новое резюме
+                $id = AdminResume::createResume($options);
 
                 // Если запись добавлена
                 if ($id) {
@@ -85,12 +86,10 @@ class AdminResumeController extends AdminBase
                         move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/resume/{$id}.jpg");
                     }
                 };
-
-                // Перенаправляем пользователя на страницу управлениями вакансиями
+                // Перенаправляем администратора на страницу управлениями резюме
                 header("Location: /admin/resume");
             }
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_resume/create.php');
         return true;
@@ -105,19 +104,16 @@ class AdminResumeController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий для выпадающего списка
-        $categoriesList = Category::getCategoriesListAdmin();
-
+        $categoriesList = AdminCategory::getCategoriesList();
         // Получаем список образований для выпадающего списка
-        $listOfEducation = Education::getEducationListAdmin();
-
+        $listOfEducations = AdminEducation::getListOfEducations();
         // Получаем список опыта работы для выпадающего списка
-        $workExperienceList = WorkExperience::getWorkExperienceListAdmin();
-
+        $listOfWorkExperiences = AdminWorkExperience::getListOfWorkExperiences();
         // Получаем список тегов для выпадающего списка
-        $tagsList = Tag::getTagListAdmin();
+        $tagsList = AdminTag::getTagsList();
 
         // Получаем данные о конкретном резюме
-        $resume = Resume::getResumeById($id);
+        $resume = AdminResume::getResumeById($id);
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -140,21 +136,17 @@ class AdminResumeController extends AdminBase
             $options['status'] = $_POST['status'];
 
             // Сохраняем изменения
-            if (Resume::updateResumeById($id, $options)) {
-
+            if (AdminResume::updateResumeById($id, $options)) {
                 // Если запись сохранена
                 // Проверим, загружалось ли через форму изображение
                 if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
-
                     // Если загружалось, переместим его в нужную папке, дадим новое имя
                     move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/resume/{$id}.jpg");
                 }
             }
-
-            // Перенаправляем пользователя на страницу управлениями вакансиями
+            // Перенаправляем администратора на страницу управлениями резюме
             header("Location: /admin/resume");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_resume/update.php');
         return true;
@@ -171,13 +163,12 @@ class AdminResumeController extends AdminBase
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена
-            // Удаляем вакансию
-            Resume::deleteResumeById($id);
+            // Удаляем резюме
+            AdminResume::deleteResumeById($id);
 
-            // Перенаправляем пользователя на страницу управлениями вакансиями
+            // Перенаправляем администратора на страницу управлениями резюме
             header("Location: /admin/resume");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_resume/delete.php');
         return true;

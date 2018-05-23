@@ -6,6 +6,10 @@
  * Time: 18:35
  */
 
+/**
+ * Контроллер AdminWorkExperienceController
+ * Страница управления  информацией об опыте работы пользователя в административной панели
+ */
 class AdminWorkExperienceController extends AdminBase
 {
     /**
@@ -17,7 +21,7 @@ class AdminWorkExperienceController extends AdminBase
         self::checkAdmin();
 
         // Получаем список вакнсий
-        $listOfWorkExperience = WorkExperience::getWorkExperienceList();
+        $listOfWorkExperiences = AdminWorkExperience::getListOfWorkExperiences();
 
         // Подключаем вид
         require_once(ROOT . '/views/admin_work_experience/index.php');
@@ -52,8 +56,8 @@ class AdminWorkExperienceController extends AdminBase
 
             if ($errors == false) {
                 // Если ошибок нет
-                // Добавляем новую вакансию
-                $id = WorkExperience::createWorkExperience($options);
+                // Добавляем новый опыт работы
+                $id = AdminWorkExperience::createWorkExperience($options);
 
                 // Если запись добавлена
                 if ($id) {
@@ -63,12 +67,10 @@ class AdminWorkExperienceController extends AdminBase
                         move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/work_experience/{$id}.jpg");
                     }
                 };
-
-                // Перенаправляем пользователя на страницу управлениями опытом работы
+                // Перенаправляем администратора на страницу управлениями опытом работы
                 header("Location: /admin/work-experience");
             }
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_work_experience/create.php');
         return true;
@@ -82,8 +84,8 @@ class AdminWorkExperienceController extends AdminBase
         // Проверка доступа
         self::checkAdmin();
 
-        // Получаем данные о конкретном заказе
-        $workExperience = WorkExperience::getWorkExperienceById($id);
+        // Получаем данные о конкретном опыте работы
+        $workExperience = AdminWorkExperience::getWorkExperienceById($id);
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -96,21 +98,17 @@ class AdminWorkExperienceController extends AdminBase
             $options['status'] = $_POST['status'];
 
             // Сохраняем изменения
-            if (WorkExperience::updateWorkExperienceById($id, $options)) {
-
+            if (AdminWorkExperience::updateWorkExperienceById($id, $options)) {
                 // Если запись сохранена
                 // Проверим, загружалось ли через форму изображение
                 if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
-
                     // Если загружалось, переместим его в нужную папке, дадим новое имя
                     move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/work_experience/{$id}.jpg");
                 }
             }
-
             // Перенаправляем пользователя на страницу управлениями образованием
             header("Location: /admin/work-experience");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_work_experience/update.php');
         return true;
@@ -128,12 +126,11 @@ class AdminWorkExperienceController extends AdminBase
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Удаляем опыт работы
-            WorkExperience::deleteWorkExperienceById($id);
+            AdminWorkExperience::deleteWorkExperienceById($id);
 
-            // Перенаправляем пользователя на страницу управлениями опытом работы
+            // Перенаправляем администратора на страницу управления опытом работы
             header("Location: /admin/work-experience");
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/admin_work_experience/delete.php');
         return true;

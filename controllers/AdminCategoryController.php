@@ -21,7 +21,7 @@ class AdminCategoryController extends AdminBase
         self::checkAdmin();
 
         // Получаем список категорий
-        $categoriesList = AdminCategory::getCategoriesListAdmin();
+        $categoriesList = AdminCategory::getCategoriesList();
 
         // Подключаем вид
         require_once(ROOT . '/views/admin_category/index.php');
