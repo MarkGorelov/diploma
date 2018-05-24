@@ -6,12 +6,15 @@
  * Time: 15:40
  */
 
+/**
+ * Класс Company - модель для работы с компаниями
+ */
 class Company
 {
     const SHOW_BY_DEFAULT = 10;
 
-    /*
-     * Returns an array of companies
+    /**
+     * Выводим список последних созданных компаний
      */
     public static function getLatestCompany($count = self::SHOW_BY_DEFAULT)
     {
@@ -38,116 +41,32 @@ class Company
         return $companiesList;
     }
 
-
-    /*
-     * Return company item by id
-     * @param integer $id
+    /**
+     * Выводим список последних созданных компаний текущим пользователем
      */
-    public static function getCompanyById($id)
+    public static function getCompaniesByUser($userId = false)
     {
-        $id = intval($id);
-
-        if ($id) {
+        if ($userId) {
             $db = Db::getConnection();
+            $companies = array();
+            $result = $db->query("SELECT id, img, company_name, headline FROM company "
+                . "WHERE status = '1' AND user_id = '$userId' "
+                . "ORDER BY id ASC ");
 
-            $result = $db->query('SELECT * FROM company WHERE id=' . $id);
-            $result->setFetchMode(PDO::FETCH_ASSOC);
-
-            return $result->fetch();
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $companies[$i]['id'] = $row['id'];
+                $companies[$i]['img'] = $row['img'];
+                $companies[$i]['headline'] = $row['headline'];
+                $companies[$i]['company_name'] = $row['company_name'];
+                $i++;
+            }
+            return $companies;
         }
     }
 
     /**
-     * Возвращает массив компаний для списка в админпанели <br/>
-     * (при этом в результат попадают и включенные и выключенные компании)
-     * @return array <p>Массив компаний</p>
-     */
-    public static function getCompaniesListAdmin()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Запрос к БД
-        $result = $db->query('SELECT id, company_name, website_address, phone_number, email_address FROM company ORDER BY id ASC');
-
-        $companiesList = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $companiesList[$i]['id'] = $row['id'];
-            $companiesList[$i]['company_name'] = $row['company_name'];
-            $companiesList[$i]['website_address'] = $row['website_address'];
-            $companiesList[$i]['phone_number'] = $row['phone_number'];
-            $companiesList[$i]['email_address'] = $row['email_address'];
-            $i++;
-        }
-        return $companiesList;
-    }
-
-    /**
-     * Возвращает список компаний
-     * @return array <p>Массив с компаниями</p>
-     */
-    public static function getCompanyList()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Получение и возврат результатов
-        $result = $db->query('SELECT id, company_name, website_address, phone_number, email_address FROM company ORDER BY id ASC');
-        $companiesList = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $companiesList[$i]['id'] = $row['id'];
-            $companiesList[$i]['company_name'] = $row['company_name'];
-            $companiesList[$i]['website_address'] = $row['website_address'];
-            $companiesList[$i]['phone_number'] = $row['phone_number'];
-            $companiesList[$i]['email_address'] = $row['email_address'];
-            $i++;
-        }
-        return $companiesList;
-    }
-
-    /**
-     * Добавляет новую компанию в админ панели
-     * @param array $options <p>Массив с информацией о компании</p>
-     * @return integer <p>id добавленной в таблицу записи</p>
-     */
-    public static function createCompanyAdmin($options)
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Текст запроса к БД
-        $sql = 'INSERT INTO company '
-            . '(company_name, category_id, headline, short_description, location, founded, employees, website_address, phone_number, email_address, company_detail, status)'
-            . 'VALUES '
-            . '(:company_name, :category_id, :headline, :short_description, :location, :founded, :employees, :website_address, :phone_number, :email_address, :company_detail, :status)';
-
-        // Получение и возврат результатов. Используется подготовленный запрос
-        $result = $db->prepare($sql);
-        $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
-        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
-        $result->bindParam(':headline', $options['headline'], PDO::PARAM_STR);
-        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
-        $result->bindParam(':location', $options['location'], PDO::PARAM_INT);
-        $result->bindParam(':founded', $options['founded'], PDO::PARAM_STR);
-        $result->bindParam(':employees', $options['employees'], PDO::PARAM_STR);
-        $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
-        $result->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_INT);
-        $result->bindParam(':email_address', $options['email_address'], PDO::PARAM_STR);
-        $result->bindParam(':company_detail', $options['company_detail'], PDO::PARAM_STR);
-        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
-
-        if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
-            return $db->lastInsertId();
-        }
-        // Иначе возвращаем 0
-        return 0;
-    }
-
-    /**
-     * Добавляет новую компанию
+     * Добавляет новую компанию в административной панели
      * @param array $options <p>Массив с информацией о компании</p>
      * @return integer <p>id добавленной в таблицу записи</p>
      */
@@ -158,13 +77,14 @@ class Company
 
         // Текст запроса к БД
         $sql = 'INSERT INTO company '
-            . '(company_name, category_id, headline, short_description, location, founded, employees, website_address, phone_number, email_address, company_detail, status)'
+            . '(company_name, user_id, category_id, headline, short_description, location, founded, employees, website_address, phone_number, email_address, company_detail, status)'
             . 'VALUES '
-            . '(:company_name, :category_id, :headline, :short_description, :location, :founded, :employees, :website_address, :phone_number, :email_address, :company_detail, :status)';
+            . '(:company_name, :user_id, :category_id, :headline, :short_description, :location, :founded, :employees, :website_address, :phone_number, :email_address, :company_detail, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
         $result->bindParam(':headline', $options['headline'], PDO::PARAM_STR);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
@@ -199,7 +119,8 @@ class Company
         // Текст запроса к БД
         $sql = "UPDATE company
             SET 
-                company_name = :company_name, 
+                company_name = :company_name,
+                user_id = :user_id, 
                 category_id = :category_id, 
                 headline = :headline, 
                 short_description = :short_description,
@@ -217,6 +138,7 @@ class Company
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
         $result->bindParam(':headline', $options['headline'], PDO::PARAM_STR);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
@@ -229,6 +151,25 @@ class Company
         $result->bindParam(':company_detail', $options['company_detail'], PDO::PARAM_STR);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
+    }
+
+    /**
+     * Возвращает компанию по индентификатору
+     * @param integer $id <p>id компании</p>
+     * @return boolean <p>Результат выполнения метода</p>
+     */
+    public static function getCompanyById($id)
+    {
+        $id = intval($id);
+
+        if ($id) {
+            $db = Db::getConnection();
+
+            $result = $db->query('SELECT * FROM company WHERE id=' . $id);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+
+            return $result->fetch();
+        }
     }
 
     /**
@@ -266,11 +207,10 @@ class Company
         // Путь к изображению пользователя
         $pathToUserImg = $path . $id . '.jpg';
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg)) {
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg))
             // Если изображение для пользователя существует
             // Возвращаем путь изображения пользователя
             return $pathToUserImg;
-        }
 
         // Возвращаем путь изображения-пустышки
         return $path . $noImg;

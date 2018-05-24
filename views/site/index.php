@@ -1,7 +1,7 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
     <!-- Site header -->
-    <header class="site-header size-lg text-center" style="background-image: url(/template/img/bg-banner1.jpg)">
+    <header class="site-header size-lg text-center" style="background-image: url(/template/img/bg-banner.jpg)">
         <div class="container">
             <div class="col-xs-12">
                 <br><br>

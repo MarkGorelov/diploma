@@ -52,11 +52,8 @@
 
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <ul class="social-icons">
-                    <li><a class="facebook" href="/"><i class="fa fa-facebook"></i></a></li>
-                    <li><a class="twitter" href="/"><i class="fa fa-twitter"></i></a></li>
-                    <li><a class="dribbble" href="/"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a class="linkedin" href="/"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a class="instagram" href="/"><i class="fa fa-instagram"></i></a></li>
+                    <li><a class="github" href="https://github.com/MarkGorelov"><i class="fa fa-github"></i></a></li>
+                    <li><a class="vk" href="https://vk.com/id428695191"><i class="fa fa-vk"></i></a></li>
                 </ul>
             </div>
         </div>

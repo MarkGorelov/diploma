@@ -4793,6 +4793,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
     color: #555;
     background-color: #e7e7e7
 }
+
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
         color: #777
@@ -12142,7 +12143,8 @@ select.bs-select-hidden, select.selectpicker {
 
 .btn-primary:active, .btn-primary:active:focus, .btn-primary:focus, .btn-primary:hover {
     color: #fff;
-    background-color: #43c767}
+    background-color: #43c767
+}
 
 .btn-success {
     background-color: #43c767;
@@ -15467,6 +15469,14 @@ section.no-overlay:before {
 
 .social-icons a.dribbble:hover {
     background-color: #ea4c89
+}
+
+.social-icons a.github:hover {
+    background-color: #24292e
+}
+
+.social-icons a.vk:hover {
+    background-color: #4a76a8
 }
 
 .social-icons a.skype:hover {

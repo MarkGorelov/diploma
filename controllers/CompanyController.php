@@ -11,8 +11,11 @@
  * Для управления страницами просмотра всех компаний, отдельной компаниий,
  * регистрацией компании, редактирования компании, удаление компании
  */
-class CompanyController
+class CompanyController extends UserBase
 {
+    /**
+     * Action для страницы "Просмотр недавно созданных компаний"
+     */
     public function actionIndex()
     {
         $latestCompanies = array();
@@ -22,6 +25,9 @@ class CompanyController
         return true;
     }
 
+    /**
+     * Action для страницы "Просмотр конкретной компании"
+     */
     public function actionView($companyId)
     {
         $company = Company::getCompanyById($companyId);
@@ -34,18 +40,34 @@ class CompanyController
     }
 
     /**
+     * Action для страницы "Управление компаниями"
+     */
+    public function actionManage()
+    {
+        self::checkEmployer();
+
+        $companiesUser = array();
+        $companiesUser = Company::getCompaniesByUser($userID = $_SESSION['user']);
+
+        require_once(ROOT . '/views/company/manage.php');
+        return true;
+    }
+
+    /**
      * Action для страницы "Добавить компанию"
      */
     public function actionCreate()
     {
+        self::checkEmployer();
         // Получаем список категорий для выпадающего списка
-        $categoriesList = Category::getCategoryList();
+        $categoriesList = AdminCategory::getCategoriesList();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Получаем данные из формы
             $options['company_name'] = $_POST['company_name'];
+            $options['user_id'] = $_POST['user_id'];
             $options['category_id'] = $_POST['category_id'];
             $options['headline'] = $_POST['headline'];
             $options['short_description'] = $_POST['short_description'];
@@ -74,12 +96,10 @@ class CompanyController
                         move_uploaded_file($_FILES["img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/img/company/{$id}.jpg");
                     }
                 };
-
                 // Перенаправляем пользователя на страницу управлениями вакансиями
-                header("Location: /");
+                header("Location: /companies");
             }
         }
-
         // Подключаем вид
         require_once(ROOT . '/views/company/create.php');
         return true;
