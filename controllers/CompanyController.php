@@ -40,12 +40,14 @@ class CompanyController extends UserBase
     }
 
     /**
-     * Action для страницы "Управление компаниями"
+     * Action для страницы "Список компаний пользователя"
      */
     public function actionManage()
     {
+        // проверка доступа
         self::checkEmployer();
 
+        // получаем список компаний пользователя
         $companiesUser = array();
         $companiesUser = Company::getCompaniesByUser($userID = $_SESSION['user']);
 

@@ -1,6 +1,6 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
-    <form action="#" method="post">
+    <form action="#" method="post" enctype="multipart/form-data">
 
         <!-- Page header -->
         <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner1.jpg);">
