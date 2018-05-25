@@ -44,20 +44,6 @@ class Resume
         return $resumesList;
     }
 
-    public static function getResumeById($id)
-    {
-        $id = intval($id);
-
-        if ($id) {
-            $db = Db::getConnection();
-
-            $result = $db->query('SELECT * FROM resume WHERE id=' . $id);
-            $result->setFetchMode(PDO::FETCH_ASSOC);
-
-            return $result->fetch();
-        }
-    }
-
     /**
      * Возвращает список резюме
      * @return array <p>Массив с резюме</p>
@@ -84,6 +70,33 @@ class Resume
     }
 
     /**
+     * Выводим список последних созданных резюме текущим пользователем
+     */
+    public static function getResumesByUser($userId = false)
+    {
+        if ($userId) {
+            $db = Db::getConnection();
+            $resumes = array();
+            $result = $db->query("SELECT id, img, name, headline, location, salary, status FROM resume "
+                . "WHERE user_id = '$userId' "
+                . "ORDER BY id DESC ");
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $resumes[$i]['id'] = $row['id'];
+                $resumes[$i]['img'] = $row['img'];
+                $resumes[$i]['name'] = $row['name'];
+                $resumes[$i]['headline'] = $row['headline'];
+                $resumes[$i]['location'] = $row['location'];
+                $resumes[$i]['salary'] = $row['salary'];
+                $resumes[$i]['status'] = $row['status'];
+                $i++;
+            }
+            return $resumes;
+        }
+    }
+
+    /**
      * Добавляет новое резюме
      * @param array $options <p>Массив с информацией о резюме</p>
      * @return integer <p>id добавленной в таблицу записи</p>
@@ -95,9 +108,9 @@ class Resume
 
         // Текст запроса к БД
         $sql = 'INSERT INTO resume '
-            . '(name, headline, short_description, location, website_address, salary, age, phone_number, email_address, gender, tag_id, education_id, work_experience_id, category_id, status)'
+            . '(name, headline, short_description, location, website_address, salary, age, phone_number, email_address, gender, category_id, user_id, status)'
             . 'VALUES '
-            . '(:name, :headline, :short_description, :location, :website_address, :salary, :age, :phone_number, :email_address, :gender, :tag_id, :education_id, :work_experience_id, :category_id, :status)';
+            . '(:name, :headline, :short_description, :location, :website_address, :salary, :age, :phone_number, :email_address, :gender, :category_id, :user_id, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -111,9 +124,7 @@ class Resume
         $result->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_INT);
         $result->bindParam(':email_address', $options['email_address'], PDO::PARAM_STR);
         $result->bindParam(':gender', $options['gender'], PDO::PARAM_STR);
-        $result->bindParam(':tag_id', $options['tag_id'], PDO::PARAM_INT);
-        $result->bindParam(':education_id', $options['education_id'], PDO::PARAM_INT);
-        $result->bindParam(':work_experience_id', $options['work_experience_id'], PDO::PARAM_INT);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
@@ -149,9 +160,7 @@ class Resume
                 phone_number = :phone_number,
                 email_address = :email_address, 
                 gender = :gender, 
-                tag_id = :tag_id, 
-                education_id = :education_id, 
-                work_experience_id = :work_experience_id, 
+                user_id = :user_id, 
                 category_id = :category_id,
                 status = :status
             WHERE id = :id";
@@ -169,12 +178,29 @@ class Resume
         $result->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_INT);
         $result->bindParam(':email_address', $options['email_address'], PDO::PARAM_STR);
         $result->bindParam(':gender', $options['gender'], PDO::PARAM_STR);
-        $result->bindParam(':tag_id', $options['tag_id'], PDO::PARAM_INT);
-        $result->bindParam(':education_id', $options['education_id'], PDO::PARAM_INT);
-        $result->bindParam(':work_experience_id', $options['work_experience_id'], PDO::PARAM_INT);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
+    }
+
+    /**
+     * Возвращает резюме по индентификатору
+     * @param integer $id <p>id резюме</p>
+     * @return boolean <p>Результат выполнения метода</p>
+     */
+    public static function getResumeById($id)
+    {
+        $id = intval($id);
+
+        if ($id) {
+            $db = Db::getConnection();
+
+            $result = $db->query('SELECT * FROM resume WHERE id=' . $id);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+
+            return $result->fetch();
+        }
     }
 
     /**

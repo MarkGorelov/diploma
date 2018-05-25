@@ -24,8 +24,31 @@ return array(
     'vacancies' => 'vacancy/index',
     'vacancy/([0-9]+)' => 'vacancy/view/$1',
 
-    'resumes' => 'resume/index', //actionIndex в ResumeController
-    'resume/([0-9]+)' => 'resume/view/$1', //actionView в ResumeController
+    // Управление тегами:
+    'tag-manage/create' => 'tag/create',
+    'tag-manage/update/([0-9]+)' => 'tag/update/$1',
+    'tag-manage/delete/([0-9]+)' => 'tag/delete/$1',
+    'tag-manage' => 'tag/manage',
+
+    // Управление образованием:
+    'education-manage/create' => 'education/create',
+    'education-manage/update/([0-9]+)' => 'education/update/$1',
+    'education-manage/delete/([0-9]+)' => 'education/delete/$1',
+    'education-manage' => 'education/manage',
+
+    // Управление опытом работы:
+    'work-experience-manage/create' => 'workExperience/create',
+    'work-experience-manage/update/([0-9]+)' => 'workExperience/update/$1',
+    'work-experience-manage/delete/([0-9]+)' => 'workExperience/delete/$1',
+    'work-experience-manage' => 'workExperience/manage',
+
+    // Управление резюме:
+    'resume-manage/create' => 'resume/create',
+    'resume-manage/update/([0-9]+)' => 'resume/update/$1',
+    'resume-manage/delete/([0-9]+)' => 'resume/delete/$1',
+    'resume-manage' => 'resume/manage',
+    'resumes' => 'resume/index',
+    'resume/([0-9]+)' => 'resume/view/$1',
 
     'user/register' => 'user/register', // actionRegister в UserController
     'user/login' => 'user/login', //actionLogin в UserController

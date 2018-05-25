@@ -70,7 +70,6 @@
                 <ul>
                     <li><a href="/vacancies/">Найти работу</a></li>
                     <li><a href="/companies/">Найти компанию</a></li>
-                    <li><a href="/company/register">Зарегистрировать компанию</a></li>
                     <li><a href="/">Создать резюме</a></li>
                 </ul>
             </li>
