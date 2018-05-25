@@ -22,7 +22,7 @@ class Resume
 
         $resumesList = array();
 
-        $result = $db->query('SELECT id, img, name, headline, short_description, tag_id, location, salary, gender FROM resume '
+        $result = $db->query('SELECT id, img,  name, headline, short_description, tag_id, location, salary, gender FROM resume '
             . 'WHERE status = "1"'
             . 'ORDER BY id DESC '
             . 'LIMIT ' . $count);
@@ -40,7 +40,6 @@ class Resume
             $resumesList[$i]['gender'] = $row['gender'];
             $i++;
         }
-
         return $resumesList;
     }
 
@@ -55,15 +54,15 @@ class Resume
 
         // Получение и возврат результатов
         $result = $db->query('SELECT id, name, headline, short_description, website_address, email_address FROM resume ORDER BY id ASC');
-        $vacanciesList = array();
+        $resumesList = array();
         $i = 0;
         while ($row = $result->fetch()) {
-            $vacanciesList[$i]['id'] = $row['id'];
-            $vacanciesList[$i]['name'] = $row['name'];
-            $vacanciesList[$i]['headline'] = $row['headline'];
-            $vacanciesList[$i]['short_description'] = $row['short_description'];
-            $vacanciesList[$i]['website_address'] = $row['website_address'];
-            $vacanciesList[$i]['email_address'] = $row['email_address'];
+            $resumesList[$i]['id'] = $row['id'];
+            $resumesList[$i]['name'] = $row['name'];
+            $resumesList[$i]['headline'] = $row['headline'];
+            $resumesList[$i]['short_description'] = $row['short_description'];
+            $resumesList[$i]['website_address'] = $row['website_address'];
+            $resumesList[$i]['email_address'] = $row['email_address'];
             $i++;
         }
         return $vacanciesList;

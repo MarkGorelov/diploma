@@ -25,6 +25,8 @@
                 <a href="/vacancy-manage/">Управление вакансиями</a>
                 <br>
                 <a href="/resume-manage/">Управление резюме</a>
+                <br>
+                <a href="/education-manage/">Управление образованием</a>
 
                 <hr>
                 <hr>

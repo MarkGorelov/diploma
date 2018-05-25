@@ -23,75 +23,31 @@ class Education
     }
 
     /**
-     * Возвращает массив образований для списка в админпанели <br/>
-     * (при этом в результат попадают и включенные и выключенные компании)
-     * @return array <p>Массив компаний</p>
+     * Выводим список последних созданных учебных учреждений текущим пользователем
      */
-    public static function getEducationListAdmin()
+    public static function getEducationsByUser($userId = false)
     {
-        // Соединение с БД
-        $db = Db::getConnection();
+        if ($userId) {
+            $db = Db::getConnection();
+            $educations = array();
+            $result = $db->query("SELECT id, img, degree, branch, school_name, date_of_education, short_description, status FROM education "
+                . "WHERE user_id = '$userId' "
+                . "ORDER BY id DESC ");
 
-        // Запрос к БД
-        $result = $db->query('SELECT id, school_name, degree, branch, short_description FROM education ORDER BY id ASC');
-
-        $listOfEducation = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $listOfEducation[$i]['id'] = $row['id'];
-            $listOfEducation[$i]['school_name'] = $row['school_name'];
-            $listOfEducation[$i]['degree'] = $row['degree'];
-            $listOfEducation[$i]['branch'] = $row['branch'];
-            $listOfEducation[$i]['short_description'] = $row['short_description'];
-            $i++;
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $educations[$i]['id'] = $row['id'];
+                $educations[$i]['img'] = $row['img'];
+                $educations[$i]['degree'] = $row['degree'];
+                $educations[$i]['branch'] = $row['branch'];
+                $educations[$i]['school_name'] = $row['school_name'];
+                $educations[$i]['date_of_education'] = $row['date_of_education'];
+                $educations[$i]['short_description'] = $row['short_description'];
+                $educations[$i]['status'] = $row['status'];
+                $i++;
+            }
+            return $educations;
         }
-        return $listOfEducation;
-    }
-
-    public static function getEducationListByResume()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Запрос к БД
-        $result = $db->query('SELECT id, school_name, degree, branch, short_description, date_of_education FROM education ORDER BY id ASC');
-
-        $listOfEducation = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $listOfEducation[$i]['id'] = $row['id'];
-            $listOfEducation[$i]['school_name'] = $row['school_name'];
-            $listOfEducation[$i]['degree'] = $row['degree'];
-            $listOfEducation[$i]['branch'] = $row['branch'];
-            $listOfEducation[$i]['short_description'] = $row['short_description'];
-            $listOfEducation[$i]['date_of_education'] = $row['date_of_education'];
-            $i++;
-        }
-        return $listOfEducation;
-    }
-
-    /**
-     * Возвращает список образования
-     * @return array <p>Массив с образования</p>
-     */
-    public static function getEducationList()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Получение и возврат результатов
-        $result = $db->query('SELECT id, school_name, date_of_education, degree, short_description FROM education ORDER BY id ASC');
-        $listOfEducation = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $listOfEducation[$i]['id'] = $row['id'];
-            $listOfEducation[$i]['school_name'] = $row['school_name'];
-            $listOfEducation[$i]['short_description'] = $row['short_description'];
-            $listOfEducation[$i]['degree'] = $row['degree'];
-            $listOfEducation[$i]['date_of_education'] = $row['date_of_education'];
-            $i++;
-        }
-        return $listOfEducation;
     }
 
     /**
@@ -106,9 +62,9 @@ class Education
 
         // Текст запроса к БД
         $sql = 'INSERT INTO education '
-            . '(degree, branch, school_name, date_of_education, short_description, status)'
+            . '(user_id, resume_id, degree, branch, school_name, date_of_education, short_description, status)'
             . 'VALUES '
-            . '(:degree, :branch, :school_name, :date_of_education, :short_description, :status)';
+            . '(:user_id, :resume_id, :degree, :branch, :school_name, :date_of_education, :short_description, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -117,6 +73,8 @@ class Education
         $result->bindParam(':school_name', $options['school_name'], PDO::PARAM_STR);
         $result->bindParam(':date_of_education', $options['date_of_education'], PDO::PARAM_STR);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
         if ($result->execute()) {
@@ -145,7 +103,9 @@ class Education
                 branch = :branch, 
                 school_name = :school_name, 
                 date_of_education = :date_of_education,
-                short_description = :short_description, 
+                short_description = :short_description,
+                user_id = :user_id,
+                resume_id = :resume_id, 
                 status = :status
             WHERE id = :id";
 
@@ -157,6 +117,8 @@ class Education
         $result->bindParam(':school_name', $options['school_name'], PDO::PARAM_STR);
         $result->bindParam(':date_of_education', $options['date_of_education'], PDO::PARAM_STR);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
     }
@@ -201,7 +163,6 @@ class Education
             // Возвращаем путь изображения пользователя
             return $pathToUserImg;
         }
-
         // Возвращаем путь изображения-пустышки
         return $path . $noImg;
     }
