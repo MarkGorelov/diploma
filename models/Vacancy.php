@@ -10,8 +10,8 @@ class Vacancy
 {
     const SHOW_BY_DEFAULT = 4;
 
-    /*
-     * Returns an array of vacancies
+    /**
+     * Выводим список последних созданных вакансий
      */
     public static function getLatestVacancy($count = self::SHOW_BY_DEFAULT)
     {
@@ -43,6 +43,32 @@ class Vacancy
         return $vacanciesList;
     }
 
+    /**
+     * Выводим список последних созданных компаний текущим пользователем
+     */
+    public static function getVacanciesByUser($userId = false)
+    {
+        if ($userId) {
+            $db = Db::getConnection();
+            $vacancies = array();
+            $result = $db->query("SELECT id, img, job_title, company_name, location, status FROM vacancy "
+                . "WHERE user_id = '$userId' "
+                . "ORDER BY id DESC ");
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $vacancies[$i]['id'] = $row['id'];
+                $vacancies[$i]['img'] = $row['img'];
+                $vacancies[$i]['job_title'] = $row['job_title'];
+                $vacancies[$i]['company_name'] = $row['company_name'];
+                $vacancies[$i]['location'] = $row['location'];
+                $vacancies[$i]['status'] = $row['status'];
+                $i++;
+            }
+            return $vacancies;
+        }
+    }
+
     /*
      * Return company item by id
      * @param integer $id
@@ -61,6 +87,10 @@ class Vacancy
         }
     }
 
+    /**
+     * Возвращает список вакансий компании
+     * @return array <p>Массив с вакансиями</p>
+     */
     public static function getVacanciesListByCompany($companyId = false)
     {
         if ($companyId) {
@@ -68,8 +98,7 @@ class Vacancy
             $vacancies = array();
             $result = $db->query("SELECT id, img, job_title, company_name, type_of_employment, short_description, location, salary, gender FROM vacancy "
                 . "WHERE status = '1' AND company_id = '$companyId' "
-                . "ORDER BY id ASC "
-                . "LIMIT " . self::SHOW_BY_DEFAULT);
+                . "ORDER BY id DESC ");
 
             $i = 0;
             while ($row = $result->fetch()) {
@@ -84,7 +113,6 @@ class Vacancy
                 $vacancies[$i]['gender'] = $row['gender'];
                 $i++;
             }
-
             return $vacancies;
         }
     }
@@ -125,14 +153,15 @@ class Vacancy
 
         // Текст запроса к БД
         $sql = 'INSERT INTO vacancy '
-            . '(company_name, job_title, company_id, short_description, website_address, location, type_of_employment, salary, working, experince, gender, job_detail, category_id, status)'
+            . '(company_name, job_title, user_id, company_id, short_description, website_address, location, type_of_employment, salary, working, experince, gender, job_detail, category_id, status)'
             . 'VALUES '
-            . '(:company_name, :job_title, :company_id, :short_description, :website_address, :location, :type_of_employment, :salary, :working, :experince, :gender, :job_detail, :category_id, :status)';
+            . '(:company_name, :job_title, :user_id, :company_id, :short_description, :website_address, :location, :type_of_employment, :salary, :working, :experince, :gender, :job_detail, :category_id, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
         $result->bindParam(':job_title', $options['job_title'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':company_id', $options['company_id'], PDO::PARAM_INT);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
         $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
@@ -171,6 +200,7 @@ class Vacancy
                 company_name = :company_name, 
                 job_title = :job_title, 
                 company_id = :company_id, 
+                user_id = :user_id,
                 short_description = :short_description,
                 website_address = :website_address, 
                 location = :location, 
@@ -190,6 +220,7 @@ class Vacancy
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
         $result->bindParam(':job_title', $options['job_title'], PDO::PARAM_STR);
         $result->bindParam(':company_id', $options['company_id'], PDO::PARAM_INT);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
         $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
         $result->bindParam(':location', $options['location'], PDO::PARAM_STR);
@@ -244,7 +275,6 @@ class Vacancy
             // Возвращаем путь изображения пользователя
             return $pathToUserImg;
         }
-
         // Возвращаем путь изображения-пустышки
         return $path . $noImg;
     }

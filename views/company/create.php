@@ -3,9 +3,9 @@
     <form action="#" method="post" enctype="multipart/form-data">
 
         <!-- Page header -->
-        <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner1.jpg);">
+        <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
             <div class="container page-name">
-                <h1 class="text-center">Создать компанию</h1>
+                <h1 class="text-center">Создайте компанию</h1>
                 <p class="lead text-center">Создайте профиль своей компании и разместите его на сайте</p>
             </div>
 
@@ -156,7 +156,7 @@
                 <div class="container">
                     <header class="section-header">
                         <span>Вы закончили?</span>
-                        <h2>Зарегистрируйте компанию</h2>
+                        <h2>Создайте компанию</h2>
                         <p>Пожалуйста, просмотрите всю указанную информацию еще раз и нажмите на кнопку ниже, чтобы
                             создать свою компанию</p>
                     </header>

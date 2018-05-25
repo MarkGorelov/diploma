@@ -66,6 +66,28 @@ class Company
     }
 
     /**
+     * Выводим список последних созданных компаний текущим пользователем
+     */
+    public static function getCompaniesListByUser($userId = false)
+    {
+        if ($userId) {
+            $db = Db::getConnection();
+            $companies = array();
+            $result = $db->query("SELECT id, company_name FROM company "
+                . "WHERE user_id = '$userId' "
+                . "ORDER BY id DESC ");
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $companies[$i]['id'] = $row['id'];
+                $companies[$i]['company_name'] = $row['company_name'];
+                $i++;
+            }
+            return $companies;
+        }
+    }
+
+    /**
      * Добавляет новую компанию в административной панели
      * @param array $options <p>Массив с информацией о компании</p>
      * @return integer <p>id добавленной в таблицу записи</p>

@@ -1,6 +1,6 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
     <!-- Page header -->
-    <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner1.jpg)">
+    <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner.jpg)">
         <div class="container">
             <div class="header-detail">
                 <img class="logo" src="<?php echo Vacancy::getImage($vacancy['id']); ?>" alt="">
@@ -39,7 +39,7 @@
 
                     <li>
                         <i class="fa fa-certificate"></i>
-                        <a href="#"><?php echo $vacancy['gender']; ?></a>
+                        <a href="#">Пол: <?php echo $vacancy['gender']; ?></a>
                     </li>
                 </ul>
 

@@ -20,6 +20,8 @@
                 <a href="/cabinet/edit/">Редактировать данные</a>
                 <br>
                 <a href="/company-manage/">Управление компаниями</a>
+                <br>
+                <a href="/vacancy-manage/">Управление вакансиями</a>
 
                 <hr>
                 <hr>
