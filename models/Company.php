@@ -51,7 +51,7 @@ class Company
             $companies = array();
             $result = $db->query("SELECT id, img, company_name, headline FROM company "
                 . "WHERE status = '1' AND user_id = '$userId' "
-                . "ORDER BY id ASC ");
+                . "ORDER BY id DESC ");
 
             $i = 0;
             while ($row = $result->fetch()) {
@@ -106,6 +106,25 @@ class Company
     }
 
     /**
+     * Возвращает компанию по индентификатору
+     * @param integer $id <p>id компании</p>
+     * @return boolean <p>Результат выполнения метода</p>
+     */
+    public static function getCompanyById($id)
+    {
+        $id = intval($id);
+
+        if ($id) {
+            $db = Db::getConnection();
+
+            $result = $db->query('SELECT * FROM company WHERE id=' . $id);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+
+            return $result->fetch();
+        }
+    }
+
+    /**
      * Редактирует компанию с заданным id
      * @param integer $id <p>id компании</p>
      * @param array $options <p>Массив с информацей о компании</p>
@@ -151,25 +170,6 @@ class Company
         $result->bindParam(':company_detail', $options['company_detail'], PDO::PARAM_STR);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
-    }
-
-    /**
-     * Возвращает компанию по индентификатору
-     * @param integer $id <p>id компании</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
-    public static function getCompanyById($id)
-    {
-        $id = intval($id);
-
-        if ($id) {
-            $db = Db::getConnection();
-
-            $result = $db->query('SELECT * FROM company WHERE id=' . $id);
-            $result->setFetchMode(PDO::FETCH_ASSOC);
-
-            return $result->fetch();
-        }
     }
 
     /**

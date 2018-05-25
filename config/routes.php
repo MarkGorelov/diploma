@@ -8,10 +8,13 @@
 
 return array(
 
+    'company-manage/delete/([0-9]+)' => 'company/delete/$1',
+    'company-manage/update/([0-9]+)' => 'company/update/$1',
+    'company-manage/create' => 'company/create', // actionCreate в CompanyController
     'companies' => 'company/index', // actionIndex в CompanyController
-    'company/register' => 'company/create', // actionCreate в CompanyController
     'company/([0-9]+)' => 'company/view/$1', // actionView в CompanyController
     'company-manage' => 'company/manage',
+
 
     'vacancies' => 'vacancy/index', //actionIndex в VacancyController
     'vacancy/([0-9]+)' => 'vacancy/view/$1', //actionView в VacancyController

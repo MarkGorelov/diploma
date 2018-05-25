@@ -4,8 +4,8 @@
     <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-manage-company.png)">
         <div class="container no-shadow">
             <h1 class="text-center">Управление компаниями</h1>
-            <p class="lead text-center">Ниже представлен список зарегистрированых вами компаний, вы можете их
-                редактировать, удалять или зарегистрировать новую</p>
+            <p class="lead text-center">Ниже представлен список созданных вами компаний, вы можете их
+                редактировать, удалять или создать новую</p>
         </div>
     </header>
     <!-- END Page header -->
@@ -18,13 +18,14 @@
 
                     <div class="col-xs-12 text-right">
                         <br>
-                        <a class="btn btn-primary btn-sm" href="/company/register/">Зарегистрировать новую компанию</a>
+                        <a class="btn btn-primary btn-sm" href="/company-manage/create/">Создать новую компанию</a>
                     </div>
                     <?php foreach ($companiesUser as $companies): ?>
                         <!-- Company item -->
                         <div class="col-xs-12">
                             <div class="item-block">
                                 <header>
+
                                     <a href="/company/<?php echo $companies['id']; ?>"><img
                                                 src="<?php echo Company::getImage($companies['id']); ?>" alt=""></a>
                                     <div class="hgroup">
@@ -39,10 +40,14 @@
                                             </a>
                                         </h5>
                                     </div>
+
                                     <div class="action-btn">
-                                        <a class="btn btn-xs btn-gray" href="#">Редактировать</a>
-                                        <a class="btn btn-xs btn-danger" href="#">Удалить</a>
+                                        <a class="btn btn-xs btn-gray"
+                                           href="/company-manage/update/<?php echo $companies['id']; ?>">Редактировать</a>
+                                        <a class="btn btn-xs btn-danger"
+                                           href="/company-manage/delete/<?php echo $companies['id']; ?>">Удалить</a>
                                     </div>
+
                                 </header>
                             </div>
                         </div>

@@ -5,7 +5,7 @@
         <!-- Page header -->
         <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner1.jpg);">
             <div class="container page-name">
-                <h1 class="text-center">Зарегистрировать компанию</h1>
+                <h1 class="text-center">Создать компанию</h1>
                 <p class="lead text-center">Создайте профиль своей компании и разместите его на сайте</p>
             </div>
 
@@ -158,14 +158,14 @@
                         <span>Вы закончили?</span>
                         <h2>Зарегистрируйте компанию</h2>
                         <p>Пожалуйста, просмотрите всю указанную информацию еще раз и нажмите на кнопку ниже, чтобы
-                            зарегистрировать свою компанию</p>
+                            создать свою компанию</p>
                     </header>
 
                     <p class="text-center">
                         <input type="hidden" name="user_id" class="btn btn-success btn-xl btn-round"
                                value=<?php echo $_SESSION['user']; ?>>
                         <input type="submit" name="submit" class="btn btn-success btn-xl btn-round"
-                               value="Зарегистрировать">
+                               value="Создать">
                     </p>
 
                 </div>
