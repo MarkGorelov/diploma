@@ -23,79 +23,35 @@ class WorkExperience
     }
 
     /**
-     * Возвращает массив образований для списка в админпанели <br/>
-     * (при этом в результат попадают и включенные и выключенные компании)
-     * @return array <p>Массив компаний</p>
+     * Выводим список последних созданных учебных учреждений текущим пользователем
      */
-    public static function getWorkExperienceListAdmin()
+    public static function getWorkExperienceByUser($userId = false)
     {
-        // Соединение с БД
-        $db = Db::getConnection();
+        if ($userId) {
+            $db = Db::getConnection();
+            $educations = array();
+            $result = $db->query("SELECT id, img, company_name , position , date_of_experience, short_description, status FROM work_experience "
+                . "WHERE user_id = '$userId' "
+                . "ORDER BY id DESC ");
 
-        // Запрос к БД
-        $result = $db->query('SELECT id, company_name, position, date_of_experience, short_description FROM work_experience ORDER BY id ASC');
-
-        $workExperienceList = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $workExperienceList[$i]['id'] = $row['id'];
-            $workExperienceList[$i]['company_name'] = $row['company_name'];
-            $workExperienceList[$i]['position'] = $row['position'];
-            $workExperienceList[$i]['date_of_experience'] = $row['date_of_experience'];
-            $workExperienceList[$i]['short_description'] = $row['short_description'];
-            $i++;
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $educations[$i]['id'] = $row['id'];
+                $educations[$i]['img'] = $row['img'];
+                $educations[$i]['company_name'] = $row['company_name'];
+                $educations[$i]['position'] = $row['position'];
+                $educations[$i]['date_of_experience'] = $row['date_of_experience'];
+                $educations[$i]['short_description'] = $row['short_description'];
+                $educations[$i]['status'] = $row['status'];
+                $i++;
+            }
+            return $educations;
         }
-        return $workExperienceList;
-    }
-
-    public static function getWorkExperienceListByResume()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Запрос к БД
-        $result = $db->query('SELECT id, company_name, position, date_of_experience, short_description FROM work_experience ORDER BY id ASC');
-
-        $workExperienceList = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $workExperienceList[$i]['id'] = $row['id'];
-            $workExperienceList[$i]['company_name'] = $row['company_name'];
-            $workExperienceList[$i]['position'] = $row['position'];
-            $workExperienceList[$i]['date_of_experience'] = $row['date_of_experience'];
-            $workExperienceList[$i]['short_description'] = $row['short_description'];
-            $i++;
-        }
-        return $workExperienceList;
     }
 
     /**
-     * Возвращает список опыта работы
-     * @return array <p>Массив с опытом работы</p>
-     */
-    public static function getWorkExperienceList()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Получение и возврат результатов
-        $result = $db->query('SELECT id, company_name, position, date_of_experience, short_description FROM work_experience ORDER BY id ASC');
-        $listOfWorkExperience = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $listOfWorkExperience[$i]['id'] = $row['id'];
-            $listOfWorkExperience[$i]['company_name'] = $row['company_name'];
-            $listOfWorkExperience[$i]['position'] = $row['position'];
-            $listOfWorkExperience[$i]['date_of_experience'] = $row['date_of_experience'];
-            $listOfWorkExperience[$i]['short_description'] = $row['short_description'];
-            $i++;
-        }
-        return $listOfWorkExperience;
-    }
-
-    /**
-     * Добавляет новый опыт работы
-     * @param array $options <p>Массив с информацией об опыте работы</p>
+     * Добавляет новое образование
+     * @param array $options <p>Массив с информацией о образование</p>
      * @return integer <p>id добавленной в таблицу записи</p>
      */
     public static function createWorkExperience($options)
@@ -105,9 +61,9 @@ class WorkExperience
 
         // Текст запроса к БД
         $sql = 'INSERT INTO work_experience '
-            . '(company_name, position, date_of_experience, short_description, status)'
+            . '(user_id, resume_id, company_name, position, date_of_experience, short_description, status)'
             . 'VALUES '
-            . '(:company_name, :position, :date_of_experience, :short_description, :status)';
+            . '(:user_id, :resume_id, :company_name, :position, :date_of_experience, :short_description, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -115,6 +71,8 @@ class WorkExperience
         $result->bindParam(':position', $options['position'], PDO::PARAM_STR);
         $result->bindParam(':date_of_experience', $options['date_of_experience'], PDO::PARAM_STR);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
         if ($result->execute()) {
@@ -126,9 +84,9 @@ class WorkExperience
     }
 
     /**
-     * Редактирует опыт работы в компании с заданным id
-     * @param integer $id <p>id опыта работы</p>
-     * @param array $options <p>Массив с информацей о опыте работы</p>
+     * Редактирует образование с заданным id
+     * @param integer $id <p>id образования</p>
+     * @param array $options <p>Массив с информацей о образовании</p>
      * @return boolean <p>Результат выполнения метода</p>
      */
     public static function updateWorkExperienceById($id, $options)
@@ -143,6 +101,8 @@ class WorkExperience
                 position = :position, 
                 date_of_experience = :date_of_experience, 
                 short_description = :short_description,
+                user_id = :user_id,
+                resume_id = :resume_id, 
                 status = :status
             WHERE id = :id";
 
@@ -153,13 +113,15 @@ class WorkExperience
         $result->bindParam(':position', $options['position'], PDO::PARAM_STR);
         $result->bindParam(':date_of_experience', $options['date_of_experience'], PDO::PARAM_STR);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
     }
 
     /**
-     * Удаляет опыт работы с указанным id
-     * @param integer $id <p>id опыта работы</p>
+     * Удаляет образование с указанным id
+     * @param integer $id <p>id образования</p>
      * @return boolean <p>Результат выполнения метода</p>
      */
     public static function deleteWorkExperienceById($id)
@@ -197,7 +159,6 @@ class WorkExperience
             // Возвращаем путь изображения пользователя
             return $pathToUserImg;
         }
-
         // Возвращаем путь изображения-пустышки
         return $path . $noImg;
     }

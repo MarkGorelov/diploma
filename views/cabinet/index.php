@@ -8,6 +8,7 @@
         </div>
     </header>
     <!-- END Site header -->
+
     <!-- Main container -->
     <main>
 
@@ -27,6 +28,9 @@
                 <a href="/resume-manage/">Управление резюме</a>
                 <br>
                 <a href="/education-manage/">Управление образованием</a>
+
+                <br>
+                <a href="/work-experience-manage/">Управление опытом работы</a>
 
                 <hr>
                 <hr>
