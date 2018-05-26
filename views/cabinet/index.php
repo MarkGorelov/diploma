@@ -32,6 +32,9 @@
                 <br>
                 <a href="/work-experience-manage/">Управление опытом работы</a>
 
+                <br>
+                <a href="/tag-manage/">Управление опытом работы</a>
+
                 <hr>
                 <hr>
             </div>

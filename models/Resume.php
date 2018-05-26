@@ -65,7 +65,7 @@ class Resume
             $resumesList[$i]['email_address'] = $row['email_address'];
             $i++;
         }
-        return $vacanciesList;
+        return $resumesList;
     }
 
     /**

@@ -23,73 +23,31 @@ class Tag
     }
 
     /**
-     * Возвращает массив тегов для списка в админпанели <br/>
-     * (при этом в результат попадают и включенные и выключенные тегов)
-     * @return array <p>Массив тегов</p>
+     * Выводим список добавленых тегов текущим пользователем
      */
-    public static function getTagListAdmin()
+    public static function getTagsByUser($userId = false)
     {
-        // Соединение с БД
-        $db = Db::getConnection();
+        if ($userId) {
+            $db = Db::getConnection();
+            $tags = array();
+            $result = $db->query("SELECT id, name, status FROM tag "
+                . "WHERE user_id = '$userId' "
+                . "ORDER BY id DESC ");
 
-        // Запрос к БД
-        $result = $db->query('SELECT id, name, status FROM tag ORDER BY id ASC');
-
-        $tagsList = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $tagsList[$i]['id'] = $row['id'];
-            $tagsList[$i]['name'] = $row['name'];
-            $tagsList[$i]['status'] = $row['status'];
-            $i++;
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $tags[$i]['id'] = $row['id'];
+                $tags[$i]['name'] = $row['name'];
+                $tags[$i]['status'] = $row['status'];
+                $i++;
+            }
+            return $tags;
         }
-        return $tagsList;
-    }
-
-    public static function getTagListByResume()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Запрос к БД
-        $result = $db->query('SELECT id, name, status FROM tag ORDER BY id ASC');
-
-        $tagsList = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $tagsList[$i]['id'] = $row['id'];
-            $tagsList[$i]['name'] = $row['name'];
-            $tagsList[$i]['status'] = $row['status'];
-            $i++;
-        }
-        return $tagsList;
     }
 
     /**
-     * Возвращает список тегов
-     * @return array <p>Массив с тегами</p>
-     */
-    public static function getTagList()
-    {
-        // Соединение с БД
-        $db = Db::getConnection();
-
-        // Получение и возврат результатов
-        $result = $db->query('SELECT id, name, status FROM tag ORDER BY id ASC');
-        $tagsList = array();
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $tagsList[$i]['id'] = $row['id'];
-            $tagsList[$i]['name'] = $row['name'];
-            $tagsList[$i]['status'] = $row['status'];
-            $i++;
-        }
-        return $tagsList;
-    }
-
-    /**
-     * Добавляет новый тег
-     * @param array $options <p>Массив с тегами</p>
+     * Добавляет новое образование
+     * @param array $options <p>Массив с информацией о образование</p>
      * @return integer <p>id добавленной в таблицу записи</p>
      */
     public static function createTag($options)
@@ -99,13 +57,15 @@ class Tag
 
         // Текст запроса к БД
         $sql = 'INSERT INTO tag '
-            . '(name, status)'
+            . '(user_id, resume_id, name, status)'
             . 'VALUES '
-            . '(:name, :status)';
+            . '(:user_id, :resume_id, :name, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
         if ($result->execute()) {
@@ -117,9 +77,9 @@ class Tag
     }
 
     /**
-     * Редактирует тег с заданным id
-     * @param integer $id <p>id тега</p>
-     * @param array $options <p>Массив с тегами</p>
+     * Редактирует образование с заданным id
+     * @param integer $id <p>id образования</p>
+     * @param array $options <p>Массив с информацей о образовании</p>
      * @return boolean <p>Результат выполнения метода</p>
      */
     public static function updateTagById($id, $options)
@@ -130,7 +90,9 @@ class Tag
         // Текст запроса к БД
         $sql = "UPDATE tag
             SET 
-                name = :name,
+                name = :name, 
+                user_id = :user_id,
+                resume_id = :resume_id, 
                 status = :status
             WHERE id = :id";
 
@@ -138,13 +100,15 @@ class Tag
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
     }
 
     /**
-     * Удаляет тег с указанным id
-     * @param integer $id <p>id тега</p>
+     * Удаляет образование с указанным id
+     * @param integer $id <p>id образования</p>
      * @return boolean <p>Результат выполнения метода</p>
      */
     public static function deleteTagById($id)
