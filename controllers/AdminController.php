@@ -8,9 +8,8 @@
 
 /**
  * Контроллер AdminController
- * Главная страница в админпанели
  */
-class AdminController extends AdminBase
+class AdminController extends UserBase
 {
     /**
      * Action для стартовой страницы "Панель администратора"

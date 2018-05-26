@@ -47,6 +47,7 @@
                     </div>
 
                     <hr class="hr-xs">
+
                     <br>
                     <select class="form-control selectpicker" name="role">
                         <option value="aspirant" selected="selected">Ищу работу</option>

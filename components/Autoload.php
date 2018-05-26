@@ -2,7 +2,9 @@
 
 function __autoload($class_name)
 {
-    # List all the class directories in the array.
+    /**
+     * Список всех каталогов содержащие классы в массиве
+     */
     $array_paths = array(
         '/models/',
         '/components/'

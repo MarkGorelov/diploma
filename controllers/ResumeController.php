@@ -13,9 +13,6 @@ class ResumeController extends UserBase
         $latestResumes = array();
         $latestResumes = Resume::getLatestResume();
 
-        $tagsResume = array();
-        $tagsResume = Tag::getTagListByResume();
-
         $categories = array();
         $categories = AdminCategory::getCategoriesList();
 
@@ -28,13 +25,13 @@ class ResumeController extends UserBase
         $resume = Resume::getResumeById($resumeId);
 
         $tagsResume = array();
-        $tagsResume = Tag::getTagListByResume();
-
-        $workExperienceResume = array();
-        $workExperienceResume = WorkExperience::getWorkExperienceListByResume();
+        $tagsResume = Tag::getTagsListByResume($resumeId);
 
         $educationResume = array();
-        $educationResume = Education::getEducationListByResume();
+        $educationResume = Education::getEducationsListByResume($resumeId);
+
+        $workExperienceResume = array();
+        $workExperienceResume = WorkExperience::getWorkExperienceListByResume($resumeId);
 
         require_once(ROOT . '/views/resume/view.php');
         return true;

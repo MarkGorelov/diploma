@@ -8,9 +8,8 @@
 
 /**
  * Контроллер AdminResumeController
- * Страница управления резюме в административной панели
  */
-class AdminResumeController extends AdminBase
+class AdminResumeController extends UserBase
 {
     /**
      * Action для страницы "Управление резюме"

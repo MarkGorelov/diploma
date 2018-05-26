@@ -22,7 +22,7 @@ class Resume
 
         $resumesList = array();
 
-        $result = $db->query('SELECT id, img,  name, headline, short_description, tag_id, location, salary, gender FROM resume '
+        $result = $db->query('SELECT id, img,  name, headline, short_description, location, salary, gender FROM resume '
             . 'WHERE status = "1"'
             . 'ORDER BY id DESC '
             . 'LIMIT ' . $count);
@@ -34,7 +34,6 @@ class Resume
             $resumesList[$i]['name'] = $row['name'];
             $resumesList[$i]['headline'] = $row['headline'];
             $resumesList[$i]['short_description'] = $row['short_description'];
-            $resumesList[$i]['tag_id'] = $row['tag_id'];
             $resumesList[$i]['location'] = $row['location'];
             $resumesList[$i]['salary'] = $row['salary'];
             $resumesList[$i]['gender'] = $row['gender'];

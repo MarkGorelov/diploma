@@ -8,9 +8,8 @@
 
 /**
  * Контроллер AdminVacancyController
- * Страница управления  информацией об вакансиях в административной панели
  */
-class AdminVacancyController extends AdminBase
+class AdminVacancyController extends UserBase
 {
     /**
      * Action для страницы "Управление вакансиями"

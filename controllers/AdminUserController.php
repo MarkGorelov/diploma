@@ -6,7 +6,10 @@
  * Time: 17:30
  */
 
-class AdminUserController extends AdminBase
+/**
+ * Контроллер AdminUserController
+ */
+class AdminUserController extends UserBase
 {
     /**
      * Action для страницы "Управление пользователями"

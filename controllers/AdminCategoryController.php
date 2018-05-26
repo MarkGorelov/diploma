@@ -8,9 +8,9 @@
 
 /**
  * Контроллер AdminCategoryController
- * Страница управления категориями в административной панели
+ * Страницы управления категориями в административной панели
  */
-class AdminCategoryController extends AdminBase
+class AdminCategoryController extends UserBase
 {
     /**
      * Action для страницы "Управление категориями"

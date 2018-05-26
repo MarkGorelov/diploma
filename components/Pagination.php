@@ -1,9 +1,8 @@
 <?php
 
-/*
+/**
  * Класс Pagination для генерации постраничной навигации
  */
-
 class Pagination
 {
 

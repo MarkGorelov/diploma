@@ -8,9 +8,8 @@
 
 /**
  * Контроллер AdminEducationController
- * Страница управления  информацией об учебных учреждениях пользователя в административной панели
  */
-class AdminEducationController extends AdminBase
+class AdminEducationController extends UserBase
 {
     /**
      * Action для страницы "Управление  информацией об учебных учреждениях пользователя"

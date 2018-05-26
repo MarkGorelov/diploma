@@ -157,12 +157,6 @@
 
                                 <div class="item-body">
                                     <p><?php echo $resume['short_description']; ?></p>
-
-                                    <div class="tag-list">
-                                        <?php foreach ($tagsResume as $tag): ?>
-                                            <span><?php echo $tag['name']; ?></span>
-                                        <?php endforeach; ?>
-                                    </div>
                                 </div>
 
                                 <footer>

@@ -8,9 +8,8 @@
 
 /**
  * Контроллер AdminCompanyController
- * Страница управления компаниями в административной панели
  */
-class AdminCompanyController extends AdminBase
+class AdminCompanyController extends UserBase
 {
     /**
      * Action для страницы "Управление компаниями"

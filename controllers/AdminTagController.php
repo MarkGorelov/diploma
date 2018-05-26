@@ -8,9 +8,8 @@
 
 /**
  * Контроллер AdminTagController
- * Страница управления тегами в административной панели
  */
-class AdminTagController extends AdminBase
+class AdminTagController extends UserBase
 {
     /**
      * Action для страницы "Управление тегами"

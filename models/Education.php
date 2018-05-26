@@ -25,6 +25,34 @@ class Education
     /**
      * Выводим список последних созданных учебных учреждений текущим пользователем
      */
+    public static function getEducationsListByResume($resumeId = false)
+    {
+        if ($resumeId) {
+            $db = Db::getConnection();
+            $educations = array();
+            $result = $db->query("SELECT id, img, degree, branch, school_name, date_of_education, short_description, status FROM education "
+                . "WHERE resume_id = '$resumeId' "
+                . "ORDER BY id DESC ");
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $educations[$i]['id'] = $row['id'];
+                $educations[$i]['img'] = $row['img'];
+                $educations[$i]['degree'] = $row['degree'];
+                $educations[$i]['branch'] = $row['branch'];
+                $educations[$i]['school_name'] = $row['school_name'];
+                $educations[$i]['date_of_education'] = $row['date_of_education'];
+                $educations[$i]['short_description'] = $row['short_description'];
+                $educations[$i]['status'] = $row['status'];
+                $i++;
+            }
+            return $educations;
+        }
+    }
+
+    /**
+     * Выводим список последних созданных учебных учреждений текущим пользователем
+     */
     public static function getEducationsByUser($userId = false)
     {
         if ($userId) {

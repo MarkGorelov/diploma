@@ -6,8 +6,14 @@
  * Time: 19:08
  */
 
+/**
+ * Контроллер CabinetController
+ */
 class CabinetController
 {
+    /**
+     * Action для страницы "Кабинет пользователя"
+     */
     public function actionIndex()
     {
         // Получаем идентификатор пользователя из сессии
@@ -16,10 +22,14 @@ class CabinetController
         // Получаем информацию о пользователе из БД
         $user = User::getUserById($userId);
 
+        // Подключаем вид
         require_once(ROOT . '/views/cabinet/index.php');
         return true;
     }
 
+    /**
+     * Action для страницы "Редактирование данных пользователя"
+     */
     public function actionEdit()
     {
         // Получаем идентификатор пользователя из сессии
@@ -52,7 +62,7 @@ class CabinetController
             }
 
         }
-
+        // Подключаем вид
         require_once(ROOT . '/views/cabinet/edit.php');
         return true;
     }

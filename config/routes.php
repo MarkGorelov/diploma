@@ -108,5 +108,4 @@ return array(
     'admin' => 'admin/index',
 
     '' => 'site/index', // actionIndex в SiteController
-
 );

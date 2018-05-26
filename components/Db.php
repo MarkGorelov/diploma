@@ -6,6 +6,9 @@
  * Time: 19:18
  */
 
+/**
+ * Класс Db для подключения к бд
+ */
 class Db
 {
     public static function getConnection()

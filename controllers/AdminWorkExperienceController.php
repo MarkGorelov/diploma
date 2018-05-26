@@ -8,9 +8,8 @@
 
 /**
  * Контроллер AdminWorkExperienceController
- * Страница управления  информацией об опыте работы пользователя в административной панели
  */
-class AdminWorkExperienceController extends AdminBase
+class AdminWorkExperienceController extends UserBase
 {
     /**
      * Action для страницы "Управление опытом работы"

@@ -17,7 +17,7 @@ class Router
     }
 
     /**
-     * Returns request string
+     * Возвращаем строку запроса
      */
     private function getURI()
     {
@@ -35,12 +35,10 @@ class Router
 
             // Сравниваем $uriPattern и $uri
             if (preg_match("~$uriPattern~", $uri)) {
-
                 // Получаем внутренний путь из внешнего согласно правилу.
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
 
                 // Определить контроллер, action, параметры
-
                 $segments = explode('/', $internalRoute);
 
                 $controllerName = array_shift($segments) . 'Controller';

@@ -8,6 +8,29 @@
 
 class Tag
 {
+    /**
+     * Возвращает список тегов резюме
+     * @return array <p>Массив с вакансиями</p>
+     */
+    public static function getTagsListByResume($resumeId = false)
+    {
+        if ($resumeId) {
+            $db = Db::getConnection();
+            $tags = array();
+            $result = $db->query("SELECT id, name FROM tag "
+                . "WHERE status = '1' AND resume_id = '$resumeId' "
+                . "ORDER BY id DESC ");
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $tags[$i]['id'] = $row['id'];
+                $tags[$i]['name'] = $row['name'];
+                $i++;
+            }
+            return $tags;
+        }
+    }
+
     public static function getTagById($id)
     {
         $id = intval($id);

@@ -12,8 +12,7 @@
 class AdminCompany
 {
     /**
-     * Возвращает массив компаний для списка в административной панели <br/>
-     * (при этом в результат попадают и включенные и выключенные компании)
+     * Возвращаем массив компаний для списка в административной панели
      * @return array <p>Массив компаний</p>
      */
     public static function getCompaniesList()
@@ -22,12 +21,14 @@ class AdminCompany
         $db = Db::getConnection();
 
         // Запрос к БД
-        $result = $db->query('SELECT id, company_name, headline, short_description, location, founded, employees, website_address, phone_number, email_address, company_detail, status FROM company ORDER BY id ASC');
+        $result = $db->query('SELECT id, user_id, category_id, company_name, headline, short_description, location, founded, employees, website_address, phone_number, email_address, company_detail, status FROM company ORDER BY id ASC');
         // Получение и возврат результатов
         $companiesList = array();
         $i = 0;
         while ($row = $result->fetch()) {
             $companiesList[$i]['id'] = $row['id'];
+            $companiesList[$i]['user_id'] = $row['user_id'];
+            $companiesList[$i]['category_id'] = $row['category_id'];
             $companiesList[$i]['company_name'] = $row['company_name'];
             $companiesList[$i]['headline'] = $row['headline'];
             $companiesList[$i]['short_description'] = $row['short_description'];
@@ -45,7 +46,7 @@ class AdminCompany
     }
 
     /**
-     * Добавляет новую компанию в административной панели
+     * Добавляем новую компанию в административной панели
      * @param array $options <p>Массив с информацией о компании</p>
      * @return integer <p>id добавленной в таблицу записи</p>
      */
@@ -56,14 +57,13 @@ class AdminCompany
 
         // Текст запроса к БД
         $sql = 'INSERT INTO company '
-            . '(company_name, category_id, headline, short_description, location, founded, employees, website_address, phone_number, email_address, company_detail, status)'
+            . '(company_name, user_id, category_id, headline, short_description, location, founded, employees, website_address, phone_number, email_address, company_detail, status)'
             . 'VALUES '
-            . '(:company_name, :category_id, :headline, :short_description, :location, :founded, :employees, :website_address, :phone_number, :email_address, :company_detail, :status)';
+            . '(:company_name, :user_id, :category_id, :headline, :short_description, :location, :founded, :employees, :website_address, :phone_number, :email_address, :company_detail, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
-        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
         $result->bindParam(':headline', $options['headline'], PDO::PARAM_STR);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
         $result->bindParam(':location', $options['location'], PDO::PARAM_INT);
@@ -73,12 +73,14 @@ class AdminCompany
         $result->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_INT);
         $result->bindParam(':email_address', $options['email_address'], PDO::PARAM_STR);
         $result->bindParam(':company_detail', $options['company_detail'], PDO::PARAM_STR);
+        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
-        if ($result->execute()) {
+        if ($result->execute())
             // Если запрос выполенен успешно, возвращаем id добавленной записи
             return $db->lastInsertId();
-        }
+
         // Иначе возвращаем 0
         return 0;
     }
@@ -190,5 +192,23 @@ class AdminCompany
 
         // Возвращаем путь изображения-пустышки
         return $path . $noImg;
+    }
+
+    /**
+     * Возвращает текстое пояснение статуса для компании :<br/>
+     * <i>0 - Скрыта, 1 - Отображается</i>
+     * @param integer $status <p>Статус</p>
+     * @return string <p>Текстовое пояснение</p>
+     */
+    public static function getStatusText($status)
+    {
+        switch ($status) {
+            case '1':
+                return 'Отображается';
+                break;
+            case '0':
+                return 'Скрыта';
+                break;
+        }
     }
 }

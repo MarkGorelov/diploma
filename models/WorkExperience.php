@@ -23,29 +23,56 @@ class WorkExperience
     }
 
     /**
-     * Выводим список последних созданных учебных учреждений текущим пользователем
+     * Выводим список опыта работы конкретного резюме
+     */
+    public static function getWorkExperienceListByResume($resumeId = false)
+    {
+        if ($resumeId) {
+            $db = Db::getConnection();
+            $workExperience = array();
+            $result = $db->query("SELECT id, img, company_name , position , date_of_experience, short_description, status FROM work_experience "
+                . "WHERE resume_id = '$resumeId' "
+                . "ORDER BY id DESC ");
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $workExperience[$i]['id'] = $row['id'];
+                $workExperience[$i]['img'] = $row['img'];
+                $workExperience[$i]['company_name'] = $row['company_name'];
+                $workExperience[$i]['position'] = $row['position'];
+                $workExperience[$i]['date_of_experience'] = $row['date_of_experience'];
+                $workExperience[$i]['short_description'] = $row['short_description'];
+                $workExperience[$i]['status'] = $row['status'];
+                $i++;
+            }
+            return $workExperience;
+        }
+    }
+
+    /**
+     * Выводим список опыта работы пользователя
      */
     public static function getWorkExperienceByUser($userId = false)
     {
         if ($userId) {
             $db = Db::getConnection();
-            $educations = array();
+            $workExperience = array();
             $result = $db->query("SELECT id, img, company_name , position , date_of_experience, short_description, status FROM work_experience "
                 . "WHERE user_id = '$userId' "
                 . "ORDER BY id DESC ");
 
             $i = 0;
             while ($row = $result->fetch()) {
-                $educations[$i]['id'] = $row['id'];
-                $educations[$i]['img'] = $row['img'];
-                $educations[$i]['company_name'] = $row['company_name'];
-                $educations[$i]['position'] = $row['position'];
-                $educations[$i]['date_of_experience'] = $row['date_of_experience'];
-                $educations[$i]['short_description'] = $row['short_description'];
-                $educations[$i]['status'] = $row['status'];
+                $workExperience[$i]['id'] = $row['id'];
+                $workExperience[$i]['img'] = $row['img'];
+                $workExperience[$i]['company_name'] = $row['company_name'];
+                $workExperience[$i]['position'] = $row['position'];
+                $workExperience[$i]['date_of_experience'] = $row['date_of_experience'];
+                $workExperience[$i]['short_description'] = $row['short_description'];
+                $workExperience[$i]['status'] = $row['status'];
                 $i++;
             }
-            return $educations;
+            return $workExperience;
         }
     }
 
