@@ -9,7 +9,7 @@
 /**
  * Контроллер SiteController
  */
-class SiteController
+class SiteController extends UserBase
 {
     public function actionIndex()
     {

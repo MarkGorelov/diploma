@@ -9,11 +9,17 @@
 class User
 {
     /**
+     * Выводим количество пользователей
+     */
+    public static function getCountUsers()
+    {
+        $db = Db::getConnection();
+        $users=$db->query("SELECT COUNT(*) as count FROM user")->fetchColumn();
+        return $users;
+    }
+
+    /**
      * Регистрация пользователя
-     * @param type $name
-     * @param type $email
-     * @param type $password
-     * @return type
      */
     public static function register($name, $email, $password, $role)
     {
@@ -278,31 +284,5 @@ class User
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
-    }
-
-    /**
-     * Возвращает путь к изображению
-     * @param integer $id
-     * @return string <p>Путь к изображению</p>
-     */
-    public static function getImage($id)
-    {
-        // Название изображения-пустышки
-        $noImg = 'no-img.jpg';
-
-        // Путь к папке с картинками пользователями
-        $path = '/upload/img/user/';
-
-        // Путь к изображению пользователя
-        $pathToUserImg = $path . $id . '.jpg';
-
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg)) {
-            // Если изображение для пользователя существует
-            // Возвращаем путь изображения пользователя
-            return $pathToUserImg;
-        }
-
-        // Возвращаем путь изображения-пустышки
-        return $path . $noImg;
     }
 }

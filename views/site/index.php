@@ -7,25 +7,11 @@
                 <br><br>
                 <h2>
                     Мы предлагаем
-                    <mark>1 290</mark>
+                    <mark><?php echo Vacancy::getCountVacancies() ?></mark>
                     вакансий прямо сейчас!
                 </h2>
                 <h5 class="font-alt">Найди работу своей мечты.</h5>
                 <br><br><br>
-                <form class="header-job-search">
-                    <div class="input-keyword">
-                        <input type="text" class="form-control" placeholder="Название должности или компании">
-                    </div>
-
-                    <div class="input-location">
-                        <input type="text" class="form-control" placeholder="Страну, город">
-                    </div>
-
-                    <div class="btn-search">
-                        <button class="btn btn-primary" type="submit">Найти работу</button>
-                        <a href="/vacancies/">Расширенный поиск работы</a>
-                    </div>
-                </form>
             </div>
         </div>
     </header>
@@ -75,22 +61,22 @@
 
                 <div class="row">
                     <div class="counter col-md-3 col-sm-6">
-                        <p><span data-from="0" data-to="6890"></span>+</p>
+                        <p><span data-from="0" data-to="<?php echo Vacancy::getCountVacancies() ?>"></span>+</p>
                         <h6>Вакансий</h6>
                     </div>
 
                     <div class="counter col-md-3 col-sm-6">
-                        <p><span data-from="0" data-to="1200"></span>+</p>
+                        <p><span data-from="0" data-to="<?php echo User::getCountUsers() ?>"></span>+</p>
                         <h6>Пользователей</h6>
                     </div>
 
                     <div class="counter col-md-3 col-sm-6">
-                        <p><span data-from="0" data-to="36800"></span>+</p>
+                        <p><span data-from="0" data-to="<?php echo Resume::getCountResumes() ?>"></span>+</p>
                         <h6>Резюме</h6>
                     </div>
 
                     <div class="counter col-md-3 col-sm-6">
-                        <p><span data-from="0" data-to="15400"></span>+</p>
+                        <p><span data-from="0" data-to="<?php echo Company::getCountCompanies() ?>"></span>+</p>
                         <h6>Компаний</h6>
                     </div>
                 </div>
@@ -98,6 +84,28 @@
             </div>
         </section>
         <!-- END Facts -->
+
+        <!-- Categories -->
+        <section class="bg-alt">
+            <div class="container">
+                <header class="section-header">
+                    <span>Категории</span>
+                    <h2>Популярные категории</h2>
+                </header>
+
+                <div class="category-grid">
+                    <?php foreach ($categories as $categoryItem): ?>
+                        <a href="/category/<?php echo $categoryItem['id']; ?>">
+                            <img width="120" src="/template/img/category_avatar.png">
+                            <h6><?php echo $categoryItem['name']; ?></h6>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+
+            </div>
+        </section>
+        <!-- END Categories -->
+
 
         <!-- Newsletter -->
         <section class="bg-img text-center" style="background-image: url(/template/img/bg-facts.png)">

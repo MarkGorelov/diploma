@@ -44,6 +44,16 @@ class Vacancy
     }
 
     /**
+     * Выводим количество вакансий
+     */
+    public static function getCountVacancies()
+    {
+        $db = Db::getConnection();
+        $vacancies=$db->query("SELECT COUNT(*) as count FROM vacancy")->fetchColumn();
+        return $vacancies;
+    }
+
+    /**
      * Выводим список последних созданных компаний текущим пользователем
      */
     public static function getVacanciesByUser($userId = false)

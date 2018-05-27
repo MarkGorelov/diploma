@@ -8,13 +8,17 @@
 
 class ResumeController extends UserBase
 {
-    public function actionIndex()
+    public function actionIndex($page = 1)
     {
         $latestResumes = array();
-        $latestResumes = Resume::getLatestResume();
+        $latestResumes = Resume::getLatestResume($page);
 
         $categories = array();
         $categories = AdminCategory::getCategoriesList();
+
+        $total = Resume::getTotalResumesList();
+
+        $pagination = new Pagination($total, $page, Resume::SHOW_BY_DEFAULT, 'page-');
 
         require_once(ROOT . '/views/resume/index.php');
         return true;
@@ -104,7 +108,8 @@ class ResumeController extends UserBase
     /**
      * Action для страницы "Редактировать резюме"
      */
-    public function actionUpdate($id)
+    public
+    function actionUpdate($id)
     {
         // Проверка доступа
         self::checkAspirant();
@@ -152,7 +157,8 @@ class ResumeController extends UserBase
     /**
      * Action для страницы "Удалить компанию"
      */
-    public function actionDelete($id)
+    public
+    function actionDelete($id)
     {
         // Проверка доступа
         self::checkAspirant();

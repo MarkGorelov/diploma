@@ -8,6 +8,7 @@
 
 return array(
 
+
     // Управление компаниями:
     'company-manage/create' => 'company/create',
     'company-manage/update/([0-9]+)' => 'company/update/$1',
@@ -47,6 +48,7 @@ return array(
     'resume-manage/update/([0-9]+)' => 'resume/update/$1',
     'resume-manage/delete/([0-9]+)' => 'resume/delete/$1',
     'resume-manage' => 'resume/manage',
+    'resumes/page-([0-9]+)' => 'resume/index/$1',
     'resumes' => 'resume/index',
     'resume/([0-9]+)' => 'resume/view/$1',
 

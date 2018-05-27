@@ -14,6 +14,16 @@ class Company
     const SHOW_BY_DEFAULT = 10;
 
     /**
+     * Выводим количество компаний
+     */
+    public static function getCountCompanies()
+    {
+        $db = Db::getConnection();
+        $companies=$db->query("SELECT COUNT(*) as count FROM company")->fetchColumn();
+        return $companies;
+    }
+
+    /**
      * Выводим список последних созданных компаний
      */
     public static function getLatestCompany($count = self::SHOW_BY_DEFAULT)

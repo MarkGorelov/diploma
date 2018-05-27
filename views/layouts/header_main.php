@@ -60,9 +60,6 @@
         <!-- nav-menu -->
         <ul class="nav-menu">
             <li>
-                <a href="/admin/">Админка</a>
-            </li>
-            <li>
                 <a href="/">Главная</a>
             </li>
             <li>
@@ -70,14 +67,15 @@
                 <ul>
                     <li><a href="/vacancies/">Найти работу</a></li>
                     <li><a href="/companies/">Найти компанию</a></li>
-                    <li><a href="/">Создать резюме</a></li>
+                    <li><a href="/resume-manage/create">Создать резюме</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#">Ищу сотрудников</a>
                 <ul>
                     <li><a href="/resumes/">Найти резюме</a></li>
-                    <li><a href="/">Создать вакансию</a></li>
+                    <li><a href="/company-manage/create">Создать компанию</a></li>
+                    <li><a href="/vacancy-manage/create">Создать вакансию</a></li>
                 </ul>
             </li>
             <li>

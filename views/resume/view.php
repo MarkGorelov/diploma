@@ -1,7 +1,7 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
     <!-- Page header -->
-    <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner1.jpg)">
+    <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
@@ -74,24 +74,29 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <?php foreach ($educationResume as $education): ?>
-                            <div class="item-block">
+                        <?php if ($educationResume == NULL): ?>
+                            <h4 class="text-center">К сожалению информация об образовании не указана</h4>
+                        <?php else: ?>
 
-                                <header>
-                                    <img src="<?php echo Education::getImage($education['id']); ?>" alt="">
-                                    <div class="hgroup">
-                                        <h4><?php echo $education['degree']; ?>
-                                            <small><?php echo $education['branch']; ?></small>
-                                        </h4>
-                                        <h5><?php echo $education['school_name']; ?></h5>
+                            <?php foreach ($educationResume as $education): ?>
+                                <div class="item-block">
+                                    <header>
+                                        <img src="<?php echo Education::getImage($education['id']); ?>" alt="">
+                                        <div class="hgroup">
+                                            <h4><?php echo $education['degree']; ?>
+                                                <small><?php echo $education['branch']; ?></small>
+                                            </h4>
+                                            <h5><?php echo $education['school_name']; ?></h5>
+                                        </div>
+                                        <h6 class="time"><?php echo $education['date_of_education']; ?></h6>
+                                    </header>
+                                    <div class="item-body">
+                                        <p><?php echo $education['short_description']; ?></p>
                                     </div>
-                                    <h6 class="time"><?php echo $education['date_of_education']; ?></h6>
-                                </header>
-                                <div class="item-body">
-                                    <p><?php echo $education['short_description']; ?></p>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
                     </div>
 
                 </div>
@@ -111,21 +116,28 @@
 
                     <!-- Work item -->
                     <div class="col-xs-12">
-                        <?php foreach ($workExperienceResume as $workExperience): ?>
-                            <div class="item-block">
-                                <header>
-                                    <img src="<?php echo WorkExperience::getImage($workExperience['id']); ?>" alt="">
-                                    <div class="hgroup">
-                                        <h4><?php echo $workExperience['company_name']; ?></h4>
-                                        <h5><?php echo $workExperience['position']; ?></h5>
+                        <?php if ($workExperienceResume == NULL): ?>
+                            <h4 class="text-center">К сожалению информация об опыте работы не указана</h4>
+                        <?php else: ?>
+
+                            <?php foreach ($workExperienceResume as $workExperience): ?>
+                                <div class="item-block">
+                                    <header>
+                                        <img src="<?php echo WorkExperience::getImage($workExperience['id']); ?>"
+                                             alt="">
+                                        <div class="hgroup">
+                                            <h4><?php echo $workExperience['company_name']; ?></h4>
+                                            <h5><?php echo $workExperience['position']; ?></h5>
+                                        </div>
+                                        <h6 class="time"><?php echo $workExperience['date_of_experience']; ?></h6>
+                                    </header>
+                                    <div class="item-body">
+                                        <p><?php echo $workExperience['short_description']; ?></p>
                                     </div>
-                                    <h6 class="time"><?php echo $workExperience['date_of_experience']; ?></h6>
-                                </header>
-                                <div class="item-body">
-                                    <p><?php echo $workExperience['short_description']; ?></p>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
                     </div>
                     <!-- END Work item -->
 

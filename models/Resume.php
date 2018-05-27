@@ -9,23 +9,36 @@
 class Resume
 {
 
-    const SHOW_BY_DEFAULT = 4;
+    const SHOW_BY_DEFAULT = 1;
+
+    /**
+     * Выводим количество резюме
+     */
+    public static function getCountResumes()
+    {
+        $db = Db::getConnection();
+        $resumes = $db->query("SELECT COUNT(*) as count FROM resume")->fetchColumn();
+        return $resumes;
+    }
+
 
     /*
      * Returns an array of vacancies
      */
-    public static function getLatestResume($count = self::SHOW_BY_DEFAULT)
+    public static function getLatestResume($page = 1)
     {
-        $count = intval($count);
+        $page = intval($page);
+        $offset = ($page - 1) * self::SHOW_BY_DEFAULT;
 
         $db = Db::getConnection();
 
         $resumesList = array();
 
-        $result = $db->query('SELECT id, img,  name, headline, short_description, location, salary, gender FROM resume '
+        $result = $db->query('SELECT id, user_id, img,  name, headline, short_description, location, salary, gender FROM resume '
             . 'WHERE status = "1"'
             . 'ORDER BY id DESC '
-            . 'LIMIT ' . $count);
+            . " LIMIT " . self::SHOW_BY_DEFAULT
+            . ' OFFSET ' . $offset);
 
         $i = 0;
         while ($row = $result->fetch()) {
@@ -40,6 +53,19 @@ class Resume
             $i++;
         }
         return $resumesList;
+    }
+
+
+    public static function getTotalResumesList()
+    {
+        $db = Db::getConnection();
+
+        $result = $db->query('SELECT count(id) AS count FROM resume '
+            . 'WHERE status="1"');
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $result->fetch();
+
+        return $row['count'];
     }
 
     /**

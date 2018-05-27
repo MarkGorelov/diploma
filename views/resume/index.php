@@ -10,12 +10,9 @@
             <form action="#">
 
                 <div class="row">
-                    <div class="form-group col-xs-12 col-sm-4">
-                        <input type="text" class="form-control" placeholder="Имя, теги, образование">
-                    </div>
 
-                    <div class="form-group col-xs-12 col-sm-4">
-                        <input type="text" class="form-control" placeholder="Местоположение">
+                    <div class="form-group col-xs-12 col-sm-8">
+                        <input type="text" class="form-control" placeholder="Имя, теги, образование">
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-4">
@@ -28,98 +25,11 @@
 
                     </div>
 
-
-                    <div class="form-group col-xs-12 col-sm-4">
-                        <h6>Уровень дохода</h6>
-                        <div class="checkall-group">
-                            <div class="checkbox">
-                                <input type="checkbox" id="rate1" name="rate" checked>
-                                <label for="rate1">По договоренности</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="rate2" name="rate">
-                                <label for="rate2">До 45,000 руб.
-                                    <small>(364)</small>
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="rate3" name="rate">
-                                <label for="rate3">От 45,000 до 65,000 руб.
-                                    <small>(684)</small>
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="rate4" name="rate">
-                                <label for="rate4">От 65,000 до 85,000 руб.
-                                    <small>(195)</small>
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="rate5" name="rate">
-                                <label for="rate5">От 85,000 до 105,000 руб.
-                                    <small>(39)</small>
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="rate5" name="rate">
-                                <label for="rate5">От 105,000 руб.
-                                    <small>(39)</small>
-                                </label>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group col-xs-12 col-sm-4">
-                        <h6>Возраст</h6>
-                        <div class="checkall-group">
-                            <div class="checkbox">
-                                <input type="checkbox" id="degree1" name="degree" checked>
-                                <label for="degree1">До 30 лет</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="degree2" name="degree">
-                                <label for="degree2">От 30 до 35 лет
-                                    <small>(216)</small>
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="degree3" name="degree">
-                                <label for="degree3">От 35 до 40 лет
-                                    <small>(569)</small>
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="degree4" name="degree">
-                                <label for="degree4">От 40 до 45 лет
-                                    <small>(439)</small>
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" id="degree5" name="degree">
-                                <label for="degree5">От 45 лет
-                                    <small>(84)</small>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="button-group">
                     <div class="action-buttons">
-                        <button class="btn btn-primary">Найти</button>
+                        <button class="btn btn-primary" >Найти</button>
                     </div>
                 </div>
 
@@ -185,22 +95,7 @@
 
                 <!-- Page navigation -->
                 <nav class="text-center">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <i class="ti-angle-left"></i>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <i class="ti-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                        <?php echo $pagination->get(); ?>
                 </nav>
                 <!-- END Page navigation -->
 
