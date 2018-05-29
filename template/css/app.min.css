@@ -15194,7 +15194,6 @@ section .bg-video {
     position: relative;
     margin-bottom: 48px;
     color: #55595c;
-    text-transform: capitalize
 }
 
 .section-header h2:after, .section-header h3:after {

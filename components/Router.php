@@ -21,8 +21,17 @@ class Router
      */
     private function getURI()
     {
-        if (!empty($_SERVER['REQUEST_URI']))
-            return trim($_SERVER['REQUEST_URI'], '/');
+        $uri = '';
+
+        if (!empty($_SERVER['REQUEST_URI'])) {
+            $uri = $_SERVER['REQUEST_URI'];
+        }
+
+        if (($cutoff = strpos($uri, '?')) !== false) {
+            $uri = substr($uri, 0, $cutoff);
+        }
+
+        return trim($uri, '/');
     }
 
     public function run()

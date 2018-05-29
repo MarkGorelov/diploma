@@ -11,18 +11,23 @@
  */
 class AdminCategory
 {
+    const SHOW_BY_DEFAULT = 10;
+
     /**
      * Возвращает массив категорий для отображения их на сайте
      * @return array <p>Массив с категориями</p>
      */
-    public static function getCategoriesList()
+    public static function getCategoriesList($count = self::SHOW_BY_DEFAULT)
     {
+        intval($count);
         // Соединение с БД
         $db = Db::getConnection();
 
         // Запрос к БД
         $result = $db->query('SELECT id, name, sort_order, status FROM category '
-            . 'ORDER BY sort_order ASC');
+            . 'WHERE status = "1"'
+            . 'ORDER BY id ASC '
+            . 'LIMIT ' . $count);
 
         // Получение и возврат результатов
         $categoriesList = array();

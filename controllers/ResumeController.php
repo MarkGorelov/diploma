@@ -108,8 +108,7 @@ class ResumeController extends UserBase
     /**
      * Action для страницы "Редактировать резюме"
      */
-    public
-    function actionUpdate($id)
+    public function actionUpdate($id)
     {
         // Проверка доступа
         self::checkAspirant();
@@ -157,8 +156,7 @@ class ResumeController extends UserBase
     /**
      * Action для страницы "Удалить компанию"
      */
-    public
-    function actionDelete($id)
+    public function actionDelete($id)
     {
         // Проверка доступа
         self::checkAspirant();

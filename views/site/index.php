@@ -56,7 +56,7 @@
         <!-- END Recent jobs -->
 
         <!-- Facts -->
-        <section class="bg-img bg-repeat no-overlay section-sm">
+        <section>
             <div class="container">
 
                 <div class="row">
@@ -89,7 +89,7 @@
         <section class="bg-alt">
             <div class="container">
                 <header class="section-header">
-                    <span>Категории</span>
+                    <span>Категории вакансий</span>
                     <h2>Популярные категории</h2>
                 </header>
 
@@ -113,12 +113,12 @@
                 <h2><strong>ПОДПИШИСЬ</strong></h2>
                 <h6 class="font-alt">Получайте еженедельно новые вакансии, на свой почтовый ящик</h6>
                 <br><br>
-                <form class="form-subscribe" action="#">
+                <form class="form-subscribe" action="/" method="post">
                     <div class="input-group">
-                        <input type="text" class="form-control input-lg" placeholder="Ваш email">
+                        <input type="text" name="email" class="form-control input-lg" placeholder="Ваш email">
                         <span class="input-group-btn">
-                <button class="btn btn-success btn-lg" type="submit">Подписаться</button>
-              </span>
+                            <input class="btn btn-success btn-lg" type="submit" name="submit" value="Подписаться"/>
+                        </span>
                     </div>
                 </form>
             </div>
