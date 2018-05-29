@@ -1,37 +1,26 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
     <!-- Page header -->
-    <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner1.jpg);">
+    <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
         <div class="container page-name">
             <h1 class="text-center">Поиск работы</h1>
-            <p class="lead text-center">Используйте поиск, чтобы найти нужную вам вакансию</p>
+            <p class="lead text-center">Используйте выпадающий список, чтобы найти нужную вам вакансию по выбранной вами
+                категории</p>
         </div>
 
         <div class="container">
             <form action="#">
 
                 <div class="row">
-                    <div class="form-group col-xs-12 col-sm-4">
-                        <input type="text" class="form-control" placeholder="Название компании">
-                    </div>
-
-                    <div class="form-group col-xs-12 col-sm-4">
-                        <input type="text" class="form-control" placeholder="Страна, город">
-                    </div>
-
-                    <div class="form-group col-xs-12 col-sm-4">
-                        <select class="form-control selectpicker">
+                    <div class="form-group col-xs-12 col-sm-12">
+                        <p>Выберите категорию</p>
+                        <select class="form-control selectpicker"
+                                onchange="if (this.value) window.location.href = this.value">
                             <?php foreach ($categories as $categoryItem): ?>
-                                <option><?php echo $categoryItem['name']; ?></option>
+                                <option></option>
+                                <option value="/vacancies-category/<?php echo $categoryItem['id']; ?>/page-1"><?php echo $categoryItem['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
-
-                </div>
-
-                <div class="button-group">
-                    <div class="action-buttons">
-                        <button class="btn btn-primary">Найти</button>
                     </div>
                 </div>
 
@@ -39,23 +28,16 @@
 
         </div>
 
-    </header>
-    <!-- END Page header -->
-
-
-    <!-- Main container -->
-    <main>
-        <section class="no-padding-top bg-alt">
+        <section class="bg-white">
             <div class="container">
                 <div class="row">
 
                     <div class="col-xs-12">
                         <br>
-                        <h5>Мы нашли <strong>86</strong> вакансий, вы просматриваете <strong>10</strong> из
-                            <strong>15</strong></h5>
+                        <h5>Мы нашли вакансий по вашим запросам</h5>
                     </div>
 
-                    <?php foreach ($latestVacancies as $vacancy): ?>
+                    <?php foreach ($categoryVacancies as $vacancy): ?>
                         <!-- Job item -->
                         <div class="col-xs-12">
                             <a class="item-block" href="/vacancy/<?php echo $vacancy['id']; ?>">
@@ -101,27 +83,15 @@
 
                 <!-- Page navigation -->
                 <nav class="text-center">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <i class="ti-angle-left"></i>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <i class="ti-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    <?php echo $pagination->get(); ?>
                 </nav>
                 <!-- END Page navigation -->
 
             </div>
         </section>
-    </main>
-    <!-- END Main container -->
+
+    </header>
+    <!-- END Page header -->
+
+
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

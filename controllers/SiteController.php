@@ -29,7 +29,7 @@ class SiteController extends UserBase
         }
 
         $categories = array();
-        $categories = AdminCategory::getCategoriesList(6);
+        $categories = AdminCategory::getPopularCategoriesList(6);
 
         $latestVacancies = array();
         $latestVacancies = Vacancy::getLatestVacancy();

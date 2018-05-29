@@ -1,35 +1,26 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
+
     <!-- Page header -->
-    <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner1.jpg);">
+    <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
         <div class="container page-name">
             <h1 class="text-center">Поиск резюме</h1>
-            <p class="lead text-center">Используйте поиск чтобы найти подходящее резюме для позиции в вашей компании</p>
+            <p class="lead text-center">Используйте выпадающий список, чтобы найти нужного вам специалиста по выбранной вами
+                сфере</p>
         </div>
 
         <div class="container">
             <form action="#">
 
                 <div class="row">
-
-                    <div class="form-group col-xs-12 col-sm-8">
-                        <input type="text" class="form-control" placeholder="Имя, теги, образование">
-                    </div>
-
-                    <div class="form-group col-xs-12 col-sm-4">
-
-                        <select class="form-control selectpicker">
+                    <div class="form-group col-xs-12 col-sm-12">
+                        <p>Выберите сферу</p>
+                        <select class="form-control selectpicker"
+                                onchange="if (this.value) window.location.href = this.value">
                             <?php foreach ($categories as $categoryItem): ?>
-                                <option><?php echo $categoryItem['name']; ?></option>
+                                <option></option>
+                                <option value="/resumes-category/<?php echo $categoryItem['id']; ?>/page-1"><?php echo $categoryItem['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
-
-                    </div>
-
-                </div>
-
-                <div class="button-group">
-                    <div class="action-buttons">
-                        <button class="btn btn-primary" >Найти</button>
                     </div>
                 </div>
 
@@ -37,31 +28,26 @@
 
         </div>
 
-    </header>
-    <!-- END Page header -->
-
-
-    <!-- Main container -->
-    <main>
-        <section class="no-padding-top bg-alt">
+        <section class="bg-white">
             <div class="container">
                 <div class="row">
 
                     <div class="col-xs-12">
                         <br>
-                        <h5>Мы нашли <strong>86</strong> резюме, вы просматриваете <strong>10</strong> из
-                            <strong>15</strong></h5>
+                        <h5>Мы нашли данные резюме по указанной вами сферы</h5>
                     </div>
-                    <?php foreach ($latestResumes as $resume): ?>
-                        <!-- Resume detail -->
+
+                    <?php foreach ($categoryResumes as $resume): ?>
+                        <!-- Job item -->
                         <div class="col-xs-12">
                             <a class="item-block" href="/resume/<?php echo $resume['id']; ?>">
                                 <header>
-                                    <img class="resume-avatar" src="<?php echo Resume::getImage($resume['id']); ?>"
-                                         alt="">
+                                    <img src="<?php echo Resume::getImage($resume['id']); ?>" height="70" alt="">
                                     <div class="hgroup">
                                         <h4><?php echo $resume['name']; ?></h4>
-                                        <h5><?php echo $resume['headline']; ?></h5>
+                                        <h5>
+                                            <?php echo $resume['headline']; ?>
+                                        </h5>
                                     </div>
                                 </header>
 
@@ -78,7 +64,7 @@
 
                                         <li>
                                             <i class="fa fa-money"></i>
-                                            <span><?php echo $resume['salary']; ?> Рублей</span>
+                                            <span><?php echo $resume['salary']; ?> рублей</span>
                                         </li>
 
                                         <li>
@@ -89,19 +75,22 @@
                                 </footer>
                             </a>
                         </div>
-                        <!-- END Resume detail -->
+                        <!-- END Job item -->
                     <?php endforeach; ?>
+
                 </div>
 
                 <!-- Page navigation -->
                 <nav class="text-center">
-                        <?php echo $pagination->get(); ?>
+                    <?php echo $pagination->get(); ?>
                 </nav>
                 <!-- END Page navigation -->
 
-
             </div>
         </section>
-    </main>
-    <!-- END Main container -->
+
+    </header>
+    <!-- END Page header -->
+
+
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

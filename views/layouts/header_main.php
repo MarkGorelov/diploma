@@ -65,15 +65,15 @@
             <li>
                 <a href="#">Ищу работу</a>
                 <ul>
-                    <li><a href="/vacancies/">Найти работу</a></li>
-                    <li><a href="/companies/">Найти компанию</a></li>
+                    <li><a href="/vacancies-category/3/page-1">Найти работу</a></li>
+                    <li><a href="/companies-category/3/page-1">Найти компанию</a></li>
                     <li><a href="/resume-manage/create">Создать резюме</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#">Ищу сотрудников</a>
                 <ul>
-                    <li><a href="/resumes/">Найти резюме</a></li>
+                    <li><a href="/resumes-category/3/page-1">Найти резюме</a></li>
                     <li><a href="/company-manage/create">Создать компанию</a></li>
                     <li><a href="/vacancy-manage/create">Создать вакансию</a></li>
                 </ul>

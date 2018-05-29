@@ -8,7 +8,59 @@
 
 class Vacancy
 {
-    const SHOW_BY_DEFAULT = 4;
+    const SHOW_BY_DEFAULT = 1;
+
+
+    /**
+     * Returns an array of products
+     */
+    public static function getVacanciesListByCategory($categoryId = false, $page = 1)
+    {
+        if ($categoryId) {
+
+            $page = intval($page);
+            $offset = ($page - 1) * self::SHOW_BY_DEFAULT;
+
+            $db = Db::getConnection();
+            $vacancies = array();
+            $result = $db->query("SELECT id, img, company_name, job_title, short_description, type_of_employment, location, salary, gender FROM vacancy "
+                . "WHERE status = '1' AND category_id = '$categoryId' "
+                . "ORDER BY id DESC "
+                . "LIMIT ".self::SHOW_BY_DEFAULT
+                . ' OFFSET '. $offset);
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $vacancies[$i]['id'] = $row['id'];
+                $vacancies[$i]['img'] = $row['img'];
+                $vacancies[$i]['company_name'] = $row['company_name'];
+                $vacancies[$i]['job_title'] = $row['job_title'];
+                $vacancies[$i]['short_description'] = $row['short_description'];
+                $vacancies[$i]['type_of_employment'] = $row['type_of_employment'];
+                $vacancies[$i]['location'] = $row['location'];
+                $vacancies[$i]['salary'] = $row['salary'];
+                $vacancies[$i]['gender'] = $row['gender'];
+                $i++;
+            }
+
+            return $vacancies;
+        }
+    }
+
+    /**
+     * Returns total products
+     */
+    public static function getTotalVacanciesInCategory($categoryId)
+    {
+        $db = Db::getConnection();
+
+        $result = $db->query('SELECT count(id) AS count FROM vacancy '
+            . 'WHERE status="1" AND category_id ="'.$categoryId.'"');
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $result->fetch();
+
+        return $row['count'];
+    }
 
     /**
      * Выводим список последних созданных вакансий

@@ -12,6 +12,56 @@ class Resume
     const SHOW_BY_DEFAULT = 1;
 
     /**
+     * Returns an array of products
+     */
+    public static function getResumesListByCategory($categoryId = false, $page = 1)
+    {
+        if ($categoryId) {
+
+            $page = intval($page);
+            $offset = ($page - 1) * self::SHOW_BY_DEFAULT;
+
+            $db = Db::getConnection();
+            $resumes = array();
+            $result = $db->query("SELECT id, img, name, headline, short_description, location, salary, gender FROM resume "
+                . "WHERE status = '1' AND category_id = '$categoryId' "
+                . "ORDER BY id DESC "
+                . "LIMIT ".self::SHOW_BY_DEFAULT
+                . ' OFFSET '. $offset);
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $resumes[$i]['id'] = $row['id'];
+                $resumes[$i]['img'] = $row['img'];
+                $resumes[$i]['name'] = $row['name'];
+                $resumes[$i]['headline'] = $row['headline'];
+                $resumes[$i]['short_description'] = $row['short_description'];
+                $resumes[$i]['location'] = $row['location'];
+                $resumes[$i]['salary'] = $row['salary'];
+                $resumes[$i]['gender'] = $row['gender'];
+                $i++;
+            }
+
+            return $resumes;
+        }
+    }
+
+    /**
+     * Returns total products
+     */
+    public static function getTotalResumesInCategory($categoryId)
+    {
+        $db = Db::getConnection();
+
+        $result = $db->query('SELECT count(id) AS count FROM resume '
+            . 'WHERE status="1" AND category_id ="'.$categoryId.'"');
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $result->fetch();
+
+        return $row['count'];
+    }
+
+    /**
      * Выводим количество резюме
      */
     public static function getCountResumes()

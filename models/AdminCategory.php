@@ -17,7 +17,7 @@ class AdminCategory
      * Возвращает массив категорий для отображения их на сайте
      * @return array <p>Массив с категориями</p>
      */
-    public static function getCategoriesList($count = self::SHOW_BY_DEFAULT)
+    public static function getPopularCategoriesList($count = self::SHOW_BY_DEFAULT)
     {
         intval($count);
         // Соединение с БД
@@ -28,6 +28,33 @@ class AdminCategory
             . 'WHERE status = "1"'
             . 'ORDER BY id ASC '
             . 'LIMIT ' . $count);
+
+        // Получение и возврат результатов
+        $categoriesList = array();
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $categoriesList[$i]['id'] = $row['id'];
+            $categoriesList[$i]['name'] = $row['name'];
+            $categoriesList[$i]['sort_order'] = $row['sort_order'];
+            $categoriesList[$i]['status'] = $row['status'];
+            $i++;
+        }
+        return $categoriesList;
+    }
+
+    /**
+     * Возвращает массив категорий для отображения их на сайте
+     * @return array <p>Массив с категориями</p>
+     */
+    public static function getCategoriesList()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Запрос к БД
+        $result = $db->query('SELECT id, name, sort_order, status FROM category '
+            . 'WHERE status = "1"'
+            . 'ORDER BY id ASC ');
 
         // Получение и возврат результатов
         $categoriesList = array();

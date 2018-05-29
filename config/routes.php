@@ -8,6 +8,10 @@
 
 return array(
 
+    // Каталог с категорями для вакансий, резюме, компаний
+    'vacancies-category/([0-9]+)/page-([0-9]+)' => 'catalog/vacancy/$1/$2',
+    'resumes-category/([0-9]+)/page-([0-9]+)' => 'catalog/resume/$1/$2',
+    'companies-category/([0-9]+)/page-([0-9]+)' => 'catalog/company/$1/$2',
 
     // Управление компаниями:
     'company-manage/create' => 'company/create',

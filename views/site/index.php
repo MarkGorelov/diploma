@@ -95,7 +95,7 @@
 
                 <div class="category-grid">
                     <?php foreach ($categories as $categoryItem): ?>
-                        <a href="/category/<?php echo $categoryItem['id']; ?>">
+                        <a href="/vacancies-category/<?php echo $categoryItem['id']; ?>/page-1">
                             <img width="120" src="/template/img/category_avatar.png">
                             <h6><?php echo $categoryItem['name']; ?></h6>
                         </a>
@@ -105,7 +105,6 @@
             </div>
         </section>
         <!-- END Categories -->
-
 
         <!-- Newsletter -->
         <section class="bg-img text-center" style="background-image: url(/template/img/bg-facts.png)">
