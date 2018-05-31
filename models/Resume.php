@@ -1,19 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 15.05.2018
- * Time: 20:23
- */
 
 class Resume
 {
-
     const SHOW_BY_DEFAULT = 1;
 
-    /**
-     * Returns an array of products
-     */
     public static function getResumesListByCategory($categoryId = false, $page = 1)
     {
         if ($categoryId) {
@@ -46,9 +36,6 @@ class Resume
         }
     }
 
-    /**
-     * Returns total products
-     */
     public static function getTotalResumesInCategory($categoryId)
     {
         $db = Db::getConnection();
@@ -61,9 +48,6 @@ class Resume
         return $row['count'];
     }
 
-    /**
-     * Выводим количество резюме
-     */
     public static function getCountResumes()
     {
         $db = Db::getConnection();
@@ -71,10 +55,6 @@ class Resume
         return $resumes;
     }
 
-
-    /*
-     * Returns an array of vacancies
-     */
     public static function getLatestResume($page = 1)
     {
         $page = intval($page);
@@ -105,7 +85,6 @@ class Resume
         return $resumesList;
     }
 
-
     public static function getTotalResumesList()
     {
         $db = Db::getConnection();
@@ -118,16 +97,10 @@ class Resume
         return $row['count'];
     }
 
-    /**
-     * Возвращает список резюме
-     * @return array <p>Массив с резюме</p>
-     */
     public static function getResumeList()
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Получение и возврат результатов
         $result = $db->query('SELECT id, name, headline, short_description, website_address, email_address FROM resume ORDER BY id ASC');
         $resumesList = array();
         $i = 0;
@@ -143,9 +116,6 @@ class Resume
         return $resumesList;
     }
 
-    /**
-     * Выводим список последних созданных резюме текущим пользователем
-     */
     public static function getResumesByUser($userId = false)
     {
         if ($userId) {
@@ -170,23 +140,15 @@ class Resume
         }
     }
 
-    /**
-     * Добавляет новое резюме
-     * @param array $options <p>Массив с информацией о резюме</p>
-     * @return integer <p>id добавленной в таблицу записи</p>
-     */
     public static function createResume($options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'INSERT INTO resume '
             . '(name, headline, short_description, location, website_address, salary, age, phone_number, email_address, gender, category_id, user_id, status)'
             . 'VALUES '
             . '(:name, :headline, :short_description, :location, :website_address, :salary, :age, :phone_number, :email_address, :gender, :category_id, :user_id, :status)';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
         $result->bindParam(':headline', $options['headline'], PDO::PARAM_STR);
@@ -202,26 +164,16 @@ class Resume
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
-        if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
+        if ($result->execute())
             return $db->lastInsertId();
-        }
-        // Иначе возвращаем 0
+
         return 0;
     }
 
-    /**
-     * Редактирует резюме с заданным id
-     * @param integer $id <p>id резюме</p>
-     * @param array $options <p>Массив с информацей о резюме</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function updateResumeById($id, $options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = "UPDATE resume
             SET 
                 name = :name, 
@@ -239,7 +191,6 @@ class Resume
                 status = :status
             WHERE id = :id";
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
@@ -258,11 +209,6 @@ class Resume
         return $result->execute();
     }
 
-    /**
-     * Возвращает резюме по индентификатору
-     * @param integer $id <p>id резюме</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function getResumeById($id)
     {
         $id = intval($id);
@@ -277,50 +223,28 @@ class Resume
         }
     }
 
-    /**
-     * Удаляет резюме с указанным id
-     * @param integer $id <p>id резюме</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function deleteResumeById($id)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'DELETE FROM resume WHERE id = :id';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
     }
 
-    /**
-     * Возвращает путь к изображению
-     * @param integer $id
-     * @return string <p>Путь к изображению</p>
-     */
     public static function getImage($id)
     {
-        // Название изображения-пустышки
         $noImg = 'no-img.jpg';
 
-        // Путь к папке с картинками пользователями
         $path = '/upload/img/resume/';
 
-        // Путь к изображению пользователя
         $pathToUserImg = $path . $id . '.jpg';
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg)) {
-            // Если изображение для пользователя существует
-            // Возвращаем путь изображения пользователя
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg))
             return $pathToUserImg;
-        }
 
-        // Возвращаем путь изображения-пустышки
         return $path . $noImg;
     }
-
-
 }

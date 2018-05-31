@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 29.05.2018
- * Time: 16:43
- */
 
 class CatalogController
 {
@@ -18,7 +12,6 @@ class CatalogController
 
         $total = Vacancy::getTotalVacanciesInCategory($categoryId);
 
-        // Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Vacancy::SHOW_BY_DEFAULT, 'page-');
 
         require_once(ROOT . '/views/catalog/vacancy.php');
@@ -35,7 +28,6 @@ class CatalogController
 
         $total = Resume::getTotalResumesInCategory($categoryId);
 
-        // Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Resume::SHOW_BY_DEFAULT, 'page-');
 
         require_once(ROOT . '/views/catalog/resume.php');
@@ -52,7 +44,6 @@ class CatalogController
 
         $total = Company::getTotalCompaniesInCategory($categoryId);
 
-        // Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Vacancy::SHOW_BY_DEFAULT, 'page-');
 
         require_once(ROOT . '/views/catalog/company.php');

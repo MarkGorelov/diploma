@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 05.05.2018
- * Time: 19:22
- */
 
 return array(
 
@@ -18,7 +12,6 @@ return array(
     'company-manage/update/([0-9]+)' => 'company/update/$1',
     'company-manage/delete/([0-9]+)' => 'company/delete/$1',
     'company-manage' => 'company/manage',
-    'companies' => 'company/index',
     'company/([0-9]+)' => 'company/view/$1',
 
     // Управление вакансиями:
@@ -26,7 +19,6 @@ return array(
     'vacancy-manage/update/([0-9]+)' => 'vacancy/update/$1',
     'vacancy-manage/delete/([0-9]+)' => 'vacancy/delete/$1',
     'vacancy-manage' => 'vacancy/manage',
-    'vacancies' => 'vacancy/index',
     'vacancy/([0-9]+)' => 'vacancy/view/$1',
 
     // Управление тегами:
@@ -53,7 +45,6 @@ return array(
     'resume-manage/delete/([0-9]+)' => 'resume/delete/$1',
     'resume-manage' => 'resume/manage',
     'resumes/page-([0-9]+)' => 'resume/index/$1',
-    'resumes' => 'resume/index',
     'resume/([0-9]+)' => 'resume/view/$1',
 
     'user/register' => 'user/register', // actionRegister в UserController
@@ -110,6 +101,8 @@ return array(
     'admin/resume/update/([0-9]+)' => 'adminResume/update/$1',
     'admin/resume/delete/([0-9]+)' => 'adminResume/delete/$1',
     'admin/resume' => 'adminResume/index',
+
+    'contacts' => 'site/contact',
 
     'admin' => 'admin/index',
 

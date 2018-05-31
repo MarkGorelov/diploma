@@ -1,5 +1,5 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
-    <!-- Page header -->
+
     <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner1.jpg)">
         <div class="container">
             <div class="header-detail">
@@ -47,26 +47,18 @@
             </div>
         </div>
     </header>
-    <!-- END Page header -->
 
-    <!-- Main container -->
     <main>
-
-        <!-- Company detail -->
         <section>
             <div class="container">
-
                 <header class="section-header">
                     <h2>О компании</h2>
                 </header>
 
                 <p><?php echo $company['company_detail']; ?></p>
-
             </div>
         </section>
-        <!-- END Company detail -->
 
-        <!-- Open positions -->
         <section id="open-positions" class="bg-alt">
             <div class="container">
                 <header class="section-header">
@@ -74,8 +66,8 @@
                 </header>
 
                 <div class="row">
+
                     <?php foreach ($jobsCompany as $vacancies): ?>
-                        <!-- Job item -->
                         <div class="col-xs-12">
                             <a class="item-block" href="/vacancy/<?php echo $vacancies['id']; ?>">
                                 <header>
@@ -115,15 +107,12 @@
                                 </footer>
                             </a>
                         </div>
-                        <!-- END Job item -->
                     <?php endforeach; ?>
+
                 </div>
 
             </div>
         </section>
-        <!-- END Open positions -->
-
     </main>
-    <!-- END Main container -->
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

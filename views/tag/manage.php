@@ -1,6 +1,5 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
-    <!-- Page header -->
     <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-manage-company.png)">
         <div class="container no-shadow">
             <h1 class="text-center">Управление тегами</h1>
@@ -8,9 +7,7 @@
                 их редактировать, удалять или создать новый</p>
         </div>
     </header>
-    <!-- END Page header -->
 
-    <!-- Main container -->
     <main>
         <section class="no-padding-top bg-alt">
             <div class="container">
@@ -27,6 +24,7 @@
                             <th></th>
                             <th></th>
                         </tr>
+
                         <?php foreach ($tagsUser as $tag): ?>
                             <tr>
                                 <td class="text-center"><?php echo $tag['name']; ?></td>
@@ -38,12 +36,12 @@
                                                 class="fa fa-times"></i></a></td>
                             </tr>
                         <?php endforeach; ?>
+
                     </table>
 
                 </div>
             </div>
         </section>
     </main>
-    <!-- END Main container -->
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

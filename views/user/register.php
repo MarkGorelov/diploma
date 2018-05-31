@@ -1,7 +1,6 @@
 <?php include ROOT . '/views/layouts/header_register.php'; ?>
 
     <main>
-
         <div class="login-block">
             <img src="/template/img/logo.png" alt="">
             <h1>Регистрация аккаунта</h1>
@@ -63,7 +62,6 @@
         <div class="login-links">
             <p class="text-center">Уже имеете аккаунт? <a class="txt-brand" href="/user/login/">Войти</a></p>
         </div>
-
     </main>
 
 <?php include ROOT . '/views/layouts/footer_register.php'; ?>

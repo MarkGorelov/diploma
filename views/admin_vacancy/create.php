@@ -14,7 +14,6 @@
                     </ol>
                 </div>
 
-
                 <h4>Добавить новую вакансию</h4>
 
                 <br/>
@@ -99,7 +98,8 @@
                             </select>
 
                             <br/><br/>
-
+                            <input type="hidden" name="user_id" class="btn btn-success btn-xl btn-round"
+                                   value=<?php echo $_SESSION['user']; ?>>
                             <input type="submit" name="submit" class="btn btn-default" value="Сохранить">
 
                             <br/><br/>

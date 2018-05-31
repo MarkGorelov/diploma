@@ -1,6 +1,5 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
-    <!-- Page header -->
     <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-manage-company.png)">
         <div class="container no-shadow">
             <h1 class="text-center">Управление образованием</h1>
@@ -8,21 +7,17 @@
                 редактировать, удалять или создать новое</p>
         </div>
     </header>
-    <!-- END Page header -->
 
-    <!-- Main container -->
     <main>
         <section class="no-padding-top bg-alt">
             <div class="container">
                 <div class="row">
-
                     <div class="col-xs-12 text-right">
                         <br>
                         <a class="btn btn-primary btn-sm" href="/education-manage/create/">Добавить образование</a>
                     </div>
 
                     <?php foreach ($educationsUser as $educations): ?>
-                        <!-- Job detail -->
                         <div class="col-xs-12">
                             <div class="item-block">
                                 <header>
@@ -52,13 +47,11 @@
                                 </footer>
                             </div>
                         </div>
-                        <!-- END Job detail -->
                     <?php endforeach; ?>
 
                 </div>
             </div>
         </section>
     </main>
-    <!-- END Main container -->
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

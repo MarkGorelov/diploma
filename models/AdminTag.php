@@ -1,26 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 22.05.2018
- * Time: 15:43
- */
 
-/**
- * Класс AdminTag - модель для работы с тегами в административной панели
- */
 class AdminTag
 {
-    /**
-     * Возвращает список тегов
-     * @return array <p>Массив с тегами</p>
-     */
     public static function getTagsList()
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Получение и возврат результатов
         $result = $db->query('SELECT id, name, status FROM tag ORDER BY id ASC');
         $tagsList = array();
         $i = 0;
@@ -33,40 +18,27 @@ class AdminTag
         return $tagsList;
     }
 
-    /**
-     * Добавляет новый тег
-     * @param array $options <p>Массив с тегами</p>
-     * @return integer <p>id добавленной в таблицу записи</p>
-     */
     public static function createTag($options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'INSERT INTO tag '
-            . '(name, status)'
+            . '(user_id, resume_id, name, status)'
             . 'VALUES '
-            . '(:name, :status)';
+            . '(:user_id, :resume_id, :name, :status)';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
-        if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
+        if ($result->execute())
             return $db->lastInsertId();
-        }
-        // Иначе возвращаем 0
+
         return 0;
     }
 
-    /**
-     * Возвращает тег по индентификатору
-     * @param integer $id <p>id тега</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function getTagById($id)
     {
         $id = intval($id);
@@ -81,25 +53,16 @@ class AdminTag
         }
     }
 
-    /**
-     * Редактирует тег с заданным id
-     * @param integer $id <p>id тега</p>
-     * @param array $options <p>Массив с тегами</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function updateTagById($id, $options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = "UPDATE tag
             SET 
                 name = :name,
                 status = :status
             WHERE id = :id";
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
@@ -107,20 +70,12 @@ class AdminTag
         return $result->execute();
     }
 
-    /**
-     * Удаляет тег с указанным id
-     * @param integer $id <p>id тега</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function deleteTagById($id)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'DELETE FROM tag WHERE id = :id';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();

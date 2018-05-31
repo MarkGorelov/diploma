@@ -29,6 +29,7 @@
                         <th></th>
                         <th></th>
                     </tr>
+
                     <?php foreach ($listResumes as $resume): ?>
                         <tr>
                             <td class="text-center"><?php echo $resume['id']; ?></td>
@@ -43,6 +44,7 @@
                                                        title="Удалить"><i class="fa fa-times"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
+
                 </table>
 
             </div>

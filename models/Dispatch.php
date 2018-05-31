@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 29.05.2018
- * Time: 16:31
- */
 
 class Dispatch
 {
@@ -12,21 +6,17 @@ class Dispatch
     {
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'INSERT INTO dispatch '
             . '(email)'
             . 'VALUES '
             . '(:email)';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':email', $email, PDO::PARAM_STR);
 
-        if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
+        if ($result->execute())
             return $db->lastInsertId();
-        }
-        // Иначе возвращаем 0
+
         return 0;
     }
 

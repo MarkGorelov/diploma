@@ -1,7 +1,6 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
     <form action="#" method="post" enctype="multipart/form-data">
-        <!-- Page header -->
         <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
             <div class="container page-name">
                 <h1 class="text-center">Создайте новую вакансию</h1>
@@ -128,14 +127,10 @@
                 </div>
             </div>
         </header>
-        <!-- END Page header -->
 
-        <!-- Main container -->
         <main>
-            <!-- Job detail -->
             <section>
                 <div class="container">
-
                     <header class="section-header">
                         <span>Описание</span>
                         <h2>Детали работы</h2>
@@ -143,12 +138,9 @@
                     </header>
 
                     <textarea class="summernote-editor" name="job_detail"></textarea>
-
                 </div>
             </section>
-            <!-- END Job detail -->
 
-            <!-- Submit -->
             <section class="bg-alt">
                 <div class="container">
                     <header class="section-header">
@@ -169,10 +161,7 @@
 
                 </div>
             </section>
-            <!-- END Submit -->
-
         </main>
-        <!-- END Main container -->
     </form>
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

@@ -1,7 +1,5 @@
-<!-- footer -->
 <footer class="site-footer">
 
-    <!-- Top section -->
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6">
@@ -41,9 +39,7 @@
 
         <hr>
     </div>
-    <!-- END Top section -->
 
-    <!-- Bottom section -->
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-sm-6 col-xs-12">
@@ -58,17 +54,10 @@
             </div>
         </div>
     </div>
-    <!-- END Bottom section -->
-
 </footer>
-<!-- END footer -->
 
-
-<!-- button scroll-up -->
 <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
-<!-- END button scroll-up -->
 
-<!-- Скрипты -->
 <script src="/template/js/app.min.js"></script>
 <script src="/template/js/custom.js"></script>
 

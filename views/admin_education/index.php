@@ -30,6 +30,7 @@
                         <th></th>
                         <th></th>
                     </tr>
+
                     <?php foreach ($listOfEducations as $education): ?>
                         <tr>
                             <td class="text-center"><?php echo $education['id']; ?></td>
@@ -44,6 +45,7 @@
                                                        title="Удалить"><i class="fa fa-times"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
+
                 </table>
 
             </div>

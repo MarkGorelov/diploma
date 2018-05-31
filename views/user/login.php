@@ -1,7 +1,6 @@
 <?php include ROOT . '/views/layouts/header_login.php'; ?>
 
     <main>
-
         <div class="login-block">
             <img src="/template/img/logo.png" alt="">
             <h1>Авторизация</h1>
@@ -43,7 +42,6 @@
             <a class="pull-left" href="/user/cabinet/">Забыли пароль?</a>
             <a class="pull-right" href="/user/register/">Регистрация</a>
         </div>
-
     </main>
 
 <?php include ROOT . '/views/layouts/footer_login.php'; ?>

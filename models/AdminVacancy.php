@@ -1,26 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 22.05.2018
- * Time: 15:43
- */
 
-/**
- * Класс AdminVacancy - модель для работы с вакансиями в административной панели
- */
 class AdminVacancy
 {
-    /**
-     * Возвращает список вакансий
-     * @return array <p>Массив с вакансиями</p>
-     */
     public static function getVacanciesList()
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Получение и возврат результатов
         $result = $db->query('SELECT id, company_name, job_title, website_address, job_detail FROM vacancy ORDER BY id ASC');
         $vacanciesList = array();
         $i = 0;
@@ -35,23 +20,15 @@ class AdminVacancy
         return $vacanciesList;
     }
 
-    /**
-     * Добавляет новую вакансию
-     * @param array $options <p>Массив с информацией о вакансии</p>
-     * @return integer <p>id добавленной в таблицу записи</p>
-     */
     public static function createVacancy($options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'INSERT INTO vacancy '
-            . '(company_name, job_title, company_id, short_description, website_address, location, type_of_employment, salary, working, experince, gender, job_detail, category_id, status)'
+            . '(company_name, job_title, user_id company_id, short_description, website_address, location, type_of_employment, salary, working, experince, gender, job_detail, category_id, status)'
             . 'VALUES '
-            . '(:company_name, :job_title, :company_id, :short_description, :website_address, :location, :type_of_employment, :salary, :working, :experince, :gender, :job_detail, :category_id, :status)';
+            . '(:company_name, :job_title, :user_id, :company_id, :short_description, :website_address, :location, :type_of_employment, :salary, :working, :experince, :gender, :job_detail, :category_id, :status)';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
         $result->bindParam(':job_title', $options['job_title'], PDO::PARAM_STR);
@@ -66,21 +43,15 @@ class AdminVacancy
         $result->bindParam(':gender', $options['gender'], PDO::PARAM_STR);
         $result->bindParam(':job_detail', $options['job_detail'], PDO::PARAM_STR);
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
-        if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
+        if ($result->execute())
             return $db->lastInsertId();
-        }
-        // Иначе возвращаем 0
+
         return 0;
     }
 
-    /**
-     * Возвращает вакансию по индентификатору
-     * @param integer $id <p>id вакансии</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function getVacancyById($id)
     {
         $id = intval($id);
@@ -95,18 +66,10 @@ class AdminVacancy
         }
     }
 
-    /**
-     * Редактирует вакансию с заданным id
-     * @param integer $id <p>id вакансии</p>
-     * @param array $options <p>Массив с информацей о вакансии</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function updateVacancyById($id, $options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = "UPDATE vacancy
             SET 
                 company_name = :company_name, 
@@ -125,7 +88,6 @@ class AdminVacancy
                 status = :status
             WHERE id = :id";
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
@@ -145,47 +107,28 @@ class AdminVacancy
         return $result->execute();
     }
 
-    /**
-     * Удаляет вакансию с указанным id
-     * @param integer $id <p>id вакансии</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function deleteVacancyById($id)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'DELETE FROM vacancy WHERE id = :id';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
     }
 
-    /**
-     * Возвращает путь к изображению
-     * @param integer $id
-     * @return string <p>Путь к изображению</p>
-     */
     public static function getImage($id)
     {
-        // Название изображения-пустышки
         $noImg = 'no-img.jpg';
 
-        // Путь к папке с картинками пользователями
         $path = '/upload/img/vacancy/';
 
-        // Путь к изображению пользователя
         $pathToUserImg = $path . $id . '.jpg';
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg)) {
-            // Если изображение для пользователя существует
-            // Возвращаем путь изображения пользователя
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg))
             return $pathToUserImg;
-        }
-        // Возвращаем путь изображения-пустышки
+
         return $path . $noImg;
     }
 }

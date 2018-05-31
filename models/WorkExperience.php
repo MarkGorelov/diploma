@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 15.05.2018
- * Time: 18:36
- */
 
 class WorkExperience
 {
@@ -22,9 +16,6 @@ class WorkExperience
         }
     }
 
-    /**
-     * Выводим список опыта работы конкретного резюме
-     */
     public static function getWorkExperienceListByResume($resumeId = false)
     {
         if ($resumeId) {
@@ -49,9 +40,6 @@ class WorkExperience
         }
     }
 
-    /**
-     * Выводим список опыта работы пользователя
-     */
     public static function getWorkExperienceByUser($userId = false)
     {
         if ($userId) {
@@ -76,23 +64,15 @@ class WorkExperience
         }
     }
 
-    /**
-     * Добавляет новое образование
-     * @param array $options <p>Массив с информацией о образование</p>
-     * @return integer <p>id добавленной в таблицу записи</p>
-     */
     public static function createWorkExperience($options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'INSERT INTO work_experience '
             . '(user_id, resume_id, company_name, position, date_of_experience, short_description, status)'
             . 'VALUES '
             . '(:user_id, :resume_id, :company_name, :position, :date_of_experience, :short_description, :status)';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
         $result->bindParam(':position', $options['position'], PDO::PARAM_STR);
@@ -102,26 +82,16 @@ class WorkExperience
         $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
-        if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
+        if ($result->execute())
             return $db->lastInsertId();
-        }
-        // Иначе возвращаем 0
+
         return 0;
     }
 
-    /**
-     * Редактирует образование с заданным id
-     * @param integer $id <p>id образования</p>
-     * @param array $options <p>Массив с информацей о образовании</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function updateWorkExperienceById($id, $options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = "UPDATE work_experience
             SET 
                 company_name = :company_name, 
@@ -133,7 +103,6 @@ class WorkExperience
                 status = :status
             WHERE id = :id";
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
@@ -146,47 +115,28 @@ class WorkExperience
         return $result->execute();
     }
 
-    /**
-     * Удаляет образование с указанным id
-     * @param integer $id <p>id образования</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function deleteWorkExperienceById($id)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'DELETE FROM work_experience WHERE id = :id';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
     }
 
-    /**
-     * Возвращает путь к изображению
-     * @param integer $id
-     * @return string <p>Путь к изображению</p>
-     */
     public static function getImage($id)
     {
-        // Название изображения-пустышки
         $noImg = 'no-img.jpg';
 
-        // Путь к папке с картинками пользователями
         $path = '/upload/img/work_experience/';
 
-        // Путь к изображению пользователя
         $pathToUserImg = $path . $id . '.jpg';
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg)) {
-            // Если изображение для пользователя существует
-            // Возвращаем путь изображения пользователя
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg))
             return $pathToUserImg;
-        }
-        // Возвращаем путь изображения-пустышки
+
         return $path . $noImg;
     }
 }

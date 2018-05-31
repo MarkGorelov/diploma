@@ -27,6 +27,7 @@
                         <th></th>
                         <th></th>
                     </tr>
+
                     <?php foreach ($tagsList as $tag): ?>
                         <tr>
                             <td class="text-center"><?php echo $tag['id']; ?></td>
@@ -40,6 +41,7 @@
                                             class="fa fa-times"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
+
                 </table>
 
             </div>

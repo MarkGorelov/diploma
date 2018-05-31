@@ -22,7 +22,6 @@
 
 <nav class="navbar">
     <div class="container">
-
         <div class="pull-left">
             <div class="nav">
                 <h5>
@@ -38,6 +37,5 @@
                 </h5>
             </div>
         </div>
-
     </div>
 </nav>

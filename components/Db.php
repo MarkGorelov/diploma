@@ -1,14 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 05.05.2018
- * Time: 19:18
- */
 
-/**
- * Класс Db для подключения к бд
- */
 class Db
 {
     public static function getConnection()

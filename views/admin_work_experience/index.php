@@ -30,6 +30,7 @@
                         <th></th>
                         <th></th>
                     </tr>
+
                     <?php foreach ($listOfWorkExperiences as $workExperience): ?>
                         <tr>
                             <td class="text-center"><?php echo $workExperience['id']; ?></td>
@@ -45,6 +46,7 @@
                                         title="Удалить"><i class="fa fa-times"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
+
                 </table>
 
             </div>

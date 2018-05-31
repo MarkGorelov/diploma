@@ -1,16 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 07.05.2018
- * Time: 17:18
- */
 
 class User
 {
-    /**
-     * Выводим количество пользователей
-     */
     public static function getCountUsers()
     {
         $db = Db::getConnection();
@@ -18,9 +9,6 @@ class User
         return $users;
     }
 
-    /**
-     * Регистрация пользователя
-     */
     public static function register($name, $email, $password, $role)
     {
         $db = Db::getConnection();
@@ -39,11 +27,6 @@ class User
         return $result->execute();
     }
 
-    /**
-     * Редактирование данных пользователя
-     * @param string $name
-     * @param string $password
-     */
     public static function edit($id, $name, $password)
     {
         $db = Db::getConnection();
@@ -59,12 +42,6 @@ class User
         return $result->execute();
     }
 
-    /**
-     * Проверяем существует ли пользователь с заданными $email и $password
-     * @param string $email
-     * @param string $password
-     * @return mixed : ingeger user id or false
-     */
     public static function checkUserData($email, $password)
     {
         $db = Db::getConnection();
@@ -86,11 +63,6 @@ class User
         return false;
     }
 
-    /**
-     * Запоминаем пользователя
-     * @param string $email
-     * @param string $password
-     */
     public static function auth($userId)
     {
         $_SESSION['user'] = $userId;
@@ -98,7 +70,6 @@ class User
 
     public static function checkLogged()
     {
-        // Если сессия есть, вернем идентификатор пользователя
         if (isset($_SESSION['user']))
             return $_SESSION['user'];
 
@@ -113,9 +84,6 @@ class User
         return true;
     }
 
-    /**
-     * Проверяет имя: не меньше, чем 2 символа
-     */
     public static function checkName($name)
     {
         if (strlen($name) >= 2)
@@ -124,21 +92,14 @@ class User
         return false;
     }
 
-    /**
-     * Проверяет имя: не меньше, чем 6 символов
-     */
     public static function checkPassword($password)
     {
-        if (strlen($password) >= 6) {
+        if (strlen($password) >= 6)
             return true;
-        }
 
         return false;
     }
 
-    /**
-     * Проверяет email
-     */
     public static function checkEmail($email)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -163,20 +124,16 @@ class User
         return false;
     }
 
-    /**
-     * Returns user by id
-     * @param integer $id
-     */
     public static function getUserById($id)
     {
         if ($id) {
             $db = Db::getConnection();
+
             $sql = 'SELECT * FROM user WHERE id = :id';
 
             $result = $db->prepare($sql);
             $result->bindParam(':id', $id, PDO::PARAM_INT);
 
-            // Указываем, что хотим получить данные в виде массива
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $result->execute();
 
@@ -184,17 +141,12 @@ class User
         }
     }
 
-    /**
-     * Возвращает список пользователей
-     * @return array <p>Массив с пользователями</p>
-     */
     public static function getUsersList()
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Получение и возврат результатов
         $result = $db->query('SELECT id, name, email, role FROM user ORDER BY id ASC');
+
         $usersList = array();
         $i = 0;
         while ($row = $result->fetch()) {
@@ -207,48 +159,31 @@ class User
         return $usersList;
     }
 
-    /**
-     * Добавляет нового пользователя
-     * @param array $options <p>Массив с информацией о пользователе</p>
-     * @return integer <p>id добавленной в таблицу записи</p>
-     */
     public static function createUser($options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'INSERT INTO user '
-            . '(name, email, password)'
+            . '(name, email, password, role)'
             . 'VALUES '
-            . '(:name, :email, :password)';
+            . '(:name, :email, :password, :role)';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
         $result->bindParam(':email', $options['email'], PDO::PARAM_STR);
         $result->bindParam(':password', $options['password'], PDO::PARAM_STR);
+        $result->bindParam(':role', $options['role'], PDO::PARAM_STR);
 
-        if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
+        if ($result->execute())
             return $db->lastInsertId();
-        }
-        // Иначе возвращаем 0
+
         return 0;
     }
 
-    /**
-     * Редактирует пользователя с заданным id
-     * @param integer $id <p>id пользователя</p>
-     * @param array $options <p>Массив с информацей о пользователе</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function updateUserById($id, $options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = "UPDATE user
             SET 
                 name = :name, 
@@ -257,7 +192,6 @@ class User
                 role = :role
             WHERE id = :id";
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
@@ -267,20 +201,12 @@ class User
         return $result->execute();
     }
 
-    /**
-     * Удаляет пользователя с указанным id
-     * @param integer $id <p>id пользователя</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function deleteUserById($id)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'DELETE FROM user WHERE id = :id';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();

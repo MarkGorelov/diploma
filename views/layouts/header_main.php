@@ -9,11 +9,9 @@
 
     <title>DreamWork</title>
 
-    <!-- Styles -->
     <link href="/template/css/app.min.css" rel="stylesheet">
     <link href="/template/css/custom.css" rel="stylesheet">
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Oswald:100,300,400,500,600,800%7COpen+Sans:300,400,500,600,700,800%7CMontserrat:400,700'
           rel='stylesheet' type='text/css'>
@@ -22,11 +20,8 @@
 
 <body class="nav-on-header">
 
-<!--Navigation -->
 <nav class="navbar">
     <div class="container">
-
-        <!-- logo -->
         <div class="pull-left">
             <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
 
@@ -35,9 +30,7 @@
                 <a class="logo-alt" href="/"><img src="/template/img/logo-alt.png" alt="logo-alt"></a>
             </div>
         </div>
-        <!-- END logo -->
 
-        <!-- user -->
         <div class="pull-right">
             <div class="dropdown user-account">
                 <a class="dropdown-toggle" href="#" data-toggle="dropdown">
@@ -55,9 +48,7 @@
                 </ul>
             </div>
         </div>
-        <!-- END user -->
 
-        <!-- nav-menu -->
         <ul class="nav-menu">
             <li>
                 <a href="/">Главная</a>
@@ -82,13 +73,10 @@
                 <a href="#">Помощь</a>
                 <ul>
                     <li><a href="/">О нас</a></li>
-                    <li><a href="/">Контакты</a></li>
+                    <li><a href="/contacts/">Контакты</a></li>
                     <li><a href="/">FAQ</a></li>
                 </ul>
             </li>
         </ul>
-        <!-- END nav-menu -->
-
     </div>
 </nav>
-<!-- END navigation -->

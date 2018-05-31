@@ -1,5 +1,5 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
-    <!-- Page header -->
+
     <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner.jpg)">
         <div class="container">
             <div class="header-detail">
@@ -42,25 +42,16 @@
                         <a href="#">Пол: <?php echo $vacancy['gender']; ?></a>
                     </li>
                 </ul>
-
-
             </div>
         </div>
     </header>
-    <!-- END Page header -->
 
-
-    <!-- Main container -->
     <main>
-
-        <!-- Job detail -->
         <section>
             <div class="container">
                 <p><?php echo $vacancy['job_detail']; ?></p>
             </div>
         </section>
-        <!-- END Job detail -->
-
     </main>
-    <!-- END Main container -->
+
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

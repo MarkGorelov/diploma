@@ -9,14 +9,10 @@
             </div>
         </div>
     </div>
-</footer><!--/Footer-->
+</footer>
 
-
-<!-- button scroll-up -->
 <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
-<!-- END button scroll-up -->
 
-<!-- Скрипты -->
 <script src="/template/js/app.min.js"></script>
 <script src="/template/js/custom.js"></script>
 

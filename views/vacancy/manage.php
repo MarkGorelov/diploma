@@ -1,6 +1,5 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
-    <!-- Page header -->
     <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-manage-company.png)">
         <div class="container no-shadow">
             <h1 class="text-center">Управление вакансиями</h1>
@@ -8,9 +7,7 @@
                 редактировать, удалять или создать новую</p>
         </div>
     </header>
-    <!-- END Page header -->
 
-    <!-- Main container -->
     <main>
         <section class="no-padding-top bg-alt">
             <div class="container">
@@ -22,7 +19,6 @@
                     </div>
 
                     <?php foreach ($vacanciesUser as $vacancies): ?>
-                        <!-- Job detail -->
                         <div class="col-xs-12">
                             <div class="item-block">
                                 <header>
@@ -46,7 +42,6 @@
                                 </header>
 
                                 <footer>
-                                    <p class="status"><strong>Статус: </strong><?php echo $vacancies['status']; ?></p>
 
                                     <div class="action-btn">
                                         <a class="btn btn-xs btn-gray"
@@ -58,13 +53,11 @@
                                 </footer>
                             </div>
                         </div>
-                        <!-- END Job detail -->
                     <?php endforeach; ?>
 
                 </div>
             </div>
         </section>
     </main>
-    <!-- END Main container -->
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

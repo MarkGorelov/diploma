@@ -2,7 +2,6 @@
 
     <form action="#" method="post" enctype="multipart/form-data">
 
-        <!-- Page header -->
         <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
             <div class="container page-name">
                 <h1 class="text-center">Редактирование компании № <?php echo $id ?></h1>
@@ -137,15 +136,10 @@
 
             </div>
         </header>
-        <!-- END Page header -->
 
-        <!-- Main container -->
         <main>
-
-            <!-- Company detail -->
             <section class=" bg-alt">
                 <div class="container">
-
                     <header class="section-header">
                         <h2>О компании</h2>
                         <p>Напишите о своей компании, культуре, коллективе, преимуществах работы в компании и т.д.</p>
@@ -153,12 +147,9 @@
 
                     <textarea class="summernote-editor"
                               name="company_detail"><?php echo $company['company_detail']; ?></textarea>
-
                 </div>
             </section>
-            <!-- END Company detail -->
 
-            <!-- Submit -->
             <section>
                 <div class="container">
                     <header class="section-header">
@@ -177,11 +168,7 @@
 
                 </div>
             </section>
-            <!-- END Submit -->
-
         </main>
-        <!-- END Main container -->
-
     </form>
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

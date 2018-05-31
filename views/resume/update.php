@@ -1,7 +1,6 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
     <form action="#" method="post" enctype="multipart/form-data">
-        <!-- Page header -->
         <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
             <div class="container page-name">
                 <h1 class="text-center">Обновите свое резюме</h1>
@@ -127,9 +126,7 @@
 
             </div>
         </header>
-        <!-- END Page header -->
 
-        <!-- Submit -->
         <section class="bg-white">
             <div class="container">
                 <header class="section-header">

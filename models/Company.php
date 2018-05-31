@@ -1,21 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 09.05.2018
- * Time: 15:40
- */
 
-/**
- * Класс Company - модель для работы с компаниями
- */
 class Company
 {
     const SHOW_BY_DEFAULT = 1;
 
-    /**
-     * Returns an array of products
-     */
     public static function getCompaniesListByCategory($categoryId = false, $page = 1)
     {
         if ($categoryId) {
@@ -24,7 +12,7 @@ class Company
             $offset = ($page - 1) * self::SHOW_BY_DEFAULT;
 
             $db = Db::getConnection();
-            $resumes = array();
+            $companies = array();
             $result = $db->query("SELECT id, img, company_name, headline, short_description FROM company "
                 . "WHERE status = '1' AND category_id = '$categoryId' "
                 . "ORDER BY id DESC "
@@ -33,21 +21,18 @@ class Company
 
             $i = 0;
             while ($row = $result->fetch()) {
-                $resumes[$i]['id'] = $row['id'];
-                $resumes[$i]['img'] = $row['img'];
-                $resumes[$i]['company_name'] = $row['company_name'];
-                $resumes[$i]['headline'] = $row['headline'];
-                $resumes[$i]['short_description'] = $row['short_description'];
+                $companies[$i]['id'] = $row['id'];
+                $companies[$i]['img'] = $row['img'];
+                $companies[$i]['company_name'] = $row['company_name'];
+                $companies[$i]['headline'] = $row['headline'];
+                $companies[$i]['short_description'] = $row['short_description'];
                 $i++;
             }
 
-            return $resumes;
+            return $companies;
         }
     }
 
-    /**
-     * Returns total products
-     */
     public static function getTotalCompaniesInCategory($categoryId)
     {
         $db = Db::getConnection();
@@ -60,9 +45,6 @@ class Company
         return $row['count'];
     }
 
-    /**
-     * Выводим количество компаний
-     */
     public static function getCountCompanies()
     {
         $db = Db::getConnection();
@@ -70,9 +52,6 @@ class Company
         return $companies;
     }
 
-    /**
-     * Выводим список последних созданных компаний
-     */
     public static function getLatestCompany($count = self::SHOW_BY_DEFAULT)
     {
         $count = intval($count);
@@ -98,9 +77,6 @@ class Company
         return $companiesList;
     }
 
-    /**
-     * Выводим список последних созданных компаний текущим пользователем
-     */
     public static function getCompaniesByUser($userId = false)
     {
         if ($userId) {
@@ -122,9 +98,6 @@ class Company
         }
     }
 
-    /**
-     * Выводим список последних созданных компаний текущим пользователем
-     */
     public static function getCompaniesListByUser($userId = false)
     {
         if ($userId) {
@@ -144,26 +117,18 @@ class Company
         }
     }
 
-    /**
-     * Добавляет новую компанию в административной панели
-     * @param array $options <p>Массив с информацией о компании</p>
-     * @return integer <p>id добавленной в таблицу записи</p>
-     */
     public static function createCompany($options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'INSERT INTO company '
             . '(company_name, user_id, category_id, headline, short_description, location, founded, employees, website_address, phone_number, email_address, company_detail, status)'
             . 'VALUES '
             . '(:company_name, :user_id, :category_id, :headline, :short_description, :location, :founded, :employees, :website_address, :phone_number, :email_address, :company_detail, :status)';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
-
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
         $result->bindParam(':headline', $options['headline'], PDO::PARAM_STR);
         $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
@@ -177,18 +142,11 @@ class Company
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
         if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
             return $db->lastInsertId();
         }
-        // Иначе возвращаем 0
         return 0;
     }
 
-    /**
-     * Возвращает компанию по индентификатору
-     * @param integer $id <p>id компании</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function getCompanyById($id)
     {
         $id = intval($id);
@@ -203,18 +161,10 @@ class Company
         }
     }
 
-    /**
-     * Редактирует компанию с заданным id
-     * @param integer $id <p>id компании</p>
-     * @param array $options <p>Массив с информацей о компании</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function updateCompanyById($id, $options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = "UPDATE company
             SET 
                 company_name = :company_name,
@@ -232,7 +182,6 @@ class Company
                 status = :status
             WHERE id = :id";
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
@@ -251,47 +200,28 @@ class Company
         return $result->execute();
     }
 
-    /**
-     * Удаляет компанию с указанным id
-     * @param integer $id <p>id компании</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function deleteCompanyById($id)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'DELETE FROM company WHERE id = :id';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
     }
 
-    /**
-     * Возвращает путь к изображению
-     * @param integer $id
-     * @return string <p>Путь к изображению</p>
-     */
     public static function getImage($id)
     {
-        // Название изображения-пустышки
         $noImg = 'no-img.jpg';
 
-        // Путь к папке с картинками пользователями
         $path = '/upload/img/company/';
 
-        // Путь к изображению пользователя
         $pathToUserImg = $path . $id . '.jpg';
 
         if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToUserImg))
-            // Если изображение для пользователя существует
-            // Возвращаем путь изображения пользователя
             return $pathToUserImg;
 
-        // Возвращаем путь изображения-пустышки
         return $path . $noImg;
     }
 }

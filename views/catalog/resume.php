@@ -1,6 +1,5 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
-    <!-- Page header -->
     <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
         <div class="container page-name">
             <h1 class="text-center">Поиск резюме</h1>
@@ -10,7 +9,6 @@
 
         <div class="container">
             <form action="#">
-
                 <div class="row">
                     <div class="form-group col-xs-12 col-sm-12">
                         <p>Выберите сферу</p>
@@ -23,9 +21,7 @@
                         </select>
                     </div>
                 </div>
-
             </form>
-
         </div>
 
         <section class="bg-white">
@@ -38,7 +34,6 @@
                     </div>
 
                     <?php foreach ($categoryResumes as $resume): ?>
-                        <!-- Job item -->
                         <div class="col-xs-12">
                             <a class="item-block" href="/resume/<?php echo $resume['id']; ?>">
                                 <header>
@@ -75,22 +70,16 @@
                                 </footer>
                             </a>
                         </div>
-                        <!-- END Job item -->
                     <?php endforeach; ?>
 
                 </div>
 
-                <!-- Page navigation -->
                 <nav class="text-center">
                     <?php echo $pagination->get(); ?>
                 </nav>
-                <!-- END Page navigation -->
 
             </div>
         </section>
-
     </header>
-    <!-- END Page header -->
-
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

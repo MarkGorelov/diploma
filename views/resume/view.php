@@ -1,6 +1,5 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
-    <!-- Page header -->
     <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg)">
         <div class="container">
             <div class="row">
@@ -59,15 +58,10 @@
 
         </div>
     </header>
-    <!-- END Page header -->
 
-    <!-- Main container -->
     <main>
-
-        <!-- Education -->
         <section>
             <div class="container">
-
                 <header class="section-header">
                     <h2>Образование</h2>
                 </header>
@@ -98,14 +92,10 @@
 
                         <?php endif; ?>
                     </div>
-
                 </div>
-
             </div>
         </section>
-        <!-- END Education -->
 
-        <!-- Work Experience -->
         <section class="bg-alt">
             <div class="container">
                 <header class="section-header">
@@ -114,7 +104,6 @@
 
                 <div class="row">
 
-                    <!-- Work item -->
                     <div class="col-xs-12">
                         <?php if ($workExperienceResume == NULL): ?>
                             <h4 class="text-center">К сожалению информация об опыте работы не указана</h4>
@@ -139,15 +128,9 @@
 
                         <?php endif; ?>
                     </div>
-                    <!-- END Work item -->
-
                 </div>
-
             </div>
         </section>
-        <!-- END Work Experience -->
-
     </main>
-    <!-- END Main container -->
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

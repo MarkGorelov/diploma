@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 07.05.2018
- * Time: 17:16
- */
 
 class UserController
 {
@@ -39,7 +33,6 @@ class UserController
             if ($errors == false)
                 $result = User::register($name, $email, $password, $role);
         }
-
         require_once(ROOT . '/views/user/register.php');
         return true;
     }
@@ -55,37 +48,26 @@ class UserController
 
             $errors = false;
 
-            // Валидация полей
-            if (!User::checkEmail($email)) {
+            if (!User::checkEmail($email))
                 $errors[] = 'Неправильный email';
-            }
-            if (!User::checkPassword($password)) {
-                $errors[] = 'Пароль не должен быть короче 6-ти символов';
-            }
 
-            // Проверяем существует ли пользователь
+            if (!User::checkPassword($password))
+                $errors[] = 'Пароль не должен быть короче 6-ти символов';
+
             $userId = User::checkUserData($email, $password);
 
             if ($userId == false) {
-                // Если данные неправильные - показываем ошибку
                 $errors[] = 'Неправильные данные для входа на сайт';
             } else {
-                // Если данные правильные, запоминаем пользователя (сессия)
                 User::auth($userId);
 
-                // Перенаправляем пользователя в закрытую часть - кабинет
                 header("Location: /cabinet/");
             }
-
         }
-
         require_once(ROOT . '/views/user/login.php');
         return true;
     }
 
-    /**
-     * Удаляем данные о пользователе из сессии
-     */
     public function actionLogout()
     {
         unset($_SESSION["user"]);

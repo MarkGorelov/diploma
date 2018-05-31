@@ -1,6 +1,5 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
-    <!-- Site header -->
     <header class="site-header size-lg text-center" style="background-image: url(/template/img/bg-banner.jpg)">
         <div class="container">
             <div class="col-xs-12">
@@ -15,12 +14,8 @@
             </div>
         </div>
     </header>
-    <!-- END Site header -->
 
-    <!-- Main container -->
     <main>
-
-        <!-- Recent jobs -->
         <section>
             <div class="container">
                 <header class="section-header">
@@ -29,7 +24,6 @@
 
                 <div class="row item-blocks-connected">
                     <?php foreach ($latestVacancies as $vacancy): ?>
-                        <!-- Job item -->
                         <div class="col-xs-12">
                             <a class="item-block" href="/vacancy/<?php echo $vacancy['id']; ?>">
                                 <header>
@@ -45,17 +39,14 @@
                                 </header>
                             </a>
                         </div>
-                        <!-- END Job item -->
                     <?php endforeach; ?>
                 </div>
 
                 <br><br>
-                <p class="text-center"><a class="btn btn-info" href="/vacancies/">Просмотреть всё</a></p>
+                <p class="text-center"><a class="btn btn-info" href="/vacancies-category/3/page-1">Просмотреть всё</a></p>
             </div>
         </section>
-        <!-- END Recent jobs -->
 
-        <!-- Facts -->
         <section>
             <div class="container">
 
@@ -83,9 +74,7 @@
 
             </div>
         </section>
-        <!-- END Facts -->
 
-        <!-- Categories -->
         <section class="bg-alt">
             <div class="container">
                 <header class="section-header">
@@ -104,9 +93,7 @@
 
             </div>
         </section>
-        <!-- END Categories -->
 
-        <!-- Newsletter -->
         <section class="bg-img text-center" style="background-image: url(/template/img/bg-facts.png)">
             <div class="container">
                 <h2><strong>ПОДПИШИСЬ</strong></h2>
@@ -122,9 +109,6 @@
                 </form>
             </div>
         </section>
-        <!-- END Newsletter -->
-
     </main>
-    <!-- END Main container -->
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

@@ -75,41 +75,6 @@
                                 <?php endif; ?>
                             </select>
 
-                            <p>Тег</p>
-                            <select class="form-control selectpicker" name="tag_id">
-                                <?php if (is_array($tagsList)): ?>
-                                    <?php foreach ($tagsList as $tag): ?>
-                                        <option value="<?php echo $tag['id']; ?>">
-                                            <?php echo $tag['name']; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-
-                            <p>Образование</p>
-                            <select class="form-control selectpicker" name="education_id">
-                                <?php if (is_array($listOfEducations)): ?>
-                                    <?php foreach ($listOfEducations as $education): ?>
-                                        <option value="<?php echo $education['id']; ?>">
-                                            <?php echo $education['school_name']; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-
-                            <p>Опыт работы</p>
-                            <select class="form-control selectpicker" name="work_experience_id">
-                                <?php if (is_array($listOfWorkExperiences)): ?>
-                                    <?php foreach ($listOfWorkExperiences as $workExperience): ?>
-                                        <option value="<?php echo $workExperience['id']; ?>">
-                                            <?php echo $workExperience['company_name']; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-
-                            <br/><br/>
-
                             <p>Статус</p>
                             <select class="form-control selectpicker" name="status">
                                 <option value="1" selected="selected">Отображается</option>
@@ -117,7 +82,8 @@
                             </select>
 
                             <br/><br/>
-
+                            <input type="hidden" name="user_id" class="btn btn-success btn-xl btn-round"
+                                   value=<?php echo $_SESSION['user']; ?>>
                             <input type="submit" name="submit" class="btn btn-default" value="Сохранить">
 
                             <br/><br/>

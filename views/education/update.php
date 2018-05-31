@@ -1,11 +1,10 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
     <form action="#" method="post" enctype="multipart/form-data">
-        <!-- Page header -->
         <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
             <div class="container page-name">
-                <h1 class="text-center">Создайте новую вакансию</h1>
-                <p class="lead text-center">Создайте вакансию для своей компании и разместите её на сайте</p>
+                <h1 class="text-center">Обновите информацию об образовании</h1>
+                <p class="lead text-center">Обновите информацию об образовании для своего резюме</p>
             </div>
 
             <div class="container">
@@ -19,7 +18,6 @@
                 <?php endif; ?>
 
                 <div class="row">
-
                     <div class="col-xs-12 col-sm-4 col-lg-2">
                         <div class="form-group">
                             <input type="file" name="img" class="dropify"
@@ -67,21 +65,16 @@
                         <textarea class="form-control" name="short_description" rows="3"
                                   placeholder="Краткое описание"><?php echo $education['short_description']; ?></textarea>
                     </div>
-
                 </div>
             </div>
         </header>
-        <!-- END Page header -->
 
-        <!-- Main container -->
         <main>
-
-            <!-- Submit -->
             <section class="bg-white">
                 <div class="container">
                     <header class="section-header">
                         <span>Вы закончили?</span>
-                        <h2>Добавте образование для резюме</h2>
+                        <h2>Обновить информацию об образование для резюме</h2>
                         <p>Пожалуйста, просмотрите всю указанную информацию еще раз и нажмите на кнопку ниже, чтобы
                             добавить образование для резюме</p>
                     </header>
@@ -92,15 +85,12 @@
                         <input type="hidden" name="user_id" class="btn btn-success btn-xl btn-round"
                                value=<?php echo $_SESSION['user']; ?>>
                         <input type="submit" name="submit" class="btn btn-success btn-xl btn-round"
-                               value="Добавить">
+                               value="Обновить">
                     </p>
 
                 </div>
             </section>
-            <!-- END Submit -->
-
         </main>
-        <!-- END Main container -->
     </form>
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

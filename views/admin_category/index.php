@@ -29,6 +29,7 @@
                         <th class="text-center"></th>
                         <th class="text-center"></th>
                     </tr>
+
                     <?php foreach ($categoriesList as $category): ?>
                         <tr>
                             <td class="text-center"><?php echo $category['id']; ?></td>
@@ -43,6 +44,7 @@
                                             class="fa fa-times"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
+
                 </table>
 
             </div>

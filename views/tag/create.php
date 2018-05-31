@@ -1,7 +1,6 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
     <form action="#" method="post" enctype="multipart/form-data">
-        <!-- Page header -->
         <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
             <div class="container page-name">
                 <h1 class="text-center">Добавте тег для резюме</h1>
@@ -46,12 +45,9 @@
                         <input type="submit" name="submit" class="btn btn-success btn-xl btn-round"
                                value="Добавить">
                     </p>
-
                 </div>
             </div>
         </header>
-        <!-- END Page header -->
-
     </form>
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>

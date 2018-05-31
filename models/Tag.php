@@ -1,17 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mark
- * Date: 15.05.2018
- * Time: 19:06
- */
 
 class Tag
 {
-    /**
-     * Возвращает список тегов резюме
-     * @return array <p>Массив с вакансиями</p>
-     */
     public static function getTagsListByResume($resumeId = false)
     {
         if ($resumeId) {
@@ -45,9 +35,6 @@ class Tag
         }
     }
 
-    /**
-     * Выводим список добавленых тегов текущим пользователем
-     */
     public static function getTagsByUser($userId = false)
     {
         if ($userId) {
@@ -68,49 +55,31 @@ class Tag
         }
     }
 
-    /**
-     * Добавляет новое образование
-     * @param array $options <p>Массив с информацией о образование</p>
-     * @return integer <p>id добавленной в таблицу записи</p>
-     */
     public static function createTag($options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'INSERT INTO tag '
             . '(user_id, resume_id, name, status)'
             . 'VALUES '
             . '(:user_id, :resume_id, :name, :status)';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
         $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
-        if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
+        if ($result->execute())
             return $db->lastInsertId();
-        }
-        // Иначе возвращаем 0
+
         return 0;
     }
 
-    /**
-     * Редактирует образование с заданным id
-     * @param integer $id <p>id образования</p>
-     * @param array $options <p>Массив с информацей о образовании</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function updateTagById($id, $options)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = "UPDATE tag
             SET 
                 name = :name, 
@@ -119,7 +88,6 @@ class Tag
                 status = :status
             WHERE id = :id";
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
@@ -129,20 +97,12 @@ class Tag
         return $result->execute();
     }
 
-    /**
-     * Удаляет образование с указанным id
-     * @param integer $id <p>id образования</p>
-     * @return boolean <p>Результат выполнения метода</p>
-     */
     public static function deleteTagById($id)
     {
-        // Соединение с БД
         $db = Db::getConnection();
 
-        // Текст запроса к БД
         $sql = 'DELETE FROM tag WHERE id = :id';
 
-        // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();

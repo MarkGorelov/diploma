@@ -1,11 +1,10 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
     <form action="#" method="post" enctype="multipart/form-data">
-        <!-- Page header -->
         <header class="page-header bg-img" style="background-image: url(/template/img/bg-banner.jpg);">
             <div class="container page-name">
                 <h1 class="text-center">Добавте опыт работы для резюме</h1>
-                <p class="lead text-center">СДобавте опыт работы для резюме и разместите её на сайте</p>
+                <p class="lead text-center">Добавте опыт работы для резюме и разместите её на сайте</p>
             </div>
 
             <div class="container">
@@ -62,12 +61,8 @@
                 </div>
             </div>
         </header>
-        <!-- END Page header -->
 
-        <!-- Main container -->
         <main>
-
-            <!-- Submit -->
             <section class="bg-white">
                 <div class="container">
                     <header class="section-header">
@@ -88,10 +83,7 @@
 
                 </div>
             </section>
-            <!-- END Submit -->
-
         </main>
-        <!-- END Main container -->
     </form>
 
 <?php include ROOT . '/views/layouts/footer_main.php'; ?>
