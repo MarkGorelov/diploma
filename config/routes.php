@@ -102,6 +102,7 @@ return array(
     'admin/resume/delete/([0-9]+)' => 'adminResume/delete/$1',
     'admin/resume' => 'adminResume/index',
 
+    'sending-letters' => 'cabinet/sendingLetter',
     'contacts' => 'site/contact',
 
     'admin' => 'admin/index',
