@@ -39,8 +39,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="userText" class="form-control" placeholder="Сообщение"
-                                           value="<?php echo $userText; ?>"/>
+                                    <textarea name="userText" class="form-control" placeholder="Сообщение">
+                                        <?php echo $userText; ?>
+                                    </textarea>
                                 </div>
 
                                 <input type="submit" name="submit" class="btn btn-primary" value="Отправить"/>

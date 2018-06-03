@@ -1,6 +1,6 @@
 <?php include ROOT . '/views/layouts/header_main.php'; ?>
 
-    <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner1.jpg)">
+    <header class="page-header bg-img size-lg" style="background-image: url(/template/img/bg-banner.jpg)">
         <div class="container">
             <div class="header-detail">
                 <img class="logo" src="<?php echo Company::getImage($company['id']); ?>" alt="">

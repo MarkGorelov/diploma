@@ -2,7 +2,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-6">
+            <div>
                 <h6>О нас</h6>
                 <p class="text-justify">Работа составляет большую часть жизни почти каждого из нас. Но ничто не вечно:
                     случается, что однажды приходится менять место работы и с головой погружаться в поиски вакансий —
@@ -13,27 +13,6 @@
                     работу в Москве? А главное, какой должна быть эта работа?»
 
                     Чтобы решать такие вопросы легко и быстро, достаточно всего лишь зайти на DreamWork!</p>
-            </div>
-
-            <div class="col-xs-6 col-md-3">
-                <h6>Компаниям</h6>
-                <ul class="footer-links">
-                    <li><a href="/">О нас</a></li>
-                    <li><a href="/">FAQ</a></li>
-                    <li><a href="/">Контакты</a></li>
-                    <li><a href="/">Правила</a></li>
-                </ul>
-            </div>
-
-            <div class="col-xs-6 col-md-3">
-                <h6>Наши вакансии</h6>
-                <ul class="footer-links">
-                    <li><a href="/">Front-end developer</a></li>
-                    <li><a href="/">Android developer</a></li>
-                    <li><a href="/">iOS developer</a></li>
-                    <li><a href="/">Full stack developer</a></li>
-                    <li><a href="/">Project administrator</a></li>
-                </ul>
             </div>
         </div>
 
