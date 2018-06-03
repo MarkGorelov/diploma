@@ -34,6 +34,18 @@ class AdminEducationController extends UserBase
                 $errors[] = 'Заполните поля';
             }
 
+            if (!isset($options['degree']) || empty($options['degree'])) {
+                $errors[] = 'Заполните поля';
+            }
+
+            if (!isset($options['branch']) || empty($options['branch'])) {
+                $errors[] = 'Заполните поля';
+            }
+
+            if (!isset($options['date_of_education']) || empty($options['date_of_education'])) {
+                $errors[] = 'Заполните поля';
+            }
+
             if ($errors == false) {
                 $id = AdminEducation::createEducation($options);
 

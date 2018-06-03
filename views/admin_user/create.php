@@ -31,17 +31,17 @@
                     <div class="login-form">
                         <form action="#" method="post">
 
-                            <p>Имя</p>
-                            <input type="text" name="name" placeholder="Имя пользователя" value="">
+                            <input type="text" name="name" class="form-control" placeholder="Имя пользователя" value="">
+                            <br>
 
-                            <p>Email</p>
-                            <input type="text" name="email" placeholder="Email" value="">
+                            <input type="text" name="email" class="form-control" placeholder="Email" value="">
+                            <br>
 
-                            <p>Пароль</p>
-                            <input type="password" name="password" placeholder="Пароль" value="">
+                            <input type="password" name="password" class="form-control" placeholder="Пароль" value="">
+                            <br>
 
                             <p>Тип пользователя</p>
-                            <select name="role">
+                            <select name="role" class="selectpicker">
                                 <option value="admin" selected="selected">Администратор</option>
                                 <option value="aspirant">Соискатель</option>
                                 <option value="employer">Работодатель</option>

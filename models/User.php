@@ -19,26 +19,11 @@ class User
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         $result = $db->prepare($sql);
-        $result->bindParam(':name', $name, PDO::PARAM_STR);
-        $result->bindParam(':email', $email, PDO::PARAM_STR);
-        $result->bindParam(':password', $hash, PDO::PARAM_STR);
-        $result->bindParam(':role', $role, PDO::PARAM_STR);
+        $result->bindParam(':name', strip_tags($name), PDO::PARAM_STR);
+        $result->bindParam(':email', strip_tags($email), PDO::PARAM_STR);
+        $result->bindParam(':password', strip_tags($hash), PDO::PARAM_STR);
+        $result->bindParam(':role', strip_tags($role), PDO::PARAM_STR);
 
-        return $result->execute();
-    }
-
-    public static function edit($id, $name, $password)
-    {
-        $db = Db::getConnection();
-
-        $sql = "UPDATE user 
-            SET name = :name, password = :password 
-            WHERE id = :id";
-
-        $result = $db->prepare($sql);
-        $result->bindParam(':id', $id, PDO::PARAM_INT);
-        $result->bindParam(':name', $name, PDO::PARAM_STR);
-        $result->bindParam(':password', $password, PDO::PARAM_STR);
         return $result->execute();
     }
 
@@ -52,8 +37,8 @@ class User
         $check = password_verify($password, $hash);
 
         $result = $db->prepare($sql);
-        $result->bindParam(':email', $email, PDO::PARAM_INT);
-        $result->bindParam(':password', $check, PDO::PARAM_INT);
+        $result->bindParam(':email', strip_tags($email), PDO::PARAM_INT);
+        $result->bindParam(':password', strip_tags($check), PDO::PARAM_INT);
         $result->execute();
 
         $user = $result->fetch();
@@ -159,7 +144,7 @@ class User
         return $usersList;
     }
 
-    public static function createUser($options)
+    public static function createUser($options, $password)
     {
         $db = Db::getConnection();
 
@@ -168,37 +153,18 @@ class User
             . 'VALUES '
             . '(:name, :email, :password, :role)';
 
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
         $result = $db->prepare($sql);
-        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
-        $result->bindParam(':email', $options['email'], PDO::PARAM_STR);
-        $result->bindParam(':password', $options['password'], PDO::PARAM_STR);
-        $result->bindParam(':role', $options['role'], PDO::PARAM_STR);
+        $result->bindParam(':name', strip_tags($options['name']), PDO::PARAM_STR);
+        $result->bindParam(':email', strip_tags($options['email']), PDO::PARAM_STR);
+        $result->bindParam(':password', strip_tags($hash), PDO::PARAM_STR);
+        $result->bindParam(':role', strip_tags($options['role']), PDO::PARAM_STR);
 
         if ($result->execute())
             return $db->lastInsertId();
 
         return 0;
-    }
-
-    public static function updateUserById($id, $options)
-    {
-        $db = Db::getConnection();
-
-        $sql = "UPDATE user
-            SET 
-                name = :name, 
-                email = :email, 
-                password = :password, 
-                role = :role
-            WHERE id = :id";
-
-        $result = $db->prepare($sql);
-        $result->bindParam(':id', $id, PDO::PARAM_INT);
-        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
-        $result->bindParam(':email', $options['email'], PDO::PARAM_STR);
-        $result->bindParam(':password', $options['password'], PDO::PARAM_STR);
-        $result->bindParam(':role', $options['role'], PDO::PARAM_STR);
-        return $result->execute();
     }
 
     public static function deleteUserById($id)

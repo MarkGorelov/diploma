@@ -47,6 +47,34 @@ class CompanyController extends UserBase
 
             $errors = false;
 
+            if (!isset($options['company_name']) || empty($options['company_name'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['headline']) || empty($options['headline'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['short_description']) || empty($options['short_description'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['location']) || empty($options['location'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['founded']) || empty($options['founded'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['employees']) || empty($options['employees'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['website_address']) || empty($options['website_address'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['phone_number']) || empty($options['phone_number'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['email_address']) || empty($options['email_address'])) {
+                $errors[] = 'Заполните поля';
+            }
+
             if ($errors == false) {
                 $id = Company::createCompany($options);
 

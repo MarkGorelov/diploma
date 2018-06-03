@@ -21,7 +21,7 @@
                 <p>Вы действительно хотите удалить этого пользователя?</p>
 
                 <form method="post">
-                    <input type="submit" name="submit" value="Удалить"/>
+                    <input type="submit" class="btn-gray" name="submit" value="Удалить"/>
                 </form>
 
             </div>

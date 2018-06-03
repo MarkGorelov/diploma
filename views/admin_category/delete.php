@@ -19,7 +19,7 @@
                 <p>Вы действительно хотите удалить эту категорию?</p>
 
                 <form method="post">
-                    <input type="submit" name="submit" value="Удалить"/>
+                    <input type="submit" name="submit" class="btn-gray" value="Удалить"/>
                 </form>
 
             </div>

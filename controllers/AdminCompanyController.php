@@ -39,6 +39,30 @@ class AdminCompanyController extends UserBase
                 $errors[] = 'Заполните поля';
             }
 
+            if (!isset($options['headline']) || empty($options['headline'])) {
+                $errors[] = 'Заполните поля';
+            }
+
+            if (!isset($options['location']) || empty($options['location'])) {
+                $errors[] = 'Заполните поля';
+            }
+
+            if (!isset($options['founded']) || empty($options['founded'])) {
+                $errors[] = 'Заполните поля';
+            }
+
+            if (!isset($options['employees']) || empty($options['employees'])) {
+                $errors[] = 'Заполните поля';
+            }
+
+            if (!isset($options['phone_number']) || empty($options['phone_number'])) {
+                $errors[] = 'Заполните поля';
+            }
+
+            if (!isset($options['email_address']) || empty($options['email_address'])) {
+                $errors[] = 'Заполните поля';
+            }
+
             if ($errors == false) {
                 $id = AdminCompany::createCompany($options);
 

@@ -24,8 +24,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 col-md-8">
-                            <h4>Для отправки сообщения нескольким пользователям напишите их почту через запятую вот так:
-                                test@test.test, test@test.test</h4>
+                            <h5>Для отправки сообщения нескольким пользователям напишите их почту через запятую вот так:
+                                test@test.test, test@test.test</h5>
                             <form action="#" method="post" class="center-block">
                                 <div class="form-group">
                                     <input type="email" name="toUsers" class="form-control input-lg"

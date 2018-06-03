@@ -41,6 +41,30 @@ class AdminVacancyController extends UserBase
             if (!isset($options['company_name']) || empty($options['company_name'])) {
                 $errors[] = 'Заполните поля';
             }
+            if (!isset($options['job_title']) || empty($options['job_title'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['short_description']) || empty($options['short_description'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['website_address']) || empty($options['website_address'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['location']) || empty($options['location'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['salary']) || empty($options['salary'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['working']) || empty($options['working'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['experince']) || empty($options['experince'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['gender']) || empty($options['gender'])) {
+                $errors[] = 'Заполните поля';
+            }
 
             if ($errors == false) {
                 $id = AdminVacancy::createVacancy($options);

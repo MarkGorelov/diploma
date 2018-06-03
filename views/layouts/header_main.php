@@ -72,9 +72,7 @@
             <li>
                 <a href="#">Помощь</a>
                 <ul>
-                    <li><a href="/">О нас</a></li>
                     <li><a href="/contacts/">Контакты</a></li>
-                    <li><a href="/">FAQ</a></li>
                 </ul>
             </li>
         </ul>

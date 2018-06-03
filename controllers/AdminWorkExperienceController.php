@@ -32,6 +32,15 @@ class AdminWorkExperienceController extends UserBase
             if (!isset($options['company_name']) || empty($options['company_name'])) {
                 $errors[] = 'Заполните поля';
             }
+            if (!isset($options['position']) || empty($options['position'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['date_of_experience']) || empty($options['date_of_experience'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['short_description']) || empty($options['short_description'])) {
+                $errors[] = 'Заполните поля';
+            }
 
             if ($errors == false) {
                 $id = AdminWorkExperience::createWorkExperience($options);

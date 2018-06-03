@@ -39,6 +39,26 @@ class AdminResumeController extends UserBase
                 $errors[] = 'Заполните поля';
             }
 
+            if (!isset($options['headline']) || empty($options['headline'])) {
+                $errors[] = 'Заполните поля';
+            }
+
+            if (!isset($options['short_description']) || empty($options['short_description'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['location']) || empty($options['location'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['website_address']) || empty($options['website_address'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['salary']) || empty($options['salary'])) {
+                $errors[] = 'Заполните поля';
+            }
+            if (!isset($options['age']) || empty($options['age'])) {
+                $errors[] = 'Заполните поля';
+            }
+
             if ($errors == false) {
                 $id = AdminResume::createResume($options);
 

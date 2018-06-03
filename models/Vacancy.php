@@ -176,21 +176,21 @@ class Vacancy
             . '(:company_name, :job_title, :user_id, :company_id, :short_description, :website_address, :location, :type_of_employment, :salary, :working, :experince, :gender, :job_detail, :category_id, :status)';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
-        $result->bindParam(':job_title', $options['job_title'], PDO::PARAM_STR);
-        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
-        $result->bindParam(':company_id', $options['company_id'], PDO::PARAM_INT);
-        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
-        $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
-        $result->bindParam(':location', $options['location'], PDO::PARAM_STR);
-        $result->bindParam(':type_of_employment', $options['type_of_employment'], PDO::PARAM_STR);
-        $result->bindParam(':salary', $options['salary'], PDO::PARAM_INT);
-        $result->bindParam(':working', $options['working'], PDO::PARAM_STR);
-        $result->bindParam(':experince', $options['experince'], PDO::PARAM_STR);
-        $result->bindParam(':gender', $options['gender'], PDO::PARAM_STR);
-        $result->bindParam(':job_detail', $options['job_detail'], PDO::PARAM_STR);
-        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
-        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
+        $result->bindParam(':company_name', strip_tags($options['company_name']), PDO::PARAM_STR);
+        $result->bindParam(':job_title', strip_tags($options['job_title']), PDO::PARAM_STR);
+        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
+        $result->bindParam(':company_id', strip_tags($options['company_id']), PDO::PARAM_INT);
+        $result->bindParam(':short_description', strip_tags($options['short_description']), PDO::PARAM_STR);
+        $result->bindParam(':website_address', strip_tags($options['website_address']), PDO::PARAM_STR);
+        $result->bindParam(':location', strip_tags($options['location']), PDO::PARAM_STR);
+        $result->bindParam(':type_of_employment', strip_tags($options['type_of_employment']), PDO::PARAM_STR);
+        $result->bindParam(':salary', strip_tags($options['salary']), PDO::PARAM_INT);
+        $result->bindParam(':working', strip_tags($options['working']), PDO::PARAM_STR);
+        $result->bindParam(':experince', strip_tags($options['experince']), PDO::PARAM_STR);
+        $result->bindParam(':gender', strip_tags($options['gender']), PDO::PARAM_STR);
+        $result->bindParam(':job_detail', strip_tags($options['job_detail']), PDO::PARAM_STR);
+        $result->bindParam(':category_id', strip_tags($options['category_id']), PDO::PARAM_INT);
+        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
 
         if ($result->execute())
             return $db->lastInsertId();
@@ -222,22 +222,22 @@ class Vacancy
             WHERE id = :id";
 
         $result = $db->prepare($sql);
-        $result->bindParam(':id', $id, PDO::PARAM_INT);
-        $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
-        $result->bindParam(':job_title', $options['job_title'], PDO::PARAM_STR);
-        $result->bindParam(':company_id', $options['company_id'], PDO::PARAM_INT);
-        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
-        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
-        $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
-        $result->bindParam(':location', $options['location'], PDO::PARAM_STR);
-        $result->bindParam(':type_of_employment', $options['type_of_employment'], PDO::PARAM_STR);
-        $result->bindParam(':salary', $options['salary'], PDO::PARAM_INT);
-        $result->bindParam(':working', $options['working'], PDO::PARAM_STR);
-        $result->bindParam(':experince', $options['experince'], PDO::PARAM_STR);
-        $result->bindParam(':gender', $options['gender'], PDO::PARAM_STR);
-        $result->bindParam(':job_detail', $options['job_detail'], PDO::PARAM_STR);
-        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
-        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
+        $result->bindParam(':id', strip_tags($id), PDO::PARAM_INT);
+        $result->bindParam(':company_name', strip_tags($options['company_name']), PDO::PARAM_STR);
+        $result->bindParam(':job_title', strip_tags($options['job_title']), PDO::PARAM_STR);
+        $result->bindParam(':company_id', strip_tags($options['company_id']), PDO::PARAM_INT);
+        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
+        $result->bindParam(':short_description', strip_tags($options['short_description']), PDO::PARAM_STR);
+        $result->bindParam(':website_address', strip_tags($options['website_address']), PDO::PARAM_STR);
+        $result->bindParam(':location', strip_tags($options['location']), PDO::PARAM_STR);
+        $result->bindParam(':type_of_employment', strip_tags($options['type_of_employment']), PDO::PARAM_STR);
+        $result->bindParam(':salary', strip_tags($options['salary']), PDO::PARAM_INT);
+        $result->bindParam(':working', strip_tags($options['working']), PDO::PARAM_STR);
+        $result->bindParam(':experince', strip_tags($options['experince']), PDO::PARAM_STR);
+        $result->bindParam(':gender', strip_tags($options['gender']), PDO::PARAM_STR);
+        $result->bindParam(':job_detail', strip_tags($options['job_detail']), PDO::PARAM_STR);
+        $result->bindParam(':category_id', strip_tags($options['category_id']), PDO::PARAM_INT);
+        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
         return $result->execute();
     }
 
