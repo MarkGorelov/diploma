@@ -54,9 +54,9 @@ class AdminCategory
             . 'VALUES (:name, :sort_order, :status)';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':name', strip_tags($name), PDO::PARAM_STR);
-        $result->bindParam(':sort_order', strip_tags($sortOrder), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($status), PDO::PARAM_INT);
+        $result->bindParam(':name', $name, PDO::PARAM_STR);
+        $result->bindParam(':sort_order', $sortOrder, PDO::PARAM_INT);
+        $result->bindParam(':status', $status, PDO::PARAM_INT);
         return $result->execute();
     }
 
@@ -89,9 +89,9 @@ class AdminCategory
 
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
-        $result->bindParam(':name', strip_tags($name), PDO::PARAM_STR);
-        $result->bindParam(':sort_order', strip_tags($sortOrder), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($status), PDO::PARAM_INT);
+        $result->bindParam(':name', $name, PDO::PARAM_STR);
+        $result->bindParam(':sort_order', $sortOrder, PDO::PARAM_INT);
+        $result->bindParam(':status', $status, PDO::PARAM_INT);
         return $result->execute();
     }
 

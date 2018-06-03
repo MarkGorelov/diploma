@@ -12,7 +12,7 @@ class Dispatch
             . '(:email)';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':email', strip_tags($email), PDO::PARAM_STR);
+        $result->bindParam(':email', $email, PDO::PARAM_STR);
 
         if ($result->execute())
             return $db->lastInsertId();

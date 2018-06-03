@@ -30,14 +30,14 @@ class AdminEducation
             . '(:user_id, :resume_id, :degree, :branch, :school_name, :date_of_education, :short_description, :status)';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':degree', strip_tags($options['degree']), PDO::PARAM_STR);
-        $result->bindParam(':branch', strip_tags($options['branch']), PDO::PARAM_STR);
-        $result->bindParam(':school_name', strip_tags($options['school_name']), PDO::PARAM_STR);
-        $result->bindParam(':date_of_education', strip_tags($options['date_of_education']), PDO::PARAM_STR);
-        $result->bindParam(':short_description', strip_tags($options['short_description']), PDO::PARAM_STR);
-        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
-        $result->bindParam(':resume_id', strip_tags($options['resume_id']), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
+        $result->bindParam(':degree', $options['degree'], PDO::PARAM_STR);
+        $result->bindParam(':branch', $options['branch'], PDO::PARAM_STR);
+        $result->bindParam(':school_name', $options['school_name'], PDO::PARAM_STR);
+        $result->bindParam(':date_of_education', $options['date_of_education'], PDO::PARAM_STR);
+        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
+        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
         if ($result->execute()) {
             return $db->lastInsertId();
@@ -74,13 +74,13 @@ class AdminEducation
             WHERE id = :id";
 
         $result = $db->prepare($sql);
-        $result->bindParam(':id', strip_tags($id), PDO::PARAM_INT);
-        $result->bindParam(':degree', strip_tags($options['degree']), PDO::PARAM_STR);
-        $result->bindParam(':branch', strip_tags($options['branch']), PDO::PARAM_STR);
-        $result->bindParam(':school_name', strip_tags($options['school_name']), PDO::PARAM_STR);
-        $result->bindParam(':date_of_education', strip_tags($options['date_of_education']), PDO::PARAM_STR);
-        $result->bindParam(':short_description', strip_tags($options['short_description']), PDO::PARAM_STR);
-        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':degree', $options['degree'], PDO::PARAM_STR);
+        $result->bindParam(':branch', $options['branch'], PDO::PARAM_STR);
+        $result->bindParam(':school_name', $options['school_name'], PDO::PARAM_STR);
+        $result->bindParam(':date_of_education', $options['date_of_education'], PDO::PARAM_STR);
+        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
     }
 

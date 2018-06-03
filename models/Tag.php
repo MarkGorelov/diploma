@@ -65,10 +65,10 @@ class Tag
             . '(:user_id, :resume_id, :name, :status)';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':name', strip_tags($options['name']), PDO::PARAM_STR);
-        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
-        $result->bindParam(':resume_id', strip_tags($options['resume_id']), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
+        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
+        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
         if ($result->execute())
             return $db->lastInsertId();
@@ -89,11 +89,11 @@ class Tag
             WHERE id = :id";
 
         $result = $db->prepare($sql);
-        $result->bindParam(':id', strip_tags($id), PDO::PARAM_INT);
-        $result->bindParam(':name', strip_tags($options['name']), PDO::PARAM_STR);
-        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
-        $result->bindParam(':resume_id', strip_tags($options['resume_id']), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
+        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
     }
 

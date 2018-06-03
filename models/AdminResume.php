@@ -31,19 +31,19 @@ class AdminResume
             . '(:name, :headline, :short_description, :location, :website_address, :salary, :age, :phone_number, :email_address, :gender, :category_id, :user_id, :status)';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':name', strip_tags($options['name']), PDO::PARAM_STR);
-        $result->bindParam(':headline', strip_tags($options['headline']), PDO::PARAM_STR);
-        $result->bindParam(':short_description', strip_tags($options['short_description']), PDO::PARAM_STR);
-        $result->bindParam(':location', strip_tags($options['location']), PDO::PARAM_STR);
-        $result->bindParam(':website_address', strip_tags($options['website_address']), PDO::PARAM_STR);
-        $result->bindParam(':salary', strip_tags($options['salary']), PDO::PARAM_INT);
-        $result->bindParam(':age', strip_tags($options['age']), PDO::PARAM_INT);
-        $result->bindParam(':phone_number', strip_tags($options['phone_number']), PDO::PARAM_INT);
-        $result->bindParam(':email_address', strip_tags($options['email_address']), PDO::PARAM_STR);
-        $result->bindParam(':gender', strip_tags($options['gender']), PDO::PARAM_STR);
-        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
-        $result->bindParam(':category_id', strip_tags($options['category_id']), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
+        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':headline', $options['headline'], PDO::PARAM_STR);
+        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':location', $options['location'], PDO::PARAM_STR);
+        $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
+        $result->bindParam(':salary', $options['salary'], PDO::PARAM_INT);
+        $result->bindParam(':age', $options['age'], PDO::PARAM_INT);
+        $result->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_INT);
+        $result->bindParam(':email_address', $options['email_address'], PDO::PARAM_STR);
+        $result->bindParam(':gender', $options['gender'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
+        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
         if ($result->execute())
             return $db->lastInsertId();
@@ -87,20 +87,20 @@ class AdminResume
             WHERE id = :id";
 
         $result = $db->prepare($sql);
-        $result->bindParam(':id', strip_tags($id), PDO::PARAM_INT);
-        $result->bindParam(':name', strip_tags($options['name']), PDO::PARAM_STR);
-        $result->bindParam(':headline', strip_tags($options['headline']), PDO::PARAM_STR);
-        $result->bindParam(':short_description', strip_tags($options['short_description']), PDO::PARAM_STR);
-        $result->bindParam(':location', strip_tags($options['location']), PDO::PARAM_STR);
-        $result->bindParam(':website_address', strip_tags($options['website_address']), PDO::PARAM_STR);
-        $result->bindParam(':salary', strip_tags($options['salary']), PDO::PARAM_INT);
-        $result->bindParam(':age', strip_tags($options['age']), PDO::PARAM_INT);
-        $result->bindParam(':phone_number', strip_tags($options['phone_number']), PDO::PARAM_INT);
-        $result->bindParam(':email_address', strip_tags($options['email_address']), PDO::PARAM_STR);
-        $result->bindParam(':gender', strip_tags($options['gender']), PDO::PARAM_STR);
-        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
-        $result->bindParam(':category_id', strip_tags($options['category_id']), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam(':headline', $options['headline'], PDO::PARAM_STR);
+        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':location', $options['location'], PDO::PARAM_STR);
+        $result->bindParam(':website_address', $options['website_address'], PDO::PARAM_STR);
+        $result->bindParam(':salary', $options['salary'], PDO::PARAM_INT);
+        $result->bindParam(':age', $options['age'], PDO::PARAM_INT);
+        $result->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_INT);
+        $result->bindParam(':email_address', $options['email_address'], PDO::PARAM_STR);
+        $result->bindParam(':gender', $options['gender'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
+        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
     }
 

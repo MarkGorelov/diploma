@@ -74,13 +74,13 @@ class WorkExperience
             . '(:user_id, :resume_id, :company_name, :position, :date_of_experience, :short_description, :status)';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':company_name', strip_tags($options['company_name']), PDO::PARAM_STR);
-        $result->bindParam(':position', strip_tags($options['position']), PDO::PARAM_STR);
-        $result->bindParam(':date_of_experience', strip_tags($options['date_of_experience']), PDO::PARAM_STR);
-        $result->bindParam(':short_description', strip_tags($options['short_description']), PDO::PARAM_STR);
-        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
-        $result->bindParam(':resume_id', strip_tags($options['resume_id']), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
+        $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
+        $result->bindParam(':position', $options['position'], PDO::PARAM_STR);
+        $result->bindParam(':date_of_experience', $options['date_of_experience'], PDO::PARAM_STR);
+        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
+        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
 
         if ($result->execute())
             return $db->lastInsertId();
@@ -104,14 +104,14 @@ class WorkExperience
             WHERE id = :id";
 
         $result = $db->prepare($sql);
-        $result->bindParam(':id', strip_tags($id), PDO::PARAM_INT);
-        $result->bindParam(':company_name', strip_tags($options['company_name']), PDO::PARAM_STR);
-        $result->bindParam(':position', strip_tags($options['position']), PDO::PARAM_STR);
-        $result->bindParam(':date_of_experience', strip_tags($options['date_of_experience']), PDO::PARAM_STR);
-        $result->bindParam(':short_description', strip_tags($options['short_description']), PDO::PARAM_STR);
-        $result->bindParam(':user_id', strip_tags($options['user_id']), PDO::PARAM_INT);
-        $result->bindParam(':resume_id', strip_tags($options['resume_id']), PDO::PARAM_INT);
-        $result->bindParam(':status', strip_tags($options['status']), PDO::PARAM_INT);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':company_name', $options['company_name'], PDO::PARAM_STR);
+        $result->bindParam(':position', $options['position'], PDO::PARAM_STR);
+        $result->bindParam(':date_of_experience', $options['date_of_experience'], PDO::PARAM_STR);
+        $result->bindParam(':short_description', $options['short_description'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':resume_id', $options['resume_id'], PDO::PARAM_INT);
+        $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         return $result->execute();
     }
 
