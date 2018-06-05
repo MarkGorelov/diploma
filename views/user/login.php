@@ -39,7 +39,6 @@
         </div>
 
         <div class="login-links">
-            <a class="pull-left" href="/user/cabinet/">Забыли пароль?</a>
             <a class="pull-right" href="/user/register/">Регистрация</a>
         </div>
     </main>

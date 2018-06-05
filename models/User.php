@@ -18,27 +18,14 @@ class User
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
+        $tagsProtection = strip_tags($name,$email);
+
         $result = $db->prepare($sql);
-        $result->bindParam(':name', $name, PDO::PARAM_STR);
-        $result->bindParam(':email', $email, PDO::PARAM_STR);
+        $result->bindParam(':name', $tagsProtection, PDO::PARAM_STR);
+        $result->bindParam(':email', $tagsProtection, PDO::PARAM_STR);
         $result->bindParam(':password', $hash, PDO::PARAM_STR);
         $result->bindParam(':role', $role, PDO::PARAM_STR);
 
-        return $result->execute();
-    }
-
-    public static function edit($id, $name, $password)
-    {
-        $db = Db::getConnection();
-
-        $sql = "UPDATE user 
-            SET name = :name, password = :password 
-            WHERE id = :id";
-
-        $result = $db->prepare($sql);
-        $result->bindParam(':id', $id, PDO::PARAM_INT);
-        $result->bindParam(':name', $name, PDO::PARAM_STR);
-        $result->bindParam(':password', $password, PDO::PARAM_STR);
         return $result->execute();
     }
 

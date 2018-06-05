@@ -42,21 +42,21 @@ class VacancyController extends UserBase
         $companiesList = Company::getCompaniesListByUser($userID = $_SESSION['user']);
 
         if (isset($_POST['submit'])) {
-            $options['company_name'] = $_POST['company_name'];
-            $options['job_title'] = $_POST['job_title'];
-            $options['user_id'] = $_POST['user_id'];
-            $options['company_id'] = $_POST['company_id'];
-            $options['short_description'] = $_POST['short_description'];
-            $options['website_address'] = $_POST['website_address'];
-            $options['location'] = $_POST['location'];
-            $options['type_of_employment'] = $_POST['type_of_employment'];
-            $options['salary'] = $_POST['salary'];
-            $options['working'] = $_POST['working'];
-            $options['experince'] = $_POST['experince'];
-            $options['gender'] = $_POST['gender'];
-            $options['job_detail'] = $_POST['job_detail'];
-            $options['category_id'] = $_POST['category_id'];
-            $options['status'] = $_POST['status'];
+            $options['company_name'] = strip_tags($_POST['company_name']);
+            $options['job_title'] = strip_tags($_POST['job_title']);
+            $options['user_id'] = strip_tags($_POST['user_id']);
+            $options['company_id'] = strip_tags($_POST['company_id']);
+            $options['short_description'] = strip_tags($_POST['short_description']);
+            $options['website_address'] = strip_tags($_POST['website_address']);
+            $options['location'] = strip_tags($_POST['location']);
+            $options['type_of_employment'] = strip_tags($_POST['type_of_employment']);
+            $options['salary'] = strip_tags($_POST['salary']);
+            $options['working'] = strip_tags($_POST['working']);
+            $options['experince'] = strip_tags($_POST['experince']);
+            $options['gender'] = strip_tags($_POST['gender']);
+            $options['job_detail'] = strip_tags($_POST['job_detail']);
+            $options['category_id'] = strip_tags($_POST['category_id']);
+            $options['status'] = strip_tags($_POST['status']);
 
             $errors = false;
 
@@ -85,21 +85,21 @@ class VacancyController extends UserBase
         $vacancy = Vacancy::getVacancyById($id);
 
         if (isset($_POST['submit'])) {
-            $options['company_name'] = $_POST['company_name'];
-            $options['job_title'] = $_POST['job_title'];
-            $options['user_id'] = $_POST['user_id'];
-            $options['company_id'] = $_POST['company_id'];
-            $options['short_description'] = $_POST['short_description'];
-            $options['website_address'] = $_POST['website_address'];
-            $options['location'] = $_POST['location'];
-            $options['type_of_employment'] = $_POST['type_of_employment'];
-            $options['salary'] = $_POST['salary'];
-            $options['working'] = $_POST['working'];
-            $options['experince'] = $_POST['experince'];
-            $options['gender'] = $_POST['gender'];
-            $options['job_detail'] = $_POST['job_detail'];
-            $options['category_id'] = $_POST['category_id'];
-            $options['status'] = $_POST['status'];
+            $options['company_name'] = strip_tags($_POST['company_name']);
+            $options['job_title'] = strip_tags($_POST['job_title']);
+            $options['user_id'] = strip_tags($_POST['user_id']);
+            $options['company_id'] = strip_tags($_POST['company_id']);
+            $options['short_description'] = strip_tags($_POST['short_description']);
+            $options['website_address'] = strip_tags($_POST['website_address']);
+            $options['location'] = strip_tags($_POST['location']);
+            $options['type_of_employment'] = strip_tags($_POST['type_of_employment']);
+            $options['salary'] = strip_tags($_POST['salary']);
+            $options['working'] = strip_tags($_POST['working']);
+            $options['experince'] = strip_tags($_POST['experince']);
+            $options['gender'] = strip_tags($_POST['gender']);
+            $options['job_detail'] = strip_tags($_POST['job_detail']);
+            $options['category_id'] = strip_tags($_POST['category_id']);
+            $options['status'] = strip_tags($_POST['status']);
 
             if (Vacancy::updateVacancyById($id, $options)) {
                 if (is_uploaded_file($_FILES["img"]["tmp_name"])) {

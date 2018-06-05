@@ -31,19 +31,19 @@ class CompanyController extends UserBase
         $categoriesList = AdminCategory::getCategoriesList();
 
         if (isset($_POST['submit'])) {
-            $options['company_name'] = $_POST['company_name'];
-            $options['user_id'] = $_POST['user_id'];
-            $options['category_id'] = $_POST['category_id'];
-            $options['headline'] = $_POST['headline'];
-            $options['short_description'] = $_POST['short_description'];
-            $options['location'] = $_POST['location'];
-            $options['founded'] = $_POST['founded'];
-            $options['employees'] = $_POST['employees'];
-            $options['website_address'] = $_POST['website_address'];
-            $options['phone_number'] = $_POST['phone_number'];
-            $options['email_address'] = $_POST['email_address'];
-            $options['company_detail'] = $_POST['company_detail'];
-            $options['status'] = $_POST['status'];
+            $options['company_name'] = strip_tags($_POST['company_name']);
+            $options['user_id'] = strip_tags($_POST['user_id']);
+            $options['category_id'] = strip_tags($_POST['category_id']);
+            $options['headline'] = strip_tags($_POST['headline']);
+            $options['short_description'] = strip_tags($_POST['short_description']);
+            $options['location'] = strip_tags($_POST['location']);
+            $options['founded'] = strip_tags($_POST['founded']);
+            $options['employees'] = strip_tags($_POST['employees']);
+            $options['website_address'] = strip_tags($_POST['website_address']);
+            $options['phone_number'] = strip_tags($_POST['phone_number']);
+            $options['email_address'] = strip_tags($_POST['email_address']);
+            $options['company_detail'] = strip_tags($_POST['company_detail']);
+            $options['status'] = strip_tags($_POST['status']);
 
             $errors = false;
 
@@ -98,19 +98,19 @@ class CompanyController extends UserBase
         $company = Company::getCompanyById($id);
 
         if (isset($_POST['submit'])) {
-            $options['company_name'] = $_POST['company_name'];
-            $options['user_id'] = $_POST['user_id'];
-            $options['category_id'] = $_POST['category_id'];
-            $options['headline'] = $_POST['headline'];
-            $options['short_description'] = $_POST['short_description'];
-            $options['location'] = $_POST['location'];
-            $options['founded'] = $_POST['founded'];
-            $options['employees'] = $_POST['employees'];
-            $options['website_address'] = $_POST['website_address'];
-            $options['phone_number'] = $_POST['phone_number'];
-            $options['email_address'] = $_POST['email_address'];
-            $options['company_detail'] = $_POST['company_detail'];
-            $options['status'] = $_POST['status'];
+            $options['company_name'] = strip_tags($_POST['company_name']);
+            $options['user_id'] = strip_tags($_POST['user_id']);
+            $options['category_id'] = strip_tags($_POST['category_id']);
+            $options['headline'] = strip_tags($_POST['headline']);
+            $options['short_description'] = strip_tags($_POST['short_description']);
+            $options['location'] = strip_tags($_POST['location']);
+            $options['founded'] = strip_tags($_POST['founded']);
+            $options['employees'] = strip_tags($_POST['employees']);
+            $options['website_address'] = strip_tags($_POST['website_address']);
+            $options['phone_number'] = strip_tags($_POST['phone_number']);
+            $options['email_address'] = strip_tags($_POST['email_address']);
+            $options['company_detail'] = strip_tags($_POST['company_detail']);
+            $options['status'] = strip_tags($_POST['status']);
 
             if (Company::updateCompanyById($id, $options)) {
                 if (is_uploaded_file($_FILES["img"]["tmp_name"])) {
